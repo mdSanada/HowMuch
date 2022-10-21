@@ -69,6 +69,12 @@ class MyReceiptViewController: UIViewController {
 }
 
 extension MyReceiptViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "SaleStoryboard", bundle: nil)
+        let controller = storyboard.instantiateViewController(identifier: "SaleDetailed") as? SaleDetailedViewController
+        navigationController?.present(controller!, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filtered.count
     }

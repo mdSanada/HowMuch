@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1684C0D5290234A100249C7B /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684C0D3290234A100249C7B /* ItemTableViewCell.swift */; };
+		1684C0D6290234A100249C7B /* ItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1684C0D4290234A100249C7B /* ItemTableViewCell.xib */; };
+		1684C0D92902405100249C7B /* ParallaxGroupedSectionHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684C0D82902405100249C7B /* ParallaxGroupedSectionHeaderTableView.swift */; };
 		16AE04092900A05C00490465 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE04082900A05C00490465 /* AppDelegate.swift */; };
 		16AE040B2900A05C00490465 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE040A2900A05C00490465 /* SceneDelegate.swift */; };
 		16AE04132900A05C00490465 /* HowMuch.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 16AE04112900A05C00490465 /* HowMuch.xcdatamodeld */; };
@@ -78,10 +81,25 @@
 		16AE04E82900DBD900490465 /* ReceiptTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16AE04E62900DBD900490465 /* ReceiptTableViewCell.xib */; };
 		16AE04EA2900DFBD00490465 /* Extension + Decimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE04E92900DFBD00490465 /* Extension + Decimal.swift */; };
 		16AE04ED2900E39100490465 /* ReceiptsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE04EC2900E39100490465 /* ReceiptsModel.swift */; };
+		16D80CD8290335E000A3FC5A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16D80CD7290335E000A3FC5A /* GoogleService-Info.plist */; };
+		16D80CDB29033A7400A3FC5A /* FirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D80CDA29033A7400A3FC5A /* FirestoreRepository.swift */; };
+		16D80CDD29033AB900A3FC5A /* FirestoreConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D80CDC29033AB900A3FC5A /* FirestoreConsts.swift */; };
+		16D80CE02903567C00A3FC5A /* BugdetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D80CDF2903567C00A3FC5A /* BugdetModel.swift */; };
+		16D80CE2290356BB00A3FC5A /* IngredientsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D80CE1290356BB00A3FC5A /* IngredientsModel.swift */; };
+		16D80CE4290356DC00A3FC5A /* SalesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D80CE3290356DC00A3FC5A /* SalesModel.swift */; };
+		16D80CE62903571E00A3FC5A /* MaterialModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D80CE52903571E00A3FC5A /* MaterialModel.swift */; };
+		16D80CE82903574A00A3FC5A /* TaxeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D80CE72903574A00A3FC5A /* TaxeModel.swift */; };
+		16D80CEA2903576E00A3FC5A /* ConsumptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D80CE92903576E00A3FC5A /* ConsumptionModel.swift */; };
+		16D80CEC290357D200A3FC5A /* FirestoreId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D80CEB290357D200A3FC5A /* FirestoreId.swift */; };
+		16FF36592901ED4F000DFC50 /* SaleStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16FF36582901ED4F000DFC50 /* SaleStoryboard.storyboard */; };
+		16FF365B2901ED5F000DFC50 /* SaleDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FF365A2901ED5F000DFC50 /* SaleDetailedViewController.swift */; };
 		4523C970B55C09549FDF66DA /* Pods_HowMuch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4921D74E24EE008C70E29347 /* Pods_HowMuch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1684C0D3290234A100249C7B /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
+		1684C0D4290234A100249C7B /* ItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemTableViewCell.xib; sourceTree = "<group>"; };
+		1684C0D82902405100249C7B /* ParallaxGroupedSectionHeaderTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxGroupedSectionHeaderTableView.swift; sourceTree = "<group>"; };
 		16AE04052900A05C00490465 /* HowMuch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HowMuch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16AE04082900A05C00490465 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16AE040A2900A05C00490465 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +173,18 @@
 		16AE04E62900DBD900490465 /* ReceiptTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiptTableViewCell.xib; sourceTree = "<group>"; };
 		16AE04E92900DFBD00490465 /* Extension + Decimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Decimal.swift"; sourceTree = "<group>"; };
 		16AE04EC2900E39100490465 /* ReceiptsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptsModel.swift; sourceTree = "<group>"; };
+		16D80CD7290335E000A3FC5A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		16D80CDA29033A7400A3FC5A /* FirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreRepository.swift; sourceTree = "<group>"; };
+		16D80CDC29033AB900A3FC5A /* FirestoreConsts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreConsts.swift; sourceTree = "<group>"; };
+		16D80CDF2903567C00A3FC5A /* BugdetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugdetModel.swift; sourceTree = "<group>"; };
+		16D80CE1290356BB00A3FC5A /* IngredientsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsModel.swift; sourceTree = "<group>"; };
+		16D80CE3290356DC00A3FC5A /* SalesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesModel.swift; sourceTree = "<group>"; };
+		16D80CE52903571E00A3FC5A /* MaterialModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialModel.swift; sourceTree = "<group>"; };
+		16D80CE72903574A00A3FC5A /* TaxeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxeModel.swift; sourceTree = "<group>"; };
+		16D80CE92903576E00A3FC5A /* ConsumptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumptionModel.swift; sourceTree = "<group>"; };
+		16D80CEB290357D200A3FC5A /* FirestoreId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreId.swift; sourceTree = "<group>"; };
+		16FF36582901ED4F000DFC50 /* SaleStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SaleStoryboard.storyboard; sourceTree = "<group>"; };
+		16FF365A2901ED5F000DFC50 /* SaleDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleDetailedViewController.swift; sourceTree = "<group>"; };
 		4921D74E24EE008C70E29347 /* Pods_HowMuch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HowMuch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EAEA848C81209C1FBDA3C9F /* Pods-HowMuch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HowMuch.debug.xcconfig"; path = "Target Support Files/Pods-HowMuch/Pods-HowMuch.debug.xcconfig"; sourceTree = "<group>"; };
 		CC754F44828695265B9B6BD3 /* Pods-HowMuch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HowMuch.release.xcconfig"; path = "Target Support Files/Pods-HowMuch/Pods-HowMuch.release.xcconfig"; sourceTree = "<group>"; };
@@ -172,9 +202,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1684C0D12902345E00249C7B /* SalesDetailed */ = {
+			isa = PBXGroup;
+			children = (
+				16FF365A2901ED5F000DFC50 /* SaleDetailedViewController.swift */,
+			);
+			path = SalesDetailed;
+			sourceTree = "<group>";
+		};
+		1684C0D22902346300249C7B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1684C0D3290234A100249C7B /* ItemTableViewCell.swift */,
+				1684C0D4290234A100249C7B /* ItemTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		1684C0D72902404100249C7B /* ParallaxGroupedSectionHeaderTableView */ = {
+			isa = PBXGroup;
+			children = (
+				1684C0D82902405100249C7B /* ParallaxGroupedSectionHeaderTableView.swift */,
+			);
+			path = ParallaxGroupedSectionHeaderTableView;
+			sourceTree = "<group>";
+		};
 		16AE03FC2900A05C00490465 = {
 			isa = PBXGroup;
 			children = (
+				16D80CD7290335E000A3FC5A /* GoogleService-Info.plist */,
 				16AE04072900A05C00490465 /* HowMuch */,
 				16AE04062900A05C00490465 /* Products */,
 				1C46DEF0A05DF2D2E3193350 /* Pods */,
@@ -196,6 +252,8 @@
 				16AE04082900A05C00490465 /* AppDelegate.swift */,
 				16AE040A2900A05C00490465 /* SceneDelegate.swift */,
 				16AE043C2900A12600490465 /* Base */,
+				16D80CDE2903566D00A3FC5A /* Models */,
+				16D80CD929033A4B00A3FC5A /* Repositories */,
 				16AE041F2900A12600490465 /* Core */,
 				16AE04332900A12600490465 /* Custom Class */,
 				16AE04512900A12600490465 /* Modules */,
@@ -279,6 +337,7 @@
 		16AE04332900A12600490465 /* Custom Class */ = {
 			isa = PBXGroup;
 			children = (
+				1684C0D72902404100249C7B /* ParallaxGroupedSectionHeaderTableView */,
 				16AE04342900A12600490465 /* Status */,
 				16AE04382900A12600490465 /* Tag */,
 			);
@@ -364,6 +423,7 @@
 			isa = PBXGroup;
 			children = (
 				16AE04522900A12600490465 /* Main */,
+				16FF36572901ED2D000DFC50 /* Sales */,
 				16AE048C2900A12600490465 /* Sign */,
 			);
 			path = Modules;
@@ -549,6 +609,39 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		16D80CD929033A4B00A3FC5A /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				16D80CDA29033A7400A3FC5A /* FirestoreRepository.swift */,
+				16D80CDC29033AB900A3FC5A /* FirestoreConsts.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		16D80CDE2903566D00A3FC5A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				16D80CDF2903567C00A3FC5A /* BugdetModel.swift */,
+				16D80CE1290356BB00A3FC5A /* IngredientsModel.swift */,
+				16D80CE3290356DC00A3FC5A /* SalesModel.swift */,
+				16D80CE52903571E00A3FC5A /* MaterialModel.swift */,
+				16D80CE72903574A00A3FC5A /* TaxeModel.swift */,
+				16D80CE92903576E00A3FC5A /* ConsumptionModel.swift */,
+				16D80CEB290357D200A3FC5A /* FirestoreId.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		16FF36572901ED2D000DFC50 /* Sales */ = {
+			isa = PBXGroup;
+			children = (
+				1684C0D22902346300249C7B /* Cells */,
+				16FF36582901ED4F000DFC50 /* SaleStoryboard.storyboard */,
+				1684C0D12902345E00249C7B /* SalesDetailed */,
+			);
+			path = Sales;
+			sourceTree = "<group>";
+		};
 		1C46DEF0A05DF2D2E3193350 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -629,11 +722,14 @@
 				16AE04C32900A12700490465 /* MainStoryboard.storyboard in Resources */,
 				16AE04A62900A12600490465 /* StatusView.xib in Resources */,
 				16AE04CA2900A12700490465 /* EstimateTableViewCell.xib in Resources */,
+				1684C0D6290234A100249C7B /* ItemTableViewCell.xib in Resources */,
 				16AE04DE2900A12700490465 /* SignStoryboard.storyboard in Resources */,
+				16D80CD8290335E000A3FC5A /* GoogleService-Info.plist in Resources */,
 				16AE04182900A05E00490465 /* LaunchScreen.storyboard in Resources */,
 				16AE04152900A05E00490465 /* Assets.xcassets in Resources */,
 				16AE04C52900A12700490465 /* MaterialsTableViewCell.xib in Resources */,
 				16AE04E82900DBD900490465 /* ReceiptTableViewCell.xib in Resources */,
+				16FF36592901ED4F000DFC50 /* SaleStoryboard.storyboard in Resources */,
 				16AE04A92900A12600490465 /* TagView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -687,14 +783,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1684C0D92902405100249C7B /* ParallaxGroupedSectionHeaderTableView.swift in Sources */,
 				16AE04AB2900A12600490465 /* SNRefreshTokenModel.swift in Sources */,
 				16AE04A72900A12600490465 /* EventTag.swift in Sources */,
 				16AE04B42900A12600490465 /* SNStateful.swift in Sources */,
+				16FF365B2901ED5F000DFC50 /* SaleDetailedViewController.swift in Sources */,
+				16D80CE82903574A00A3FC5A /* TaxeModel.swift in Sources */,
+				1684C0D5290234A100249C7B /* ItemTableViewCell.swift in Sources */,
+				16D80CE4290356DC00A3FC5A /* SalesModel.swift in Sources */,
 				16AE04B92900A12600490465 /* SNViewModelProtocol.swift in Sources */,
 				16AE04CB2900A12700490465 /* EstimateCoordinator.swift in Sources */,
 				16AE04BB2900A12600490465 /* MainProtocol.swift in Sources */,
 				16AE04A32900A12600490465 /* Validator.swift in Sources */,
 				16AE04AA2900A12600490465 /* SNRefresher.swift in Sources */,
+				16D80CDB29033A7400A3FC5A /* FirestoreRepository.swift in Sources */,
 				16AE04092900A05C00490465 /* AppDelegate.swift in Sources */,
 				16AE04AF2900A12600490465 /* SNNetworkManager.swift in Sources */,
 				16AE04D02900A12700490465 /* SettingsProtocol.swift in Sources */,
@@ -707,9 +809,12 @@
 				16AE04A22900A12600490465 /* Service.swift in Sources */,
 				16AE04132900A05C00490465 /* HowMuch.xcdatamodeld in Sources */,
 				16AE04B72900A12600490465 /* SNDynamic.swift in Sources */,
+				16D80CEA2903576E00A3FC5A /* ConsumptionModel.swift in Sources */,
 				16AE04B32900A12600490465 /* SNCoordinator.swift in Sources */,
 				16AE04E22900A12700490465 /* LoginViewModel.swift in Sources */,
 				16AE04C12900A12700490465 /* MyReceiptViewController.swift in Sources */,
+				16D80CEC290357D200A3FC5A /* FirestoreId.swift in Sources */,
+				16D80CE2290356BB00A3FC5A /* IngredientsModel.swift in Sources */,
 				16AE04D12900A12700490465 /* SettingsViewController.swift in Sources */,
 				16AE04E72900DBD900490465 /* ReceiptTableViewCell.swift in Sources */,
 				16AE04BA2900A12600490465 /* MainCoordinator.swift in Sources */,
@@ -719,10 +824,12 @@
 				16AE04C22900A12700490465 /* MyReceiptViewModel.swift in Sources */,
 				16AE04B22900A12600490465 /* SNRequestable.swift in Sources */,
 				16AE04B82900A12600490465 /* SNViewModel.swift in Sources */,
+				16D80CDD29033AB900A3FC5A /* FirestoreConsts.swift in Sources */,
 				16AE04B52900A12600490465 /* SNViewController.swift in Sources */,
 				16AE04B02900A12600490465 /* SNNetworkMethod.swift in Sources */,
 				16AE049D2900A12600490465 /* Extension + Table.swift in Sources */,
 				16AE04C92900A12700490465 /* EstimateTableViewCell.swift in Sources */,
+				16D80CE62903571E00A3FC5A /* MaterialModel.swift in Sources */,
 				16AE04C82900A12700490465 /* MaterialsViewController.swift in Sources */,
 				16AE04972900A12600490465 /* AppLauncher.swift in Sources */,
 				16AE04C02900A12700490465 /* MyReceiptProtocol.swift in Sources */,
@@ -746,6 +853,7 @@
 				16AE04E12900A12700490465 /* LoginViewController.swift in Sources */,
 				16AE04EA2900DFBD00490465 /* Extension + Decimal.swift in Sources */,
 				16AE04A02900A12600490465 /* Launcher.swift in Sources */,
+				16D80CE02903567C00A3FC5A /* BugdetModel.swift in Sources */,
 				16AE04D22900A12700490465 /* TabController.swift in Sources */,
 				16AE04ED2900E39100490465 /* ReceiptsModel.swift in Sources */,
 				16AE049A2900A12600490465 /* Extension + Data.swift in Sources */,
@@ -909,7 +1017,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = XDS.HowMuch;
+				PRODUCT_BUNDLE_IDENTIFIER = Sanada.HowMuch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -941,7 +1049,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = XDS.HowMuch;
+				PRODUCT_BUNDLE_IDENTIFIER = Sanada.HowMuch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

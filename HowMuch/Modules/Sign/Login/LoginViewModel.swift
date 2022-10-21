@@ -18,6 +18,7 @@ enum LoginStates: SNStateful {
 class LoginViewModel: SNViewModel<LoginStates> {
     // Inputs
     let login = PublishSubject<(email: String, password: String)>()
+    let repository = FirestoreRepository.shared
 //    fileprivate let repository = SNNetworkManager<SNLoginService>()
     var disposeBag = DisposeBag()
     
@@ -25,6 +26,7 @@ class LoginViewModel: SNViewModel<LoginStates> {
         login
             .subscribe(onNext: { [weak self] _ in
                 self?.emit(.success(""))
+                self?.repository.fetchAll()
             })
             .disposed(by: disposeBag)
     }

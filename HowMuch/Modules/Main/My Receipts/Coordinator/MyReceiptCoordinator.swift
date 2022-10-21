@@ -24,9 +24,9 @@ class MyReceiptCoordinator: SNCoordinator {
     init() {
         let viewController = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MyReceiptViewController") as? MyReceiptViewController
         let navigation = UINavigationController(rootViewController: viewController!)
-        viewController?.title = "Minhas Receitas"
+        viewController?.title = "Vendas"
         navigation.tabBarItem.image = UIImage.init(systemName: "list.bullet.rectangle.portrait")
-        navigation.tabBarItem.title = "Receitas"
+        navigation.tabBarItem.title = "Vendas"
         navigation.navigationBar.prefersLargeTitles = true
         self.presenter = navigation
         viewController?.delegate = self

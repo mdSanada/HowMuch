@@ -18,7 +18,9 @@ target 'HowMuch' do
   pod 'SnapKit'
   pod 'IQKeyboardManagerSwift'
   pod 'InputMask'
+  pod 'ParallaxHeader', '~> 3.0.0'
   
+  pod 'FirebaseFirestore'
   #Mock
   pod 'OHHTTPStubs',           '~> 9.1.0'
   pod 'OHHTTPStubs/Swift',     '~> 9.1.0'

@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import FirebaseCore
 #if DEBUG
 import OHHTTPStubs
 #endif
@@ -17,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let launcher: Launcher = AppLauncher()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
         #if DEBUG
         var error: NSError?
         HTTPStubs.stubRequestsUsingMocktails(atPath: "Mocks", in: Bundle.main, error: &error)

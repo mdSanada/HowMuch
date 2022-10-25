@@ -15,7 +15,8 @@ extension UIColor {
 
 //    static let primary = UIColor(named: "Primary")!
 //    static let secondary = UIColor(named: "Secondary")!
-    static let accent = UIColor.systemBackground//UIColor(named: "AccentColor")!
+    static let accent = UIColor(named: "AccentColor")!
+    static let pink = UIColor(named: "Pink")
 //    static let background = UIColor(named: "Background")
 //
 //    static let title = UIColor(named: "Title")!

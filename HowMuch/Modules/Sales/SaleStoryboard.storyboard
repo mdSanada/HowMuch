@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -38,8 +40,63 @@
             </objects>
             <point key="canvasLocation" x="63.076923076923073" y="-2.1327014218009479"/>
         </scene>
+        <!--Sales Create View Controller-->
+        <scene sceneID="0M6-Dn-o7B">
+            <objects>
+                <viewController storyboardIdentifier="SaleCreate" id="HYZ-qA-GqL" customClass="SalesCreateViewController" customModule="HowMuch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7bi-N9-mya">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qqc-h2-nqV">
+                                <rect key="frame" x="0.0" y="44" width="390" height="716"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hPT-oA-mlc">
+                                <rect key="frame" x="20" y="770" width="350" height="40"/>
+                                <color key="backgroundColor" name="AccentColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Je6-hn-KDT"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Salvar"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="actionSave:" destination="HYZ-qA-GqL" eventType="touchUpInside" id="Lfo-Ki-S9q"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="DlI-gM-MyM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hPT-oA-mlc" firstAttribute="leading" secondItem="DlI-gM-MyM" secondAttribute="leading" constant="20" id="431-fM-yTX"/>
+                            <constraint firstItem="qqc-h2-nqV" firstAttribute="top" secondItem="DlI-gM-MyM" secondAttribute="top" id="AHE-f4-VFE"/>
+                            <constraint firstItem="DlI-gM-MyM" firstAttribute="trailing" secondItem="hPT-oA-mlc" secondAttribute="trailing" constant="20" id="Ham-0J-VvP"/>
+                            <constraint firstItem="hPT-oA-mlc" firstAttribute="bottom" secondItem="DlI-gM-MyM" secondAttribute="bottom" id="Tla-hg-QFx"/>
+                            <constraint firstItem="DlI-gM-MyM" firstAttribute="trailing" secondItem="qqc-h2-nqV" secondAttribute="trailing" id="V5a-x7-7uD"/>
+                            <constraint firstItem="qqc-h2-nqV" firstAttribute="leading" secondItem="DlI-gM-MyM" secondAttribute="leading" id="kKx-tg-XmF"/>
+                            <constraint firstItem="hPT-oA-mlc" firstAttribute="top" secondItem="qqc-h2-nqV" secondAttribute="bottom" constant="10" id="tKL-XW-qwj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="createTable" destination="qqc-h2-nqV" id="cYY-bk-SEQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XZV-r5-Z4b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="841.53846153846155" y="-2.1327014218009479"/>
+        </scene>
     </scenes>
     <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.92549019607843142" blue="0.75686274509803919" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -66,6 +66,11 @@ class MyReceiptViewController: UIViewController {
             filtered = array.filter({ $0.title.lowercased().contains(text.lowercased()) })
         }
     }
+    @IBAction func addSale(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "SaleStoryboard", bundle: nil)
+        let controller = storyboard.instantiateViewController(identifier: "SaleCreate") as? SalesCreateViewController
+        navigationController?.present(controller!, animated: true)
+    }
 }
 
 extension MyReceiptViewController: UITableViewDelegate, UITableViewDataSource {

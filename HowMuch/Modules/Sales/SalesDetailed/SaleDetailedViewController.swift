@@ -36,11 +36,14 @@ class SaleDetailedViewController: UIViewController {
         tableDetailed.register(type: ItemTableViewCell.self)
         tableDetailed.delegate = self
         tableDetailed.dataSource = self
-        tableDetailed.sectionHeaderTopPadding = 5
+        if #available(iOS 15.0, *) {
+            tableDetailed.sectionHeaderTopPadding = 5
+        }
         
         headerView = createParallaxHeader(image: UIImage(named: "brigadeiro"),
                                           title: "Brigadeiro",
                                           description: "Chocolate Belga")
+        
         tableDetailed.parallaxHeader.view = headerView ?? UIView()
         tableDetailed.parallaxHeader.height = 200
         tableDetailed.parallaxHeader.mode = .fill
@@ -93,6 +96,52 @@ class SaleDetailedViewController: UIViewController {
 }
 
 extension SaleDetailedViewController: UITableViewDelegate, UITableViewDataSource {
+    func makeContextMenu() -> UIMenu {
+        let edit = UIAction(title: "Editar...", image: UIImage(systemName: "pencil")) { action in
+            print("edit")
+        }
+        
+        let delete = UIAction(title: "Delete Photo", image: UIImage(systemName: "trash"), attributes: .destructive) { action in
+            print("delete")
+        }
+
+        return UIMenu(title: "Configurações", children: [edit, delete])
+    }
+
+    func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
+    
+    private func makeTargetedPreview(for configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        guard let indexPath = configuration.identifier as? IndexPath else { return nil }
+        guard let cell: ItemTableViewCell = tableDetailed.cellForRow(at: indexPath) as? ItemTableViewCell else {
+            return nil
+        }
+        let parameters = UIPreviewParameters()
+        parameters.backgroundColor = UIColor.clear
+        parameters.visiblePath = UIBezierPath(roundedRect: cell.bounds , cornerRadius: 10.0)
+        var targetedPreview: UITargetedPreview? = nil
+        targetedPreview = UITargetedPreview(view: cell, parameters: parameters)
+        return targetedPreview
+    }
+
+    func tableView(_ tableView: UITableView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return self.makeTargetedPreview(for: configuration)
+    }
+
+    func tableView(_ tableView: UITableView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return self.makeTargetedPreview(for: configuration)
+    }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let configuration = UIContextMenuConfiguration(identifier: indexPath as NSCopying,
+                                                       previewProvider: nil,
+                                                       actionProvider: { suggestedActions in
+            return self.makeContextMenu()
+        })
+        return configuration
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }

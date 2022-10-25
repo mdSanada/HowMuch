@@ -91,6 +91,13 @@
 		16D80CE82903574A00A3FC5A /* TaxeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D80CE72903574A00A3FC5A /* TaxeModel.swift */; };
 		16D80CEA2903576E00A3FC5A /* ConsumptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D80CE92903576E00A3FC5A /* ConsumptionModel.swift */; };
 		16D80CEC290357D200A3FC5A /* FirestoreId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D80CEB290357D200A3FC5A /* FirestoreId.swift */; };
+		16FE20B129073657000AC718 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE20AF29073657000AC718 /* TextFieldTableViewCell.swift */; };
+		16FE20B229073657000AC718 /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16FE20B029073657000AC718 /* TextFieldTableViewCell.xib */; };
+		16FE20B5290737F9000AC718 /* SalesCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE20B4290737F9000AC718 /* SalesCreateViewController.swift */; };
+		16FE20BA290739DC000AC718 /* AddItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE20B8290739DB000AC718 /* AddItemTableViewCell.swift */; };
+		16FE20BB290739DC000AC718 /* AddItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16FE20B9290739DB000AC718 /* AddItemTableViewCell.xib */; };
+		16FE20BF2907433A000AC718 /* AddButtonFooterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE20BD2907433A000AC718 /* AddButtonFooterTableViewCell.swift */; };
+		16FE20C02907433A000AC718 /* AddButtonFooterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16FE20BE2907433A000AC718 /* AddButtonFooterTableViewCell.xib */; };
 		16FF36592901ED4F000DFC50 /* SaleStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16FF36582901ED4F000DFC50 /* SaleStoryboard.storyboard */; };
 		16FF365B2901ED5F000DFC50 /* SaleDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FF365A2901ED5F000DFC50 /* SaleDetailedViewController.swift */; };
 		4523C970B55C09549FDF66DA /* Pods_HowMuch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4921D74E24EE008C70E29347 /* Pods_HowMuch.framework */; };
@@ -183,6 +190,13 @@
 		16D80CE72903574A00A3FC5A /* TaxeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxeModel.swift; sourceTree = "<group>"; };
 		16D80CE92903576E00A3FC5A /* ConsumptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumptionModel.swift; sourceTree = "<group>"; };
 		16D80CEB290357D200A3FC5A /* FirestoreId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreId.swift; sourceTree = "<group>"; };
+		16FE20AF29073657000AC718 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		16FE20B029073657000AC718 /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		16FE20B4290737F9000AC718 /* SalesCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesCreateViewController.swift; sourceTree = "<group>"; };
+		16FE20B8290739DB000AC718 /* AddItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemTableViewCell.swift; sourceTree = "<group>"; };
+		16FE20B9290739DB000AC718 /* AddItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddItemTableViewCell.xib; sourceTree = "<group>"; };
+		16FE20BD2907433A000AC718 /* AddButtonFooterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonFooterTableViewCell.swift; sourceTree = "<group>"; };
+		16FE20BE2907433A000AC718 /* AddButtonFooterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddButtonFooterTableViewCell.xib; sourceTree = "<group>"; };
 		16FF36582901ED4F000DFC50 /* SaleStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SaleStoryboard.storyboard; sourceTree = "<group>"; };
 		16FF365A2901ED5F000DFC50 /* SaleDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleDetailedViewController.swift; sourceTree = "<group>"; };
 		4921D74E24EE008C70E29347 /* Pods_HowMuch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HowMuch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -213,8 +227,9 @@
 		1684C0D22902346300249C7B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				1684C0D3290234A100249C7B /* ItemTableViewCell.swift */,
-				1684C0D4290234A100249C7B /* ItemTableViewCell.xib */,
+				16FE20BC29074326000AC718 /* AddItemButtonFooter */,
+				16FE20B7290739C9000AC718 /* AddItem */,
+				16FE20B6290739C2000AC718 /* Item */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -337,6 +352,7 @@
 		16AE04332900A12600490465 /* Custom Class */ = {
 			isa = PBXGroup;
 			children = (
+				16FE20AE2907363A000AC718 /* TextFieldTableViewCell */,
 				1684C0D72902404100249C7B /* ParallaxGroupedSectionHeaderTableView */,
 				16AE04342900A12600490465 /* Status */,
 				16AE04382900A12600490465 /* Tag */,
@@ -422,9 +438,9 @@
 		16AE04512900A12600490465 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				16AE048C2900A12600490465 /* Sign */,
 				16AE04522900A12600490465 /* Main */,
 				16FF36572901ED2D000DFC50 /* Sales */,
-				16AE048C2900A12600490465 /* Sign */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -632,12 +648,57 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		16FE20AE2907363A000AC718 /* TextFieldTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				16FE20AF29073657000AC718 /* TextFieldTableViewCell.swift */,
+				16FE20B029073657000AC718 /* TextFieldTableViewCell.xib */,
+			);
+			path = TextFieldTableViewCell;
+			sourceTree = "<group>";
+		};
+		16FE20B3290737D5000AC718 /* SalesCreate */ = {
+			isa = PBXGroup;
+			children = (
+				16FE20B4290737F9000AC718 /* SalesCreateViewController.swift */,
+			);
+			path = SalesCreate;
+			sourceTree = "<group>";
+		};
+		16FE20B6290739C2000AC718 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				1684C0D3290234A100249C7B /* ItemTableViewCell.swift */,
+				1684C0D4290234A100249C7B /* ItemTableViewCell.xib */,
+			);
+			path = Item;
+			sourceTree = "<group>";
+		};
+		16FE20B7290739C9000AC718 /* AddItem */ = {
+			isa = PBXGroup;
+			children = (
+				16FE20B8290739DB000AC718 /* AddItemTableViewCell.swift */,
+				16FE20B9290739DB000AC718 /* AddItemTableViewCell.xib */,
+			);
+			path = AddItem;
+			sourceTree = "<group>";
+		};
+		16FE20BC29074326000AC718 /* AddItemButtonFooter */ = {
+			isa = PBXGroup;
+			children = (
+				16FE20BD2907433A000AC718 /* AddButtonFooterTableViewCell.swift */,
+				16FE20BE2907433A000AC718 /* AddButtonFooterTableViewCell.xib */,
+			);
+			path = AddItemButtonFooter;
+			sourceTree = "<group>";
+		};
 		16FF36572901ED2D000DFC50 /* Sales */ = {
 			isa = PBXGroup;
 			children = (
 				1684C0D22902346300249C7B /* Cells */,
 				16FF36582901ED4F000DFC50 /* SaleStoryboard.storyboard */,
 				1684C0D12902345E00249C7B /* SalesDetailed */,
+				16FE20B3290737D5000AC718 /* SalesCreate */,
 			);
 			path = Sales;
 			sourceTree = "<group>";
@@ -719,13 +780,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16FE20C02907433A000AC718 /* AddButtonFooterTableViewCell.xib in Resources */,
 				16AE04C32900A12700490465 /* MainStoryboard.storyboard in Resources */,
 				16AE04A62900A12600490465 /* StatusView.xib in Resources */,
 				16AE04CA2900A12700490465 /* EstimateTableViewCell.xib in Resources */,
+				16FE20B229073657000AC718 /* TextFieldTableViewCell.xib in Resources */,
 				1684C0D6290234A100249C7B /* ItemTableViewCell.xib in Resources */,
 				16AE04DE2900A12700490465 /* SignStoryboard.storyboard in Resources */,
 				16D80CD8290335E000A3FC5A /* GoogleService-Info.plist in Resources */,
 				16AE04182900A05E00490465 /* LaunchScreen.storyboard in Resources */,
+				16FE20BB290739DC000AC718 /* AddItemTableViewCell.xib in Resources */,
 				16AE04152900A05E00490465 /* Assets.xcassets in Resources */,
 				16AE04C52900A12700490465 /* MaterialsTableViewCell.xib in Resources */,
 				16AE04E82900DBD900490465 /* ReceiptTableViewCell.xib in Resources */,
@@ -784,10 +848,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1684C0D92902405100249C7B /* ParallaxGroupedSectionHeaderTableView.swift in Sources */,
+				16FE20B5290737F9000AC718 /* SalesCreateViewController.swift in Sources */,
 				16AE04AB2900A12600490465 /* SNRefreshTokenModel.swift in Sources */,
 				16AE04A72900A12600490465 /* EventTag.swift in Sources */,
 				16AE04B42900A12600490465 /* SNStateful.swift in Sources */,
 				16FF365B2901ED5F000DFC50 /* SaleDetailedViewController.swift in Sources */,
+				16FE20BF2907433A000AC718 /* AddButtonFooterTableViewCell.swift in Sources */,
 				16D80CE82903574A00A3FC5A /* TaxeModel.swift in Sources */,
 				1684C0D5290234A100249C7B /* ItemTableViewCell.swift in Sources */,
 				16D80CE4290356DC00A3FC5A /* SalesModel.swift in Sources */,
@@ -837,8 +903,10 @@
 				16AE049C2900A12600490465 /* Extension + String.swift in Sources */,
 				16AE04E32900A12700490465 /* LoginRepository.swift in Sources */,
 				16AE049E2900A12600490465 /* Extension + UIColor.swift in Sources */,
+				16FE20B129073657000AC718 /* TextFieldTableViewCell.swift in Sources */,
 				16AE04DF2900A12700490465 /* LoginCoordinator.swift in Sources */,
 				16AE04CD2900A12700490465 /* EstimateViewController.swift in Sources */,
+				16FE20BA290739DC000AC718 /* AddItemTableViewCell.swift in Sources */,
 				16AE04C62900A12700490465 /* MaterialsCoordinator.swift in Sources */,
 				16AE04E02900A12700490465 /* LoginProtocol.swift in Sources */,
 				16AE04AC2900A12600490465 /* SNRefreshTokenService.swift in Sources */,
@@ -932,7 +1000,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -986,7 +1054,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

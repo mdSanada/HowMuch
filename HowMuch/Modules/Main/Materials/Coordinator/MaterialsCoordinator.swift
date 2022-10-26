@@ -43,6 +43,13 @@ class MaterialsCoordinator: SNCoordinator {
     }
 }
 extension MaterialsCoordinator: MaterialsProtocol {
+    func create(type: MaterialsType) {
+        let storyboard = UIStoryboard(name: "MaterialStoryboard", bundle: nil)
+        let controller = storyboard.instantiateViewController(identifier: "MaterialCreate") as? MaterialCreateViewController
+        controller?.type = type
+        navigation?.present(controller!, animated: true)
+    }
+    
     func pushDetailed() {
     }
 }

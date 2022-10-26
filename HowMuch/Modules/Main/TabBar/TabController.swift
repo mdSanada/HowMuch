@@ -45,7 +45,7 @@ class TabController: UITabBarController {
 
         let settings = interface.getViewController(.settings)
         
-        let listViewControllers = [myReceipt, materials, estimate, settings]
+        let listViewControllers = [myReceipt, materials,/* estimate,*/ settings]
 
         viewControllers = listViewControllers.compactMap { $0 }
     }

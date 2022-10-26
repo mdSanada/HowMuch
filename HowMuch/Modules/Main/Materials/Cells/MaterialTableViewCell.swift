@@ -1,17 +1,16 @@
 //
-//  AddItemTableViewCell.swift
+//  MaterialTableViewCell.swift
 //  HowMuch
 //
-//  Created by Matheus D Sanada on 24/10/22.
+//  Created by Matheus D Sanada on 25/10/22.
 //
 
 import UIKit
 
-class AddItemTableViewCell: UITableViewCell {
+class MaterialTableViewCell: UITableViewCell {
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelQuantity: UILabel!
-    @IBOutlet weak var labelValue: UILabel!
-    @IBOutlet weak var buttonDelete: UIButton!
+    @IBOutlet weak var labelPrice: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,10 +20,12 @@ class AddItemTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    public func render(title: String, quantity: String, value: Decimal) {
+    public func render(title: String,
+                       quantity: String,
+                       price: Decimal) {
         self.labelTitle.text = title
         self.labelQuantity.text = quantity
-        self.labelValue.text = value.asMoney()
+        self.labelPrice.text = price.asMoney()
     }
     
 }

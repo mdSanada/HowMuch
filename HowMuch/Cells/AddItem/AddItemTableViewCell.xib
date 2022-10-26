@@ -74,6 +74,8 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="buttonDelete" destination="NEf-Qn-GP5" id="GU6-Xd-PRS"/>
+                <outlet property="constraintBottom" destination="7S7-Ss-cXl" id="rHt-JX-dBc"/>
+                <outlet property="constraintTop" destination="h1C-mc-Oub" id="Vxz-jh-d5g"/>
                 <outlet property="labelQuantity" destination="Ni9-jS-1bQ" id="zMb-dN-nLg"/>
                 <outlet property="labelTitle" destination="cGn-jG-otG" id="tMY-bD-BlH"/>
                 <outlet property="labelValue" destination="q7g-Vg-o54" id="kcR-eU-qEO"/>

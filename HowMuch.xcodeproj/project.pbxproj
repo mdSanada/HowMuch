@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1646642A29088B31008892EB /* CreateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1646642929088B31008892EB /* CreateModel.swift */; };
+		1646642E290892E0008892EB /* AddImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1646642C290892E0008892EB /* AddImageTableViewCell.swift */; };
+		1646642F290892E0008892EB /* AddImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1646642D290892E0008892EB /* AddImageTableViewCell.xib */; };
+		164664342908976C008892EB /* MaterialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164664322908976C008892EB /* MaterialTableViewCell.swift */; };
+		164664352908976C008892EB /* MaterialTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 164664332908976C008892EB /* MaterialTableViewCell.xib */; };
+		1646643B2908A7FF008892EB /* MaterialStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1646643A2908A7FF008892EB /* MaterialStoryboard.storyboard */; };
+		1646643C2908A812008892EB /* MaterialCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164664372908A6FE008892EB /* MaterialCreateViewController.swift */; };
+		1646643E2908AA5D008892EB /* MaterialsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1646643D2908AA5D008892EB /* MaterialsType.swift */; };
+		164664422908AC02008892EB /* SelectableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164664402908AC02008892EB /* SelectableTableViewCell.swift */; };
+		164664432908AC02008892EB /* SelectableTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 164664412908AC02008892EB /* SelectableTableViewCell.xib */; };
+		164664482908BA2A008892EB /* MeasureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164664472908BA2A008892EB /* MeasureType.swift */; };
+		1646644E2908C41F008892EB /* ConsumptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1646644D2908C41F008892EB /* ConsumptionType.swift */; };
+		164664502908C526008892EB /* TimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1646644F2908C526008892EB /* TimeType.swift */; };
+		164664522908C632008892EB /* NivelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164664512908C632008892EB /* NivelType.swift */; };
 		1684C0D5290234A100249C7B /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684C0D3290234A100249C7B /* ItemTableViewCell.swift */; };
 		1684C0D6290234A100249C7B /* ItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1684C0D4290234A100249C7B /* ItemTableViewCell.xib */; };
 		1684C0D92902405100249C7B /* ParallaxGroupedSectionHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684C0D82902405100249C7B /* ParallaxGroupedSectionHeaderTableView.swift */; };
@@ -57,8 +71,6 @@
 		16AE04C12900A12700490465 /* MyReceiptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE04602900A12600490465 /* MyReceiptViewController.swift */; };
 		16AE04C22900A12700490465 /* MyReceiptViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE04612900A12600490465 /* MyReceiptViewModel.swift */; };
 		16AE04C32900A12700490465 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16AE04622900A12600490465 /* MainStoryboard.storyboard */; };
-		16AE04C42900A12700490465 /* MaterialsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE04652900A12600490465 /* MaterialsTableViewCell.swift */; };
-		16AE04C52900A12700490465 /* MaterialsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16AE04662900A12600490465 /* MaterialsTableViewCell.xib */; };
 		16AE04C62900A12700490465 /* MaterialsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE04682900A12600490465 /* MaterialsCoordinator.swift */; };
 		16AE04C72900A12700490465 /* MaterialsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE04692900A12600490465 /* MaterialsProtocol.swift */; };
 		16AE04C82900A12700490465 /* MaterialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE046A2900A12600490465 /* MaterialsViewController.swift */; };
@@ -104,6 +116,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1646642929088B31008892EB /* CreateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateModel.swift; sourceTree = "<group>"; };
+		1646642C290892E0008892EB /* AddImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageTableViewCell.swift; sourceTree = "<group>"; };
+		1646642D290892E0008892EB /* AddImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddImageTableViewCell.xib; sourceTree = "<group>"; };
+		164664322908976C008892EB /* MaterialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialTableViewCell.swift; sourceTree = "<group>"; };
+		164664332908976C008892EB /* MaterialTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MaterialTableViewCell.xib; sourceTree = "<group>"; };
+		164664372908A6FE008892EB /* MaterialCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialCreateViewController.swift; sourceTree = "<group>"; };
+		1646643A2908A7FF008892EB /* MaterialStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MaterialStoryboard.storyboard; sourceTree = "<group>"; };
+		1646643D2908AA5D008892EB /* MaterialsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialsType.swift; sourceTree = "<group>"; };
+		164664402908AC02008892EB /* SelectableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableTableViewCell.swift; sourceTree = "<group>"; };
+		164664412908AC02008892EB /* SelectableTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectableTableViewCell.xib; sourceTree = "<group>"; };
+		164664472908BA2A008892EB /* MeasureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureType.swift; sourceTree = "<group>"; };
+		1646644D2908C41F008892EB /* ConsumptionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumptionType.swift; sourceTree = "<group>"; };
+		1646644F2908C526008892EB /* TimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeType.swift; sourceTree = "<group>"; };
+		164664512908C632008892EB /* NivelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NivelType.swift; sourceTree = "<group>"; };
 		1684C0D3290234A100249C7B /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		1684C0D4290234A100249C7B /* ItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemTableViewCell.xib; sourceTree = "<group>"; };
 		1684C0D82902405100249C7B /* ParallaxGroupedSectionHeaderTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxGroupedSectionHeaderTableView.swift; sourceTree = "<group>"; };
@@ -156,8 +182,6 @@
 		16AE04602900A12600490465 /* MyReceiptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyReceiptViewController.swift; sourceTree = "<group>"; };
 		16AE04612900A12600490465 /* MyReceiptViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyReceiptViewModel.swift; sourceTree = "<group>"; };
 		16AE04622900A12600490465 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
-		16AE04652900A12600490465 /* MaterialsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialsTableViewCell.swift; sourceTree = "<group>"; };
-		16AE04662900A12600490465 /* MaterialsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MaterialsTableViewCell.xib; sourceTree = "<group>"; };
 		16AE04682900A12600490465 /* MaterialsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialsCoordinator.swift; sourceTree = "<group>"; };
 		16AE04692900A12600490465 /* MaterialsProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialsProtocol.swift; sourceTree = "<group>"; };
 		16AE046A2900A12600490465 /* MaterialsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialsViewController.swift; sourceTree = "<group>"; };
@@ -216,22 +240,77 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1646642829088B21008892EB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				16D80CE3290356DC00A3FC5A /* SalesModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1646642B290892CF008892EB /* AddImage */ = {
+			isa = PBXGroup;
+			children = (
+				1646642C290892E0008892EB /* AddImageTableViewCell.swift */,
+				1646642D290892E0008892EB /* AddImageTableViewCell.xib */,
+			);
+			path = AddImage;
+			sourceTree = "<group>";
+		};
+		164664302908974F008892EB /* Materials */ = {
+			isa = PBXGroup;
+			children = (
+				1646643A2908A7FF008892EB /* MaterialStoryboard.storyboard */,
+				164664362908A6FE008892EB /* MaterialCreate */,
+			);
+			path = Materials;
+			sourceTree = "<group>";
+		};
+		164664312908975D008892EB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				164664322908976C008892EB /* MaterialTableViewCell.swift */,
+				164664332908976C008892EB /* MaterialTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		164664362908A6FE008892EB /* MaterialCreate */ = {
+			isa = PBXGroup;
+			children = (
+				164664372908A6FE008892EB /* MaterialCreateViewController.swift */,
+			);
+			path = MaterialCreate;
+			sourceTree = "<group>";
+		};
+		1646643F2908ABF5008892EB /* Selectable */ = {
+			isa = PBXGroup;
+			children = (
+				164664402908AC02008892EB /* SelectableTableViewCell.swift */,
+				164664412908AC02008892EB /* SelectableTableViewCell.xib */,
+			);
+			path = Selectable;
+			sourceTree = "<group>";
+		};
+		1646644C2908C3A8008892EB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1646643F2908ABF5008892EB /* Selectable */,
+				1646642B290892CF008892EB /* AddImage */,
+				16FE20BC29074326000AC718 /* AddItemButtonFooter */,
+				16FE20B7290739C9000AC718 /* AddItem */,
+				16FE20B6290739C2000AC718 /* Item */,
+				16FE20AE2907363A000AC718 /* TextField */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		1684C0D12902345E00249C7B /* SalesDetailed */ = {
 			isa = PBXGroup;
 			children = (
 				16FF365A2901ED5F000DFC50 /* SaleDetailedViewController.swift */,
 			);
 			path = SalesDetailed;
-			sourceTree = "<group>";
-		};
-		1684C0D22902346300249C7B /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				16FE20BC29074326000AC718 /* AddItemButtonFooter */,
-				16FE20B7290739C9000AC718 /* AddItem */,
-				16FE20B6290739C2000AC718 /* Item */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		1684C0D72902404100249C7B /* ParallaxGroupedSectionHeaderTableView */ = {
@@ -270,6 +349,7 @@
 				16D80CDE2903566D00A3FC5A /* Models */,
 				16D80CD929033A4B00A3FC5A /* Repositories */,
 				16AE041F2900A12600490465 /* Core */,
+				1646644C2908C3A8008892EB /* Cells */,
 				16AE04332900A12600490465 /* Custom Class */,
 				16AE04512900A12600490465 /* Modules */,
 				16AE04142900A05E00490465 /* Assets.xcassets */,
@@ -352,7 +432,6 @@
 		16AE04332900A12600490465 /* Custom Class */ = {
 			isa = PBXGroup;
 			children = (
-				16FE20AE2907363A000AC718 /* TextFieldTableViewCell */,
 				1684C0D72902404100249C7B /* ParallaxGroupedSectionHeaderTableView */,
 				16AE04342900A12600490465 /* Status */,
 				16AE04382900A12600490465 /* Tag */,
@@ -441,6 +520,7 @@
 				16AE048C2900A12600490465 /* Sign */,
 				16AE04522900A12600490465 /* Main */,
 				16FF36572901ED2D000DFC50 /* Sales */,
+				164664302908974F008892EB /* Materials */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -492,20 +572,11 @@
 		16AE04632900A12600490465 /* Materials */ = {
 			isa = PBXGroup;
 			children = (
-				16AE04642900A12600490465 /* Cell */,
+				164664312908975D008892EB /* Cells */,
 				16AE04672900A12600490465 /* Coordinator */,
 				16AE046A2900A12600490465 /* MaterialsViewController.swift */,
 			);
 			path = Materials;
-			sourceTree = "<group>";
-		};
-		16AE04642900A12600490465 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				16AE04652900A12600490465 /* MaterialsTableViewCell.swift */,
-				16AE04662900A12600490465 /* MaterialsTableViewCell.xib */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		16AE04672900A12600490465 /* Coordinator */ = {
@@ -637,29 +708,35 @@
 		16D80CDE2903566D00A3FC5A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1646642929088B31008892EB /* CreateModel.swift */,
 				16D80CDF2903567C00A3FC5A /* BugdetModel.swift */,
 				16D80CE1290356BB00A3FC5A /* IngredientsModel.swift */,
-				16D80CE3290356DC00A3FC5A /* SalesModel.swift */,
 				16D80CE52903571E00A3FC5A /* MaterialModel.swift */,
 				16D80CE72903574A00A3FC5A /* TaxeModel.swift */,
 				16D80CE92903576E00A3FC5A /* ConsumptionModel.swift */,
 				16D80CEB290357D200A3FC5A /* FirestoreId.swift */,
+				164664472908BA2A008892EB /* MeasureType.swift */,
+				1646644D2908C41F008892EB /* ConsumptionType.swift */,
+				164664512908C632008892EB /* NivelType.swift */,
+				1646644F2908C526008892EB /* TimeType.swift */,
+				1646643D2908AA5D008892EB /* MaterialsType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		16FE20AE2907363A000AC718 /* TextFieldTableViewCell */ = {
+		16FE20AE2907363A000AC718 /* TextField */ = {
 			isa = PBXGroup;
 			children = (
 				16FE20AF29073657000AC718 /* TextFieldTableViewCell.swift */,
 				16FE20B029073657000AC718 /* TextFieldTableViewCell.xib */,
 			);
-			path = TextFieldTableViewCell;
+			path = TextField;
 			sourceTree = "<group>";
 		};
 		16FE20B3290737D5000AC718 /* SalesCreate */ = {
 			isa = PBXGroup;
 			children = (
+				1646642829088B21008892EB /* Models */,
 				16FE20B4290737F9000AC718 /* SalesCreateViewController.swift */,
 			);
 			path = SalesCreate;
@@ -695,7 +772,6 @@
 		16FF36572901ED2D000DFC50 /* Sales */ = {
 			isa = PBXGroup;
 			children = (
-				1684C0D22902346300249C7B /* Cells */,
 				16FF36582901ED4F000DFC50 /* SaleStoryboard.storyboard */,
 				1684C0D12902345E00249C7B /* SalesDetailed */,
 				16FE20B3290737D5000AC718 /* SalesCreate */,
@@ -783,16 +859,19 @@
 				16FE20C02907433A000AC718 /* AddButtonFooterTableViewCell.xib in Resources */,
 				16AE04C32900A12700490465 /* MainStoryboard.storyboard in Resources */,
 				16AE04A62900A12600490465 /* StatusView.xib in Resources */,
+				1646643B2908A7FF008892EB /* MaterialStoryboard.storyboard in Resources */,
 				16AE04CA2900A12700490465 /* EstimateTableViewCell.xib in Resources */,
 				16FE20B229073657000AC718 /* TextFieldTableViewCell.xib in Resources */,
 				1684C0D6290234A100249C7B /* ItemTableViewCell.xib in Resources */,
 				16AE04DE2900A12700490465 /* SignStoryboard.storyboard in Resources */,
 				16D80CD8290335E000A3FC5A /* GoogleService-Info.plist in Resources */,
 				16AE04182900A05E00490465 /* LaunchScreen.storyboard in Resources */,
+				1646642F290892E0008892EB /* AddImageTableViewCell.xib in Resources */,
+				164664352908976C008892EB /* MaterialTableViewCell.xib in Resources */,
 				16FE20BB290739DC000AC718 /* AddItemTableViewCell.xib in Resources */,
 				16AE04152900A05E00490465 /* Assets.xcassets in Resources */,
-				16AE04C52900A12700490465 /* MaterialsTableViewCell.xib in Resources */,
 				16AE04E82900DBD900490465 /* ReceiptTableViewCell.xib in Resources */,
+				164664432908AC02008892EB /* SelectableTableViewCell.xib in Resources */,
 				16FF36592901ED4F000DFC50 /* SaleStoryboard.storyboard in Resources */,
 				16AE04A92900A12600490465 /* TagView.xib in Resources */,
 			);
@@ -850,11 +929,16 @@
 				1684C0D92902405100249C7B /* ParallaxGroupedSectionHeaderTableView.swift in Sources */,
 				16FE20B5290737F9000AC718 /* SalesCreateViewController.swift in Sources */,
 				16AE04AB2900A12600490465 /* SNRefreshTokenModel.swift in Sources */,
+				164664422908AC02008892EB /* SelectableTableViewCell.swift in Sources */,
+				1646644E2908C41F008892EB /* ConsumptionType.swift in Sources */,
 				16AE04A72900A12600490465 /* EventTag.swift in Sources */,
 				16AE04B42900A12600490465 /* SNStateful.swift in Sources */,
+				1646642E290892E0008892EB /* AddImageTableViewCell.swift in Sources */,
+				1646643C2908A812008892EB /* MaterialCreateViewController.swift in Sources */,
 				16FF365B2901ED5F000DFC50 /* SaleDetailedViewController.swift in Sources */,
 				16FE20BF2907433A000AC718 /* AddButtonFooterTableViewCell.swift in Sources */,
 				16D80CE82903574A00A3FC5A /* TaxeModel.swift in Sources */,
+				164664522908C632008892EB /* NivelType.swift in Sources */,
 				1684C0D5290234A100249C7B /* ItemTableViewCell.swift in Sources */,
 				16D80CE4290356DC00A3FC5A /* SalesModel.swift in Sources */,
 				16AE04B92900A12600490465 /* SNViewModelProtocol.swift in Sources */,
@@ -880,13 +964,14 @@
 				16AE04E22900A12700490465 /* LoginViewModel.swift in Sources */,
 				16AE04C12900A12700490465 /* MyReceiptViewController.swift in Sources */,
 				16D80CEC290357D200A3FC5A /* FirestoreId.swift in Sources */,
+				164664342908976C008892EB /* MaterialTableViewCell.swift in Sources */,
 				16D80CE2290356BB00A3FC5A /* IngredientsModel.swift in Sources */,
 				16AE04D12900A12700490465 /* SettingsViewController.swift in Sources */,
 				16AE04E72900DBD900490465 /* ReceiptTableViewCell.swift in Sources */,
+				164664502908C526008892EB /* TimeType.swift in Sources */,
 				16AE04BA2900A12600490465 /* MainCoordinator.swift in Sources */,
 				16AE04992900A12600490465 /* DateHelper.swift in Sources */,
 				16AE04B62900A12600490465 /* SNViewControllerProtocol.swift in Sources */,
-				16AE04C42900A12700490465 /* MaterialsTableViewCell.swift in Sources */,
 				16AE04C22900A12700490465 /* MyReceiptViewModel.swift in Sources */,
 				16AE04B22900A12600490465 /* SNRequestable.swift in Sources */,
 				16AE04B82900A12600490465 /* SNViewModel.swift in Sources */,
@@ -901,6 +986,7 @@
 				16AE04C02900A12700490465 /* MyReceiptProtocol.swift in Sources */,
 				16AE04A82900A12600490465 /* TagView.swift in Sources */,
 				16AE049C2900A12600490465 /* Extension + String.swift in Sources */,
+				1646642A29088B31008892EB /* CreateModel.swift in Sources */,
 				16AE04E32900A12700490465 /* LoginRepository.swift in Sources */,
 				16AE049E2900A12600490465 /* Extension + UIColor.swift in Sources */,
 				16FE20B129073657000AC718 /* TextFieldTableViewCell.swift in Sources */,
@@ -908,10 +994,12 @@
 				16AE04CD2900A12700490465 /* EstimateViewController.swift in Sources */,
 				16FE20BA290739DC000AC718 /* AddItemTableViewCell.swift in Sources */,
 				16AE04C62900A12700490465 /* MaterialsCoordinator.swift in Sources */,
+				1646643E2908AA5D008892EB /* MaterialsType.swift in Sources */,
 				16AE04E02900A12700490465 /* LoginProtocol.swift in Sources */,
 				16AE04AC2900A12600490465 /* SNRefreshTokenService.swift in Sources */,
 				16AE049B2900A12600490465 /* Extension + Dictionary.swift in Sources */,
 				16AE04A12900A12600490465 /* Registering.swift in Sources */,
+				164664482908BA2A008892EB /* MeasureType.swift in Sources */,
 				16AE049F2900A12600490465 /* Extension + UIImage.swift in Sources */,
 				16AE04C72900A12700490465 /* MaterialsProtocol.swift in Sources */,
 				16AE04B12900A12600490465 /* SNNetworkTask.swift in Sources */,

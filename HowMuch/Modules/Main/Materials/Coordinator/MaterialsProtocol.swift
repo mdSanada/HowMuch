@@ -8,5 +8,6 @@
 import Foundation
 
 protocol MaterialsProtocol: AnyObject {
+    func create(type: MaterialsType)
     func pushDetailed()
 }

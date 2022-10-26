@@ -70,11 +70,11 @@ extension MainCoordinator: TabProtocol {
             myReceiptCoordinator.parent = self
             return myReceiptCoordinator.presenter
         case .estimate:
-            materialsCoordinator.parent = self
-            return materialsCoordinator.presenter
-        case .materials:
             estimateCoordinator.parent = self
             return estimateCoordinator.presenter
+        case .materials:
+            materialsCoordinator.parent = self
+            return materialsCoordinator.presenter
         case .settings:
             settingsCoordinator.parent = self
             return settingsCoordinator.presenter

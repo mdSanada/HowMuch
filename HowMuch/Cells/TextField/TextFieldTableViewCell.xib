@@ -26,11 +26,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="placeholder" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="DSj-95-cKC">
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5f8-Kb-eaX">
                                 <rect key="frame" x="0.0" y="25.5" width="320" height="24.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="placeholder" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="DSj-95-cKC">
+                                        <rect key="frame" x="0.0" y="0.0" width="233" height="24.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmt-ON-gep">
+                                        <rect key="frame" x="233" y="0.0" width="87" height="24.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="square.and.pencil" catalog="system" title="Menu" imagePadding="5">
+                                            <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </stackView>
@@ -46,10 +58,16 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="buttonMenu" destination="zmt-ON-gep" id="Wub-Pp-lru"/>
+                <outlet property="constraintBottom" destination="1JY-eE-aj4" id="j7x-DI-d6f"/>
+                <outlet property="constraintTop" destination="kgy-fh-OoB" id="uMb-W1-M2X"/>
                 <outlet property="fieldContent" destination="DSj-95-cKC" id="TCY-dH-Mbr"/>
                 <outlet property="labelTitle" destination="tix-d1-Lwq" id="Ngh-7H-YVT"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="105.80357142857143"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
+    </resources>
 </document>

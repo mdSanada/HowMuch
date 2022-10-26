@@ -1,5 +1,5 @@
 //
-//  SalesCreateViewController.swift
+//  MaterialCreateViewController.swift
 //  HowMuch
 //
 //  Created by Matheus D Sanada on 24/10/22.
@@ -7,22 +7,36 @@
 
 import UIKit
 
-class SalesCreateViewController: UIViewController {
+class MaterialCreateViewController: UIViewController {
+    @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var createTable: UITableView!
-    var itens: [CreateDTO] = CreateDTO.sales()
+    var type: MaterialsType?
+    var itens: [CreateDTO] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureView()
         configureTable()
     }
     
-    func configureTable() {
+    private func configureView() {
+        guard let type = type else {
+            dismiss(animated: true)
+            return
+        }
+        itens = CreateDTO.materials(type: type)
+        labelTitle.text = type.newTitle()
+    }
+    
+    private func configureTable() {
         createTable.register(type: TextFieldTableViewCell.self)
-        createTable.register(type: AddItemTableViewCell.self)
-        createTable.register(type: AddButtonFooterTableViewCell.self)
-        createTable.register(type: AddImageTableViewCell.self)
+        createTable.register(type: SelectableTableViewCell.self)
         createTable.delegate = self
         createTable.dataSource = self
+        
+        if #available(iOS 15.0, *) {
+            createTable.sectionHeaderTopPadding = 0
+        }
     }
     
     private func create() {
@@ -34,13 +48,22 @@ class SalesCreateViewController: UIViewController {
     }
 }
 
-extension SalesCreateViewController: UITableViewDataSource, UITableViewDelegate {
+extension MaterialCreateViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return itens.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itens[section].itens.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let item = itens[section]
+        return item.showTitle ? 30 : 0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -52,34 +75,23 @@ extension SalesCreateViewController: UITableViewDataSource, UITableViewDelegate 
         let item = itens[indexPath.section]
         
         switch item.type {
-        case .image:
-            let cell: AddImageTableViewCell = tableView.dequeueReusableCell(indexPath)
-            cell.render(image: nil)
-            return cell
         case .text:
             let row = item.itens[indexPath.row]
             guard let type = row.type, let title = row.title, let placeholder = row.placeholder else { return UITableViewCell() }
             let cell: TextFieldTableViewCell = tableView.dequeueReusableCell(indexPath)
             cell.render(type: type,
                         title: title,
-                        placeholder: placeholder)
+                        placeholder: placeholder,
+                        constraint: (top: indexPath.row == 0 ? 0 : nil,
+                                     bottom: indexPath.row == (item.itens.count - 1) ? 0 : nil))
             return cell
-        case .item:
-            let row = item.itens[indexPath.row]
-            guard let type = row.itemType else { return UITableViewCell() }
-            switch type {
-            case .item:
-                // TODO: - Add item
-                guard let title = row.title, let placeholder = row.placeholder else { return UITableViewCell() }
-                let cell: AddItemTableViewCell = tableView.dequeueReusableCell(indexPath)
-                cell.render(title: "Title", quantity: "5 units", value: 10)
-                return cell
-            case .add:
-                let cell: AddButtonFooterTableViewCell = tableView.dequeueReusableCell(indexPath)
-                cell.render(title: "Adicionar")
-                return cell
-            }
         case .selectable:
+            let row = item.itens[indexPath.row]
+            guard let title = row.title, let menu = row.selectable else { return UITableViewCell() }
+            let cell: SelectableTableViewCell = tableView.dequeueReusableCell(indexPath)
+            cell.render(title: title, actions: menu)
+            return cell
+        default:
             return UITableViewCell()
         }
     }

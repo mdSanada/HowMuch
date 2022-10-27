@@ -30,22 +30,22 @@ extension CreateDTO {
         array.append(.text(TextFieldViewModelCell(item: CreateTextModel(key: "",
                                                                         title: "Nome",
                                                                         placeholder: "Nome",
-                                                                        keyboard: .default,
+                                                                        textFieldType: .text,
                                                                         type: .title))))
         array.append(.text(TextFieldViewModelCell(item: CreateTextModel(key: "",
                                                                         title: "Descrição",
                                                                         placeholder: "Descrição",
-                                                                        keyboard: .default,
+                                                                        textFieldType: .text,
                                                                         type: .body))))
         array.append(.text(TextFieldViewModelCell(item: CreateTextModel(key: "",
                                                                         title: "Lucro",
                                                                         placeholder: "Lucro",
-                                                                        keyboard: .numberPad,
+                                                                        textFieldType: .currency,
                                                                         type: .body))))
         array.append(.text(TextFieldViewModelCell(item: CreateTextModel(key: "",
                                                                         title: "Rendimento",
                                                                         placeholder: "Rendimento",
-                                                                        keyboard: .numberPad,
+                                                                        textFieldType: .currency,
                                                                         type: .body))))
         
         result.append(CreateDTO(section: "Descrição",
@@ -93,133 +93,18 @@ extension CreateDTO {
     }
     
     static func materials(type: MaterialsType) -> [CreateDTO] {
-        var result:[CreateDTO] = []
-        var array:[CreateType]  = []
-        
         switch type {
         case .ingredient:
-            // MARK: - Ingredient Section
-            array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: IngredientKey.name.rawValue,
-                                                                                      title: "Nome",
-                                                                                      placeholder: "Nome",
-                                                                                      keyboard: .default,
-                                                                                      type: .title))))
-            array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: IngredientKey.description.rawValue,
-                                                                                      title: "Descrição",
-                                                                                      placeholder: "Descrição",
-                                                                                      keyboard: .default,
-                                                                                      type: .body))))
-            array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: IngredientKey.cost.rawValue,
-                                                                                      title: "Custo (R$)",
-                                                                                      placeholder: "R$ 0,00",
-                                                                                      keyboard: .decimalPad,
-                                                                                      type: .body))))
-            array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: IngredientKey.quantity.rawValue,
-                                                                                      title: "Quantidade",
-                                                                                      placeholder: "Quantidade",
-                                                                                      keyboard: .numberPad,
-                                                                                      type: .menu(MeasureType.allCases.map { $0.rawValue },
-                                                                                                  initial: MeasureType.gramas.rawValue,
-                                                                                                  hiddenInput: false)))))
-            
-            result.append(CreateDTO(section: "Descrição",
-                                    showTitle: false,
-                                    itens: array))
-            array.removeAll()
-            
-            return result
+            return IngredientsModel.create()
         case .material:
             // MARK: - Material Section
-            array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: MaterialKey.name.rawValue,
-                                                                                      title: "Nome",
-                                                                                      placeholder: "Nome",
-                                                                                      keyboard: .default,
-                                                                                      type: .title))))
-            array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: MaterialKey.description.rawValue,
-                                                                                      title: "Descrição",
-                                                                                      placeholder: "Descrição",
-                                                                                      keyboard: .default,
-                                                                                      type: .body))))
-            array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: MaterialKey.cost.rawValue,
-                                                                                      title: "Custo (R$)",
-                                                                                      placeholder: "R$ 0,00",
-                                                                                      keyboard: .decimalPad,
-                                                                                      type: .body))))
-            array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: MaterialKey.quantity.rawValue,
-                                                                                      title: "Quantidade",
-                                                                                      placeholder: "Quantidade",
-                                                                                      keyboard: .numberPad,
-                                                                                      type: .menu(MeasureType.allCases.map { $0.rawValue },
-                                                                                                  initial: MeasureType.gramas.rawValue,
-                                                                                                  hiddenInput: false)))))
-            
-            
-            result.append(CreateDTO(section: "Descrição", showTitle: false, itens: array))
-            array.removeAll()
-            
-            return result
+            return MaterialModel.create()
         case .taxes:
             // MARK: - Taxes Section
-            array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: TaxesKey.name.rawValue,
-                                                                                      title: "Nome",
-                                                                                      placeholder: "Nome",
-                                                                                      keyboard: .default,
-                                                                                      type: .title))))
-            array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: TaxesKey.description.rawValue,
-                                                                                      title: "Descrição",
-                                                                                      placeholder: "Descrição",
-                                                                                      keyboard: .default,
-                                                                                      type: .body))))
-            array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: TaxesKey.cost.rawValue,
-                                                                                      title: "Custo (%)",
-                                                                                      placeholder: "0 %",
-                                                                                      keyboard: .numberPad,
-                                                                                      type: .body))))
-            
-            result.append(CreateDTO(section: "Descrição", showTitle: false, itens: array))
-            array.removeAll()
-            
-            return result
+            return TaxeModel.create()
         case .consumption:
             // MARK: - Consumption Section
-            array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: ConsumptionKey.name.rawValue,
-                                                                                      title: "Nome",
-                                                                                      placeholder: "Nome",
-                                                                                      keyboard: .default,
-                                                                                      type: .title))))
-            array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: ConsumptionKey.description.rawValue,
-                                                                                      title: "Descrição",
-                                                                                      placeholder: "Descrição",
-                                                                                      keyboard: .default,
-                                                                                      type: .body))))
-            
-            array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: ConsumptionKey.consumption.rawValue,
-                                                                                      title: "Consumo",
-                                                                                      placeholder: "",
-                                                                                      keyboard: .numberPad,
-                                                                                      type: .menu(ConsumptionType.allCases.map { $0.rawValue },
-                                                                                                  initial: ConsumptionType.gas.rawValue,
-                                                                                                  hiddenInput: true)))))
-            array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: ConsumptionKey.nivel.rawValue,
-                                                                                      title: "Nível",
-                                                                                      placeholder: "",
-                                                                                      keyboard: .numberPad,
-                                                                                      type: .menu(NivelType.allCases.map { $0.rawValue },
-                                                                                                  initial: NivelType.low.rawValue,
-                                                                                                  hiddenInput: true)))))
-            array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: ConsumptionKey.time.rawValue,
-                                                                                      title: "Tempo",
-                                                                                      placeholder: "Tempo",
-                                                                                      keyboard: .numberPad,
-                                                                                      type: .menu(TimeType.allCases.map { $0.rawValue },
-                                                                                                  initial: TimeType.min.rawValue,
-                                                                                                  hiddenInput: false)))))
-            
-            
-            result.append(CreateDTO(section: "Descrição", showTitle: false, itens: array))
-            array.removeAll()
-            
-            return result
+            return ConsumptionModel.create()
         }
     }
 }

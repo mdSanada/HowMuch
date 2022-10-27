@@ -12,7 +12,7 @@ import RxCocoa
 enum TextFieldTableViewCellType {
     case title
     case body
-    case menu([String], initial: String, hiddenInput: Bool)
+    case menu(key: String, actions: [String], initial: String, hiddenInput: Bool)
 }
 
 class TextFieldTableViewCell: UITableViewCell, TextFieldOutputProtocol {
@@ -24,42 +24,30 @@ class TextFieldTableViewCell: UITableViewCell, TextFieldOutputProtocol {
     var viewModel: TextFieldViewModelCell?
     private var disposeBag = DisposeBag()
     var validateSubject = PublishSubject<Validator>()
-    
+    var textFieldType: TextFieldTypes = .percent
+
     override func awakeFromNib() {
         super.awakeFromNib()
+        fieldContent.delegate = self
+
         fieldContent.rx.text
             .changed
             .compactMap { $0 }
             .subscribe(onNext: { [weak self] text in
-                self?.viewModel?.valueDidChange(text)
+                switch self?.textFieldType {
+                case .text:
+                    self?.viewModel?.valueDidChange(text)
+                case .currency:
+                    self?.viewModel?.valueDidChange(text.decimalInputFormatting())
+                case .percent:
+                    self?.viewModel?.valueDidChange(text.percentInputFormatting())
+                case .number:
+                    self?.viewModel?.valueDidChange(text.numberInputFormatting())
+                default:
+                    self?.viewModel?.valueDidChange(text)
+                }
             })
             .disposed(by: disposeBag)
-        
-//        fieldContent.rx
-//            .text
-//            .changed
-//            .map { [weak self] text in
-//                return (text?.count ?? 0) >= 1
-//            }
-//            .subscribe(onNext: {[weak self] (valid) in
-//                self?.viewModel?.isValid.onNext(valid)
-//            })
-//            .disposed(by: disposeBag)
-//        
-//        fieldContent.rx
-//            .text
-//            .changed
-//            .filter { [weak self] text in
-//                return (text?.count ?? 0) >= 1
-//            }
-//            .map { [weak self] text in
-//                return (text?.count ?? 0) >= 1
-//            }
-//            .subscribe(onNext: {[weak self] (valid) in
-//                self?.viewModel?.isValid.onNext(valid)
-//            })
-//            .disposed(by: disposeBag)
-
         
         fieldContent.rx
             .text
@@ -87,15 +75,6 @@ class TextFieldTableViewCell: UITableViewCell, TextFieldOutputProtocol {
                 self?.viewModel?.isValid.onNext(valid)
             })
             .disposed(by: disposeBag)
-        
-//        fieldContent.rx
-//            .controlEvent(.editingDidEnd)
-//            .map { [weak self] _ in validate.validate(self?.fieldContent.text ?? "") }
-//            .subscribe(onNext: {[weak self] (valid) in
-//                self?.subscribeEventField(valid)
-//            })
-//            .disposed(by: disposeBag)
-
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -111,7 +90,7 @@ class TextFieldTableViewCell: UITableViewCell, TextFieldOutputProtocol {
     func configure(type: TextFieldTableViewCellType,
                    title: String,
                    placeholder: String,
-                   keyboard: UIKeyboardType) {
+                   textFieldType: TextFieldTypes) {
         switch type {
         case .title:
             labelTitle.font = UIFont.systemFont(ofSize: 28, weight: .bold)
@@ -121,27 +100,25 @@ class TextFieldTableViewCell: UITableViewCell, TextFieldOutputProtocol {
             labelTitle.font = UIFont.systemFont(ofSize: 14, weight: .regular)
             fieldContent.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             buttonMenu.isHidden = true
-        case .menu(let actions, let initial, let hiddenInput):
+        case .menu(let key, let actions, let initial, let hiddenInput):
             labelTitle.font = UIFont.systemFont(ofSize: 14, weight: .regular)
             fieldContent.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             buttonMenu.isHidden = false
             fieldContent.isUserInteractionEnabled = !hiddenInput
             buttonMenu.setTitle(initial, for: .normal)
             viewModel?.menuDidChange(initial)
+            viewModel?.setMenuKey(key)
             configureMenu(actions: actions)
         }
         labelTitle.text = title
+        self.textFieldType = textFieldType
         fieldContent.placeholder = placeholder
-        fieldContent.keyboardType = keyboard
+        fieldContent.keyboardType = textFieldType.keyboard()
     }
 
     func configureError(validate: Validator) {
         validateSubject.onNext(validate)
     }
-    
-//    private func subscribeEventField(_ isValid: Bool) {
-//        viewModel?.isValid.onNext(isValid)
-//    }
 
     public func render(constraint: (top: CGFloat?, bottom: CGFloat?)? = nil) {
         if let top = constraint?.top {
@@ -167,5 +144,60 @@ class TextFieldTableViewCell: UITableViewCell, TextFieldOutputProtocol {
                           children: children)
         buttonMenu.menu = menu
         buttonMenu.showsMenuAsPrimaryAction = true
+    }
+}
+
+extension TextFieldTableViewCell: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let oldText = textField.text else { return false }
+        switch textFieldType {
+        case .currency:
+            guard lenght(textField: textField, range: range, string: string) else {
+                return false
+            }
+            if string.isEmpty {
+                let oldDigits = textField.text?.digits
+                textField.text = String(oldDigits?.dropLast() ?? "").currencyInputFormatting()
+            } else {
+                let newNumber = (oldText as NSString).replacingCharacters(in: range, with: string).digits
+                textField.text = newNumber.currencyInputFormatting()
+            }
+        case .percent:
+            guard lenght(textField: textField, range: range, string: string) else {
+                return false
+            }
+            if string.isEmpty {
+                let oldDigits = textField.text?.digits
+                textField.text = String(oldDigits?.dropLast() ?? "").percentFormatting()
+            } else {
+                let newNumber = (oldText as NSString).replacingCharacters(in: range, with: string).digits
+                textField.text =  newNumber.percentFormatting()
+            }
+        case .number:
+            guard lenght(textField: textField, range: range, string: string) else {
+                return false
+            }
+            if string.isEmpty {
+                
+                let oldDigits = textField.text?.digitsAndPonctuation
+                textField.text = String(oldDigits?.dropLast() ?? "")
+            } else {
+                let newNumber = (oldText as NSString).replacingCharacters(in: range, with: string).digitsAndPonctuation
+                textField.text =  newNumber
+            }
+        default:
+            return true
+        }
+        return false
+    }
+    
+    private func lenght(textField: UITextField, range: NSRange, string: String) -> Bool {
+        guard let textFieldText = textField.text,
+            let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+                return false
+        }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.onlyNumbers().count - substringToReplace.count + string.count
+        return count <= 12
     }
 }

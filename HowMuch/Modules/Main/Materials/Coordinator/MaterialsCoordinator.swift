@@ -47,6 +47,7 @@ extension MaterialsCoordinator: MaterialsProtocol {
         let viewModel = MaterialCreateViewModel()
         let controller = materialStoryboard.instantiateViewController(identifier: "MaterialCreate") as? MaterialCreateViewController
         controller?.set(viewModel: viewModel)
+        controller?.flow = .save
         controller?.type = type
         navigation?.present(controller!, animated: true)
     }

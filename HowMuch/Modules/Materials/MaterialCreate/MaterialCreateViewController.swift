@@ -16,6 +16,7 @@ class MaterialCreateViewController: SNViewController<MaterialCreateStates, Mater
     @IBOutlet weak var buttonComplete: UIButton!
     
     var type: MaterialsType?
+    var flow: MaterialsFlow?
     var itens: [CreateDTO] = [] {
         didSet {
             createTable.reloadData()
@@ -27,6 +28,7 @@ class MaterialCreateViewController: SNViewController<MaterialCreateStates, Mater
         super.viewDidLoad()
         configureTable()
         viewModel?.type.onNext(type)
+        viewModel?.flow.onNext(flow)
     }
     
     override func configureViews() {
@@ -55,8 +57,8 @@ class MaterialCreateViewController: SNViewController<MaterialCreateStates, Mater
     }
     
     @IBAction func actionSave(_ sender: Any) {
+        view.endEditing(true)
         viewModel?.complete()
-        self.dismiss(animated: true, completion: nil)
     }
     
     private func didDisappear() {
@@ -66,11 +68,13 @@ class MaterialCreateViewController: SNViewController<MaterialCreateStates, Mater
     override func render(states: MaterialCreateStates) {
         switch states {
         case .success(let string):
-            break
+            Sanada.print(string)
+            self.dismiss(animated: true, completion: nil)
         case .loading(let bool):
             break
         case .error(let string):
-            break
+            Sanada.print(string)
+            self.dismiss(animated: true, completion: nil)
         case .button(let enabled):
             buttonComplete.isEnabled = enabled
         case .configure(let itens):

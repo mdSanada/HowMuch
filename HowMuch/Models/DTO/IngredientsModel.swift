@@ -27,3 +27,38 @@ struct IngredientsModel: Codable {
         self.cost = cost
     }
 }
+
+extension IngredientsModel: Creatable {
+    static func create() -> [CreateDTO] {
+        var result:[CreateDTO] = []
+        var array:[CreateType]  = []
+        array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: IngredientsModel.CodingKeys.name.stringValue,
+                                                                                  title: "Nome",
+                                                                                  placeholder: "Nome",
+                                                                                  textFieldType: .text,
+                                                                                  type: .title))))
+        array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: IngredientsModel.CodingKeys.ingredientsDescription.stringValue,
+                                                                                  title: "Descrição",
+                                                                                  placeholder: "Descrição",
+                                                                                  textFieldType: .text,
+                                                                                  type: .body))))
+        array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: IngredientsModel.CodingKeys.cost.stringValue,
+                                                                                  title: "Custo (R$)",
+                                                                                  placeholder: "R$ 0,00",
+                                                                                  textFieldType: .currency,
+                                                                                  type: .body))))
+        array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: IngredientsModel.CodingKeys.quantity.stringValue,
+                                                                                  title: "Quantidade",
+                                                                                  placeholder: "Quantidade",
+                                                                                  textFieldType: .number,
+                                                                                  type: .menu(key: IngredientsModel.CodingKeys.measurement.stringValue,
+                                                                                              actions: MeasureType.allCases.map { $0.rawValue },
+                                                                                              initial: MeasureType.gramas.rawValue,
+                                                                                              hiddenInput: false)))))
+
+        result.append(CreateDTO(section: "Descrição",
+                                showTitle: false,
+                                itens: array))
+        return result
+    }
+}

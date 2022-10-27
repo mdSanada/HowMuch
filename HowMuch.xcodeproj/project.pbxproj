@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		162B557B290B23CE000F9477 /* Listeners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B557A290B23CE000F9477 /* Listeners.swift */; };
+		162B557D290B2FA3000F9477 /* TextFieldTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B557C290B2FA3000F9477 /* TextFieldTypes.swift */; };
+		162B557F290B4818000F9477 /* MaterialsFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B557E290B4818000F9477 /* MaterialsFlow.swift */; };
+		162B5581290B4A5F000F9477 /* KeyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B5580290B4A5F000F9477 /* KeyValue.swift */; };
+		162B5584290B4A75000F9477 /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B5583290B4A75000F9477 /* CellViewModel.swift */; };
+		162B5586290B4D83000F9477 /* Creatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B5585290B4D83000F9477 /* Creatable.swift */; };
 		162ECD322909997A0005B6A4 /* ItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162ECD312909997A0005B6A4 /* ItemType.swift */; };
 		162ECD34290999810005B6A4 /* CreateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162ECD33290999810005B6A4 /* CreateType.swift */; };
 		162ECD36290999970005B6A4 /* CreateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162ECD35290999970005B6A4 /* CreateDTO.swift */; };
@@ -126,6 +132,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		162B557A290B23CE000F9477 /* Listeners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listeners.swift; sourceTree = "<group>"; };
+		162B557C290B2FA3000F9477 /* TextFieldTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTypes.swift; sourceTree = "<group>"; };
+		162B557E290B4818000F9477 /* MaterialsFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialsFlow.swift; sourceTree = "<group>"; };
+		162B5580290B4A5F000F9477 /* KeyValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValue.swift; sourceTree = "<group>"; };
+		162B5583290B4A75000F9477 /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
+		162B5585290B4D83000F9477 /* Creatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creatable.swift; sourceTree = "<group>"; };
 		162ECD312909997A0005B6A4 /* ItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemType.swift; sourceTree = "<group>"; };
 		162ECD33290999810005B6A4 /* CreateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateType.swift; sourceTree = "<group>"; };
 		162ECD35290999970005B6A4 /* CreateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDTO.swift; sourceTree = "<group>"; };
@@ -260,6 +272,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		162B5579290B23BA000F9477 /* Listeners */ = {
+			isa = PBXGroup;
+			children = (
+				162B557A290B23CE000F9477 /* Listeners.swift */,
+			);
+			path = Listeners;
+			sourceTree = "<group>";
+		};
+		162B5582290B4A6B000F9477 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				162B5583290B4A75000F9477 /* CellViewModel.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		162ECD2E290996C00005B6A4 /* Create */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,6 +307,7 @@
 				16D80CE72903574A00A3FC5A /* TaxeModel.swift */,
 				16D80CE92903576E00A3FC5A /* ConsumptionModel.swift */,
 				16D80CEB290357D200A3FC5A /* FirestoreId.swift */,
+				162B5585290B4D83000F9477 /* Creatable.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -291,8 +320,10 @@
 				164664512908C632008892EB /* NivelType.swift */,
 				1646644F2908C526008892EB /* TimeType.swift */,
 				1646643D2908AA5D008892EB /* MaterialsType.swift */,
+				162B557E290B4818000F9477 /* MaterialsFlow.swift */,
 				162ECD312909997A0005B6A4 /* ItemType.swift */,
 				162ECD33290999810005B6A4 /* CreateType.swift */,
+				162B557C290B2FA3000F9477 /* TextFieldTypes.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -355,6 +386,7 @@
 		1646644C2908C3A8008892EB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				162B5582290B4A6B000F9477 /* Protocols */,
 				1646643F2908ABF5008892EB /* Selectable */,
 				1646642B290892CF008892EB /* AddImage */,
 				16FE20BC29074326000AC718 /* AddItemButtonFooter */,
@@ -423,6 +455,7 @@
 		16AE041F2900A12600490465 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				162B5579290B23BA000F9477 /* Listeners */,
 				16AE04202900A12600490465 /* AppLauncher.swift */,
 				16AE04212900A12600490465 /* Button */,
 				16AE04232900A12600490465 /* DateHelper */,
@@ -771,6 +804,7 @@
 				162ECD2E290996C00005B6A4 /* Create */,
 				162ECD2F290996D50005B6A4 /* DTO */,
 				162ECD30290996DF0005B6A4 /* Type */,
+				162B5580290B4A5F000F9477 /* KeyValue.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -990,6 +1024,7 @@
 				162ECD42290A16510005B6A4 /* MaterialCreateViewModel.swift in Sources */,
 				1646642E290892E0008892EB /* AddImageTableViewCell.swift in Sources */,
 				1646643C2908A812008892EB /* MaterialCreateViewController.swift in Sources */,
+				162B5584290B4A75000F9477 /* CellViewModel.swift in Sources */,
 				16FF365B2901ED5F000DFC50 /* SaleDetailedViewController.swift in Sources */,
 				16FE20BF2907433A000AC718 /* AddButtonFooterTableViewCell.swift in Sources */,
 				16D80CE82903574A00A3FC5A /* TaxeModel.swift in Sources */,
@@ -1004,6 +1039,7 @@
 				162ECD36290999970005B6A4 /* CreateDTO.swift in Sources */,
 				16AE04AA2900A12600490465 /* SNRefresher.swift in Sources */,
 				16D80CDB29033A7400A3FC5A /* FirestoreRepository.swift in Sources */,
+				162B557F290B4818000F9477 /* MaterialsFlow.swift in Sources */,
 				16AE04092900A05C00490465 /* AppDelegate.swift in Sources */,
 				16AE04AF2900A12600490465 /* SNNetworkManager.swift in Sources */,
 				16AE04D02900A12700490465 /* SettingsProtocol.swift in Sources */,
@@ -1015,6 +1051,7 @@
 				16AE04AE2900A12600490465 /* SNImageDownloader.swift in Sources */,
 				16AE04A22900A12600490465 /* Service.swift in Sources */,
 				162ECD3C2909E45F0005B6A4 /* AddImageViewModelCell.swift in Sources */,
+				162B5581290B4A5F000F9477 /* KeyValue.swift in Sources */,
 				16AE04132900A05C00490465 /* HowMuch.xcdatamodeld in Sources */,
 				16AE04B72900A12600490465 /* SNDynamic.swift in Sources */,
 				16D80CEA2903576E00A3FC5A /* ConsumptionModel.swift in Sources */,
@@ -1049,6 +1086,7 @@
 				16AE04A82900A12600490465 /* TagView.swift in Sources */,
 				16AE049C2900A12600490465 /* Extension + String.swift in Sources */,
 				1646642A29088B31008892EB /* CreateModel.swift in Sources */,
+				162B557D290B2FA3000F9477 /* TextFieldTypes.swift in Sources */,
 				16AE04E32900A12700490465 /* LoginRepository.swift in Sources */,
 				16AE049E2900A12600490465 /* Extension + UIColor.swift in Sources */,
 				162ECD38290999BD0005B6A4 /* CreateItemModel.swift in Sources */,
@@ -1071,7 +1109,9 @@
 				16AE04BF2900A12700490465 /* MyReceiptCoordinator.swift in Sources */,
 				16AE04982900A12600490465 /* SNButton.swift in Sources */,
 				16AE04E12900A12700490465 /* LoginViewController.swift in Sources */,
+				162B557B290B23CE000F9477 /* Listeners.swift in Sources */,
 				16AE04EA2900DFBD00490465 /* Extension + Decimal.swift in Sources */,
+				162B5586290B4D83000F9477 /* Creatable.swift in Sources */,
 				16AE04A02900A12600490465 /* Launcher.swift in Sources */,
 				16D80CE02903567C00A3FC5A /* BugdetModel.swift in Sources */,
 				16AE04D22900A12700490465 /* TabController.swift in Sources */,

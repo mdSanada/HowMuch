@@ -133,8 +133,81 @@ class FirestoreRepository {
             }
         }
     }
-
     
+    public func save(material: MaterialsType, data: Data, completion: @escaping (Bool) -> ()) {
+        switch material {
+        case .ingredient:
+            do {
+                let decoded = try JSONDecoder().decode(IngredientsModel.self, from: data)
+                Sanada.print("Save \(decoded)")
+                completion(true)
+            } catch {
+                completion(false)
+            }
+        case .material:
+            do {
+                let decoded = try JSONDecoder().decode(MaterialModel.self, from: data)
+                Sanada.print("Save \(decoded)")
+                completion(true)
+            } catch {
+                completion(false)
+            }
+        case .taxes:
+            do {
+                let decoded = try JSONDecoder().decode(TaxeModel.self, from: data)
+                Sanada.print("Save \(decoded)")
+                completion(true)
+            } catch {
+                completion(false)
+            }
+        case .consumption:
+            do {
+                let decoded = try JSONDecoder().decode(ConsumptionModel.self, from: data)
+                Sanada.print("Save \(decoded)")
+                completion(true)
+            } catch {
+                completion(false)
+            }
+        }
+    }
+
+    public func update(uuid: FirestoreId, material: MaterialsType, data: Data, completion: @escaping (Bool) -> ()) {
+        switch material {
+        case .ingredient:
+            do {
+                let decoded = try JSONDecoder().decode(IngredientsModel.self, from: data)
+                Sanada.print("Save \(decoded)")
+                completion(true)
+            } catch {
+                completion(false)
+            }
+        case .material:
+            do {
+                let decoded = try JSONDecoder().decode(MaterialModel.self, from: data)
+                Sanada.print("Save \(decoded)")
+                completion(true)
+            } catch {
+                completion(false)
+            }
+        case .taxes:
+            do {
+                let decoded = try JSONDecoder().decode(TaxeModel.self, from: data)
+                Sanada.print("Save \(decoded)")
+                completion(true)
+            } catch {
+                completion(false)
+            }
+        case .consumption:
+            do {
+                let decoded = try JSONDecoder().decode(ConsumptionModel.self, from: data)
+                Sanada.print("Save \(decoded)")
+                completion(true)
+            } catch {
+                completion(false)
+            }
+        }
+    }
+
     public func fetch() {
         // Firebase documentation
 //        let docRef = db.collection("cities").document("BJ")

@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 
 struct CreateTextModel {
-    let key: String
+    let key: String?
     let title: String?
     let placeholder: String?
-    let keyboard: UIKeyboardType?
+    let textFieldType: TextFieldTypes?
     let type: TextFieldTableViewCellType?
 }

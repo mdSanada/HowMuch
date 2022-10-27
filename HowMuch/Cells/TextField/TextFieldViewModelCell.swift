@@ -9,26 +9,20 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-protocol CellViewModel {
-    var completion: ((_ key: String, _ value: String?, _ menu: String?) -> Void)? { get set }
-    var isValid: BehaviorSubject<Bool> { get }
-    func complete()
-    func clean()
-}
-
 class TextFieldViewModelCell: CellViewModel {
     private let item: CreateTextModel
     weak var output: TextFieldOutputProtocol?
     private var disposeBag = DisposeBag()
     
-    fileprivate let result = PublishSubject<String>()
+    fileprivate let result = PublishSubject<Any?>()
     fileprivate let menu = PublishSubject<String>()
     
-    var completion: ((_ key: String, _ value: String?, _ menu: String?) -> Void)?
+    var completion: ((_ item: KeyValue?, _ menu: KeyValue?) -> Void)?
     var isValid = BehaviorSubject<Bool>(value: false)
     
-    var extractedValue: String? = ""
-    var extractedMenu: String? = ""
+    var menuKey: String? = nil
+    var extractedValue: Any? = nil
+    var extractedMenu: String? = nil
     
     deinit {
         Sanada.print("Deinitializing: \(self)")
@@ -58,19 +52,36 @@ class TextFieldViewModelCell: CellViewModel {
     }
     
     func complete() {
-        completion?(item.key, extractedValue, extractedMenu)
+        let item: KeyValue? = {
+            guard let itemKey = self.item.key else {
+                return nil
+            }
+           return KeyValue(key: itemKey, value: extractedValue)
+        }()
+
+        let menu: KeyValue? = {
+            guard let menuKey = menuKey else {
+                return nil
+            }
+           return KeyValue(key: menuKey, value: extractedMenu)
+        }()
+        completion?(item, menu)
     }
 }
 
 extension TextFieldViewModelCell: TextFieldInputProtocol {
+    func setMenuKey(_ key: String) {
+        menuKey = key
+    }
+    
     func awake() {
         output?.configure(type: item.type ?? .body,
                           title: item.title ?? "",
                           placeholder: item.placeholder ?? "",
-                          keyboard: item.keyboard ?? .default)
+                          textFieldType: item.textFieldType ?? .text)
     }
     
-    func valueDidChange(_ value: String) {
+    func valueDidChange(_ value: Any?) {
         result.onNext(value)
     }
     

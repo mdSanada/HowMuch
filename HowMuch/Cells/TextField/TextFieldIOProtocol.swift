@@ -11,13 +11,14 @@ import RxCocoa
 
 protocol TextFieldInputProtocol: AnyObject {
     func awake()
-    func valueDidChange(_ value: String)
+    func valueDidChange(_ value: Any?)
     func menuDidChange(_ value: String)
+    func setMenuKey(_ key: String)
 }
 
 protocol TextFieldOutputProtocol: AnyObject {
     func configure(type: TextFieldTableViewCellType,
                    title: String,
                    placeholder: String,
-                   keyboard: UIKeyboardType)
+                   textFieldType: TextFieldTypes)
 }

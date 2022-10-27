@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		162ECD322909997A0005B6A4 /* ItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162ECD312909997A0005B6A4 /* ItemType.swift */; };
+		162ECD34290999810005B6A4 /* CreateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162ECD33290999810005B6A4 /* CreateType.swift */; };
+		162ECD36290999970005B6A4 /* CreateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162ECD35290999970005B6A4 /* CreateDTO.swift */; };
+		162ECD38290999BD0005B6A4 /* CreateItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162ECD37290999BD0005B6A4 /* CreateItemModel.swift */; };
+		162ECD3A2909E4520005B6A4 /* AddItemViewModelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162ECD392909E4520005B6A4 /* AddItemViewModelCell.swift */; };
+		162ECD3C2909E45F0005B6A4 /* AddImageViewModelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162ECD3B2909E45F0005B6A4 /* AddImageViewModelCell.swift */; };
+		162ECD3E2909E5150005B6A4 /* TextFieldViewModelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162ECD3D2909E5150005B6A4 /* TextFieldViewModelCell.swift */; };
+		162ECD402909E6BA0005B6A4 /* TextFieldIOProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162ECD3F2909E6BA0005B6A4 /* TextFieldIOProtocol.swift */; };
+		162ECD42290A16510005B6A4 /* MaterialCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162ECD41290A16510005B6A4 /* MaterialCreateViewModel.swift */; };
+		162ECD44290A16C90005B6A4 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162ECD43290A16C90005B6A4 /* Keys.swift */; };
 		1646642A29088B31008892EB /* CreateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1646642929088B31008892EB /* CreateModel.swift */; };
 		1646642E290892E0008892EB /* AddImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1646642C290892E0008892EB /* AddImageTableViewCell.swift */; };
 		1646642F290892E0008892EB /* AddImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1646642D290892E0008892EB /* AddImageTableViewCell.xib */; };
@@ -116,6 +126,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		162ECD312909997A0005B6A4 /* ItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemType.swift; sourceTree = "<group>"; };
+		162ECD33290999810005B6A4 /* CreateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateType.swift; sourceTree = "<group>"; };
+		162ECD35290999970005B6A4 /* CreateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDTO.swift; sourceTree = "<group>"; };
+		162ECD37290999BD0005B6A4 /* CreateItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemModel.swift; sourceTree = "<group>"; };
+		162ECD392909E4520005B6A4 /* AddItemViewModelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewModelCell.swift; sourceTree = "<group>"; };
+		162ECD3B2909E45F0005B6A4 /* AddImageViewModelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageViewModelCell.swift; sourceTree = "<group>"; };
+		162ECD3D2909E5150005B6A4 /* TextFieldViewModelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldViewModelCell.swift; sourceTree = "<group>"; };
+		162ECD3F2909E6BA0005B6A4 /* TextFieldIOProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldIOProtocol.swift; sourceTree = "<group>"; };
+		162ECD41290A16510005B6A4 /* MaterialCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialCreateViewModel.swift; sourceTree = "<group>"; };
+		162ECD43290A16C90005B6A4 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		1646642929088B31008892EB /* CreateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateModel.swift; sourceTree = "<group>"; };
 		1646642C290892E0008892EB /* AddImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageTableViewCell.swift; sourceTree = "<group>"; };
 		1646642D290892E0008892EB /* AddImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddImageTableViewCell.xib; sourceTree = "<group>"; };
@@ -240,6 +260,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		162ECD2E290996C00005B6A4 /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				162ECD35290999970005B6A4 /* CreateDTO.swift */,
+				1646642929088B31008892EB /* CreateModel.swift */,
+				162ECD37290999BD0005B6A4 /* CreateItemModel.swift */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
+		162ECD2F290996D50005B6A4 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				16D80CDF2903567C00A3FC5A /* BugdetModel.swift */,
+				16D80CE1290356BB00A3FC5A /* IngredientsModel.swift */,
+				16D80CE52903571E00A3FC5A /* MaterialModel.swift */,
+				16D80CE72903574A00A3FC5A /* TaxeModel.swift */,
+				16D80CE92903576E00A3FC5A /* ConsumptionModel.swift */,
+				16D80CEB290357D200A3FC5A /* FirestoreId.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		162ECD30290996DF0005B6A4 /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				164664472908BA2A008892EB /* MeasureType.swift */,
+				1646644D2908C41F008892EB /* ConsumptionType.swift */,
+				164664512908C632008892EB /* NivelType.swift */,
+				1646644F2908C526008892EB /* TimeType.swift */,
+				1646643D2908AA5D008892EB /* MaterialsType.swift */,
+				162ECD312909997A0005B6A4 /* ItemType.swift */,
+				162ECD33290999810005B6A4 /* CreateType.swift */,
+			);
+			path = Type;
+			sourceTree = "<group>";
+		};
 		1646642829088B21008892EB /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +308,7 @@
 		1646642B290892CF008892EB /* AddImage */ = {
 			isa = PBXGroup;
 			children = (
+				162ECD3B2909E45F0005B6A4 /* AddImageViewModelCell.swift */,
 				1646642C290892E0008892EB /* AddImageTableViewCell.swift */,
 				1646642D290892E0008892EB /* AddImageTableViewCell.xib */,
 			);
@@ -261,6 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				1646643A2908A7FF008892EB /* MaterialStoryboard.storyboard */,
+				162ECD43290A16C90005B6A4 /* Keys.swift */,
 				164664362908A6FE008892EB /* MaterialCreate */,
 			);
 			path = Materials;
@@ -279,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				164664372908A6FE008892EB /* MaterialCreateViewController.swift */,
+				162ECD41290A16510005B6A4 /* MaterialCreateViewModel.swift */,
 			);
 			path = MaterialCreate;
 			sourceTree = "<group>";
@@ -708,18 +768,9 @@
 		16D80CDE2903566D00A3FC5A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1646642929088B31008892EB /* CreateModel.swift */,
-				16D80CDF2903567C00A3FC5A /* BugdetModel.swift */,
-				16D80CE1290356BB00A3FC5A /* IngredientsModel.swift */,
-				16D80CE52903571E00A3FC5A /* MaterialModel.swift */,
-				16D80CE72903574A00A3FC5A /* TaxeModel.swift */,
-				16D80CE92903576E00A3FC5A /* ConsumptionModel.swift */,
-				16D80CEB290357D200A3FC5A /* FirestoreId.swift */,
-				164664472908BA2A008892EB /* MeasureType.swift */,
-				1646644D2908C41F008892EB /* ConsumptionType.swift */,
-				164664512908C632008892EB /* NivelType.swift */,
-				1646644F2908C526008892EB /* TimeType.swift */,
-				1646643D2908AA5D008892EB /* MaterialsType.swift */,
+				162ECD2E290996C00005B6A4 /* Create */,
+				162ECD2F290996D50005B6A4 /* DTO */,
+				162ECD30290996DF0005B6A4 /* Type */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -727,6 +778,8 @@
 		16FE20AE2907363A000AC718 /* TextField */ = {
 			isa = PBXGroup;
 			children = (
+				162ECD3D2909E5150005B6A4 /* TextFieldViewModelCell.swift */,
+				162ECD3F2909E6BA0005B6A4 /* TextFieldIOProtocol.swift */,
 				16FE20AF29073657000AC718 /* TextFieldTableViewCell.swift */,
 				16FE20B029073657000AC718 /* TextFieldTableViewCell.xib */,
 			);
@@ -754,6 +807,7 @@
 		16FE20B7290739C9000AC718 /* AddItem */ = {
 			isa = PBXGroup;
 			children = (
+				162ECD392909E4520005B6A4 /* AddItemViewModelCell.swift */,
 				16FE20B8290739DB000AC718 /* AddItemTableViewCell.swift */,
 				16FE20B9290739DB000AC718 /* AddItemTableViewCell.xib */,
 			);
@@ -933,18 +987,21 @@
 				1646644E2908C41F008892EB /* ConsumptionType.swift in Sources */,
 				16AE04A72900A12600490465 /* EventTag.swift in Sources */,
 				16AE04B42900A12600490465 /* SNStateful.swift in Sources */,
+				162ECD42290A16510005B6A4 /* MaterialCreateViewModel.swift in Sources */,
 				1646642E290892E0008892EB /* AddImageTableViewCell.swift in Sources */,
 				1646643C2908A812008892EB /* MaterialCreateViewController.swift in Sources */,
 				16FF365B2901ED5F000DFC50 /* SaleDetailedViewController.swift in Sources */,
 				16FE20BF2907433A000AC718 /* AddButtonFooterTableViewCell.swift in Sources */,
 				16D80CE82903574A00A3FC5A /* TaxeModel.swift in Sources */,
 				164664522908C632008892EB /* NivelType.swift in Sources */,
+				162ECD3A2909E4520005B6A4 /* AddItemViewModelCell.swift in Sources */,
 				1684C0D5290234A100249C7B /* ItemTableViewCell.swift in Sources */,
 				16D80CE4290356DC00A3FC5A /* SalesModel.swift in Sources */,
 				16AE04B92900A12600490465 /* SNViewModelProtocol.swift in Sources */,
 				16AE04CB2900A12700490465 /* EstimateCoordinator.swift in Sources */,
 				16AE04BB2900A12600490465 /* MainProtocol.swift in Sources */,
 				16AE04A32900A12600490465 /* Validator.swift in Sources */,
+				162ECD36290999970005B6A4 /* CreateDTO.swift in Sources */,
 				16AE04AA2900A12600490465 /* SNRefresher.swift in Sources */,
 				16D80CDB29033A7400A3FC5A /* FirestoreRepository.swift in Sources */,
 				16AE04092900A05C00490465 /* AppDelegate.swift in Sources */,
@@ -957,6 +1014,7 @@
 				16AE04A42900A12600490465 /* Status.swift in Sources */,
 				16AE04AE2900A12600490465 /* SNImageDownloader.swift in Sources */,
 				16AE04A22900A12600490465 /* Service.swift in Sources */,
+				162ECD3C2909E45F0005B6A4 /* AddImageViewModelCell.swift in Sources */,
 				16AE04132900A05C00490465 /* HowMuch.xcdatamodeld in Sources */,
 				16AE04B72900A12600490465 /* SNDynamic.swift in Sources */,
 				16D80CEA2903576E00A3FC5A /* ConsumptionModel.swift in Sources */,
@@ -969,14 +1027,18 @@
 				16AE04D12900A12700490465 /* SettingsViewController.swift in Sources */,
 				16AE04E72900DBD900490465 /* ReceiptTableViewCell.swift in Sources */,
 				164664502908C526008892EB /* TimeType.swift in Sources */,
+				162ECD44290A16C90005B6A4 /* Keys.swift in Sources */,
 				16AE04BA2900A12600490465 /* MainCoordinator.swift in Sources */,
+				162ECD34290999810005B6A4 /* CreateType.swift in Sources */,
 				16AE04992900A12600490465 /* DateHelper.swift in Sources */,
 				16AE04B62900A12600490465 /* SNViewControllerProtocol.swift in Sources */,
 				16AE04C22900A12700490465 /* MyReceiptViewModel.swift in Sources */,
 				16AE04B22900A12600490465 /* SNRequestable.swift in Sources */,
 				16AE04B82900A12600490465 /* SNViewModel.swift in Sources */,
 				16D80CDD29033AB900A3FC5A /* FirestoreConsts.swift in Sources */,
+				162ECD322909997A0005B6A4 /* ItemType.swift in Sources */,
 				16AE04B52900A12600490465 /* SNViewController.swift in Sources */,
+				162ECD3E2909E5150005B6A4 /* TextFieldViewModelCell.swift in Sources */,
 				16AE04B02900A12600490465 /* SNNetworkMethod.swift in Sources */,
 				16AE049D2900A12600490465 /* Extension + Table.swift in Sources */,
 				16AE04C92900A12700490465 /* EstimateTableViewCell.swift in Sources */,
@@ -989,11 +1051,13 @@
 				1646642A29088B31008892EB /* CreateModel.swift in Sources */,
 				16AE04E32900A12700490465 /* LoginRepository.swift in Sources */,
 				16AE049E2900A12600490465 /* Extension + UIColor.swift in Sources */,
+				162ECD38290999BD0005B6A4 /* CreateItemModel.swift in Sources */,
 				16FE20B129073657000AC718 /* TextFieldTableViewCell.swift in Sources */,
 				16AE04DF2900A12700490465 /* LoginCoordinator.swift in Sources */,
 				16AE04CD2900A12700490465 /* EstimateViewController.swift in Sources */,
 				16FE20BA290739DC000AC718 /* AddItemTableViewCell.swift in Sources */,
 				16AE04C62900A12700490465 /* MaterialsCoordinator.swift in Sources */,
+				162ECD402909E6BA0005B6A4 /* TextFieldIOProtocol.swift in Sources */,
 				1646643E2908AA5D008892EB /* MaterialsType.swift in Sources */,
 				16AE04E02900A12700490465 /* LoginProtocol.swift in Sources */,
 				16AE04AC2900A12600490465 /* SNRefreshTokenService.swift in Sources */,

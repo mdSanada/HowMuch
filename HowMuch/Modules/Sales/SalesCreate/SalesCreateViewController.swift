@@ -50,27 +50,22 @@ extension SalesCreateViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = itens[indexPath.section]
+        let row = item.itens[indexPath.row]
         
-        switch item.type {
+        switch row {
         case .image:
             let cell: AddImageTableViewCell = tableView.dequeueReusableCell(indexPath)
             cell.render(image: nil)
             return cell
-        case .text:
-            let row = item.itens[indexPath.row]
-            guard let type = row.type, let title = row.title, let placeholder = row.placeholder else { return UITableViewCell() }
+        case .text(let viewModel):
             let cell: TextFieldTableViewCell = tableView.dequeueReusableCell(indexPath)
-            cell.render(type: type,
-                        title: title,
-                        placeholder: placeholder)
+            cell.bind(viewModel: viewModel)
             return cell
-        case .item:
-            let row = item.itens[indexPath.row]
-            guard let type = row.itemType else { return UITableViewCell() }
+        case .item(let model):
+            guard let type = model?.itemType else { return UITableViewCell() }
             switch type {
             case .item:
-                // TODO: - Add item
-                guard let title = row.title, let placeholder = row.placeholder else { return UITableViewCell() }
+                // Passar componente pelo o item
                 let cell: AddItemTableViewCell = tableView.dequeueReusableCell(indexPath)
                 cell.render(title: "Title", quantity: "5 units", value: 10)
                 return cell
@@ -79,7 +74,7 @@ extension SalesCreateViewController: UITableViewDataSource, UITableViewDelegate 
                 cell.render(title: "Adicionar")
                 return cell
             }
-        case .selectable:
+        default:
             return UITableViewCell()
         }
     }

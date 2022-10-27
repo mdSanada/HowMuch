@@ -9,7 +9,8 @@ import UIKit
 
 class AddImageTableViewCell: UITableViewCell {
     @IBOutlet weak var imageBackground: UIImageView!
-    
+    var viewModel: AddImageViewModelCell!
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }

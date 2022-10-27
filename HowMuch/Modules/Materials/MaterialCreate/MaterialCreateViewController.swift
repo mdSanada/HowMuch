@@ -6,28 +6,43 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxSwiftExt
 
-class MaterialCreateViewController: UIViewController {
+class MaterialCreateViewController: SNViewController<MaterialCreateStates, MaterialCreateViewModel> {
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var createTable: UITableView!
+    @IBOutlet weak var buttonComplete: UIButton!
+    
     var type: MaterialsType?
-    var itens: [CreateDTO] = []
+    var itens: [CreateDTO] = [] {
+        didSet {
+            createTable.reloadData()
+        }
+    }
+    private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureView()
         configureTable()
+        viewModel?.type.onNext(type)
     }
     
-    private func configureView() {
+    override func configureViews() {
+        super.configureViews()
         guard let type = type else {
             dismiss(animated: true)
             return
         }
-        itens = CreateDTO.materials(type: type)
         labelTitle.text = type.newTitle()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        didDisappear()
+        viewModel?.clean()
+    }
+        
     private func configureTable() {
         createTable.register(type: TextFieldTableViewCell.self)
         createTable.register(type: SelectableTableViewCell.self)
@@ -39,12 +54,28 @@ class MaterialCreateViewController: UIViewController {
         }
     }
     
-    private func create() {
-        
+    @IBAction func actionSave(_ sender: Any) {
+        viewModel?.complete()
+        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func actionSave(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+    private func didDisappear() {
+        itens = []
+    }
+    
+    override func render(states: MaterialCreateStates) {
+        switch states {
+        case .success(let string):
+            break
+        case .loading(let bool):
+            break
+        case .error(let string):
+            break
+        case .button(let enabled):
+            buttonComplete.isEnabled = enabled
+        case .configure(let itens):
+            self.itens = itens
+        }
     }
 }
 
@@ -62,10 +93,6 @@ extension MaterialCreateViewController: UITableViewDataSource, UITableViewDelega
         return item.showTitle ? 30 : 0
     }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
-    }
-    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let item = itens[section]
         return item.showTitle ? item.section : nil
@@ -73,23 +100,17 @@ extension MaterialCreateViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = itens[indexPath.section]
+        let row = item.itens[indexPath.row]
         
-        switch item.type {
-        case .text:
-            let row = item.itens[indexPath.row]
-            guard let type = row.type, let title = row.title, let placeholder = row.placeholder else { return UITableViewCell() }
+        switch row {
+        case .text(let viewModel):
             let cell: TextFieldTableViewCell = tableView.dequeueReusableCell(indexPath)
-            cell.render(type: type,
-                        title: title,
-                        placeholder: placeholder,
-                        constraint: (top: indexPath.row == 0 ? 0 : nil,
+            cell.render(constraint: (top: indexPath.row == 0 ? 0 : nil,
                                      bottom: indexPath.row == (item.itens.count - 1) ? 0 : nil))
-            return cell
-        case .selectable:
-            let row = item.itens[indexPath.row]
-            guard let title = row.title, let menu = row.selectable else { return UITableViewCell() }
-            let cell: SelectableTableViewCell = tableView.dequeueReusableCell(indexPath)
-            cell.render(title: title, actions: menu)
+            viewModel.completion = self.viewModel?.completion
+            cell.configureError(validate: .equalMore(count: 1))
+            cell.bind(viewModel: viewModel)
+
             return cell
         default:
             return UITableViewCell()

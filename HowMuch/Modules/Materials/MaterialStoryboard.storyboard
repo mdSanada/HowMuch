@@ -64,6 +64,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonComplete" destination="pFe-Vv-UDW" id="PKB-aC-9RM"/>
                         <outlet property="createTable" destination="TFO-L6-v56" id="kBu-9I-ceD"/>
                         <outlet property="labelTitle" destination="bhG-1n-K89" id="sEC-sn-6je"/>
                     </connections>

@@ -14,6 +14,7 @@ class AddItemTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonDelete: UIButton!
     @IBOutlet weak var constraintTop: NSLayoutConstraint!
     @IBOutlet weak var constraintBottom: NSLayoutConstraint!
+    var viewModel: AddItemViewModelCell!
     
     override func awakeFromNib() {
         super.awakeFromNib()

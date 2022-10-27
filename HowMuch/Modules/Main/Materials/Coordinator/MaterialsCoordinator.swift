@@ -16,8 +16,8 @@ class MaterialsCoordinator: SNCoordinator {
         return .init(name: "MainStoryboard", bundle: nil)
     }()
     
-    lazy var reminderStoryboard: UIStoryboard = {
-        return .init(name: "PetStoryboard", bundle: nil)
+    lazy var materialStoryboard: UIStoryboard = {
+        return .init(name: "MaterialStoryboard", bundle: nil)
     }()
     
     deinit {
@@ -44,8 +44,9 @@ class MaterialsCoordinator: SNCoordinator {
 }
 extension MaterialsCoordinator: MaterialsProtocol {
     func create(type: MaterialsType) {
-        let storyboard = UIStoryboard(name: "MaterialStoryboard", bundle: nil)
-        let controller = storyboard.instantiateViewController(identifier: "MaterialCreate") as? MaterialCreateViewController
+        let viewModel = MaterialCreateViewModel()
+        let controller = materialStoryboard.instantiateViewController(identifier: "MaterialCreate") as? MaterialCreateViewController
+        controller?.set(viewModel: viewModel)
         controller?.type = type
         navigation?.present(controller!, animated: true)
     }

@@ -32,23 +32,76 @@ struct ConsumptionModel: Codable {
 }
 
 extension ConsumptionModel: Creatable {
-    static func create() -> [CreateDTO] {
+    static func editable(model: ConsumptionModel) -> [CreateDTO] {
         var result:[CreateDTO] = []
         var array:[CreateType]  = []
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: ConsumptionModel.CodingKeys.name.rawValue,
                                                                                   title: "Nome",
                                                                                   placeholder: "Nome",
+                                                                                  initial: model.name,
                                                                                   textFieldType: .text,
                                                                                   type: .title))))
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: ConsumptionModel.CodingKeys.consumptionDescription.rawValue,
                                                                                   title: "Descrição",
                                                                                   placeholder: "Descrição",
+                                                                                  initial: model.consumptionDescription,
                                                                                   textFieldType: .text,
                                                                                   type: .body))))
         
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: nil,
                                                                                   title: "Consumo",
                                                                                   placeholder: "",
+                                                                                  initial: nil,
+                                                                                  textFieldType: .text,
+                                                                                  type: .menu(key: ConsumptionModel.CodingKeys.consumption.rawValue,
+                                                                                              actions: ConsumptionType.allCases.map { $0.rawValue },
+                                                                                              initial: model.consumption ?? ConsumptionType.gas.rawValue,
+                                                                                              hiddenInput: true)))))
+        array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: nil,
+                                                                                  title: "Nível",
+                                                                                  placeholder: "",
+                                                                                  initial: nil,
+                                                                                  textFieldType: .currency,
+                                                                                  type: .menu(key: ConsumptionModel.CodingKeys.level.rawValue,
+                                                                                              actions: NivelType.allCases.map { $0.rawValue },
+                                                                                              initial: model.level ?? NivelType.low.rawValue,
+                                                                                              hiddenInput: true)))))
+        array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: ConsumptionModel.CodingKeys.time.rawValue,
+                                                                                  title: "Tempo",
+                                                                                  placeholder: "Tempo",
+                                                                                  initial: nil,
+                                                                                  textFieldType: .number,
+                                                                                  type: .menu(key: ConsumptionModel.CodingKeys.measurement.rawValue,
+                                                                                              actions: TimeType.allCases.map { $0.rawValue },
+                                                                                              initial: model.measurement ?? TimeType.min.rawValue,
+                                                                                              hiddenInput: false)))))
+        
+        
+        result.append(CreateDTO(section: "Descrição", showTitle: false, itens: array))
+        
+        return result
+    }
+    
+    static func create() -> [CreateDTO] {
+        var result:[CreateDTO] = []
+        var array:[CreateType]  = []
+        array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: ConsumptionModel.CodingKeys.name.rawValue,
+                                                                                  title: "Nome",
+                                                                                  placeholder: "Nome",
+                                                                                  initial: nil,
+                                                                                  textFieldType: .text,
+                                                                                  type: .title))))
+        array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: ConsumptionModel.CodingKeys.consumptionDescription.rawValue,
+                                                                                  title: "Descrição",
+                                                                                  placeholder: "Descrição",
+                                                                                  initial: nil,
+                                                                                  textFieldType: .text,
+                                                                                  type: .body))))
+        
+        array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: nil,
+                                                                                  title: "Consumo",
+                                                                                  placeholder: "",
+                                                                                  initial: nil,
                                                                                   textFieldType: .text,
                                                                                   type: .menu(key: ConsumptionModel.CodingKeys.consumption.rawValue,
                                                                                               actions: ConsumptionType.allCases.map { $0.rawValue },
@@ -57,6 +110,7 @@ extension ConsumptionModel: Creatable {
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: nil,
                                                                                   title: "Nível",
                                                                                   placeholder: "",
+                                                                                  initial: nil,
                                                                                   textFieldType: .currency,
                                                                                   type: .menu(key: ConsumptionModel.CodingKeys.level.rawValue,
                                                                                               actions: NivelType.allCases.map { $0.rawValue },
@@ -65,6 +119,7 @@ extension ConsumptionModel: Creatable {
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: ConsumptionModel.CodingKeys.time.rawValue,
                                                                                   title: "Tempo",
                                                                                   placeholder: "Tempo",
+                                                                                  initial: nil,
                                                                                   textFieldType: .number,
                                                                                   type: .menu(key: ConsumptionModel.CodingKeys.measurement.rawValue,
                                                                                               actions: TimeType.allCases.map { $0.rawValue },

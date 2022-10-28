@@ -11,14 +11,15 @@ import RxCocoa
 
 class MaterialsViewController: UIViewController {
     @IBOutlet weak var tableMaterials: UITableView!
-    let segmentItems = MaterialsType.allCases.map { $0.rawValue }
+    let segmentItems = MaterialsType.allCases.map { $0.title() }
     var segmentMaterials: UISegmentedControl?
     
     weak var delegate: MaterialsProtocol?
     fileprivate let searchText = PublishSubject<String>()
     private let searchController = UISearchController()
     private var disposeBag = DisposeBag()
-
+    var materials: [MaterialModel] = MaterialModel.mock()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViews()
@@ -37,7 +38,7 @@ class MaterialsViewController: UIViewController {
     @objc func segmentControl(_ segmentedControl: UISegmentedControl) {
         let index = segmentedControl.selectedSegmentIndex
         let stringType = segmentItems[index]
-        guard let material = MaterialsType(rawValue: stringType) else { return }
+        guard let material = MaterialsType.fromTitle(stringType) else { return }
         
         switch material {
         case .ingredient:
@@ -67,7 +68,9 @@ class MaterialsViewController: UIViewController {
         tableMaterials.register(type: MaterialTableViewCell.self)
         tableMaterials.delegate = self
         tableMaterials.dataSource = self
-        
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress(longPressGestureRecognizer:)))
+        tableMaterials.addGestureRecognizer(longPressRecognizer)
+
         if #available(iOS 15.0, *) {
             tableMaterials.sectionHeaderTopPadding = 0
         }
@@ -83,7 +86,7 @@ class MaterialsViewController: UIViewController {
     @IBAction func actionAdd(_ sender: Any) {
         guard let index = segmentMaterials?.selectedSegmentIndex else { return }
         let stringType = segmentItems[index]
-        guard let material = MaterialsType(rawValue: stringType) else { return }
+        guard let material = MaterialsType.fromTitle(stringType) else { return }
         delegate?.create(type: material)
     }
 }
@@ -96,8 +99,18 @@ extension MaterialsViewController: UISearchResultsUpdating {
 }
 
 extension MaterialsViewController: UITableViewDataSource, UITableViewDelegate {
+    @objc func longPress(longPressGestureRecognizer: UILongPressGestureRecognizer) {
+        if longPressGestureRecognizer.state == UIGestureRecognizer.State.began {
+            let touchPoint = longPressGestureRecognizer.location(in: tableMaterials)
+            if let indexPath = tableMaterials.indexPathForRow(at: touchPoint) {
+                let material = materials[indexPath.row]
+                delegate?.pushEdit(id: "id", type: .material(material))
+            }
+        }
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return materials.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -118,9 +131,15 @@ extension MaterialsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: MaterialTableViewCell = tableView.dequeueReusableCell(indexPath)
-        cell.render(title: segmentMaterials!.titleForSegment(at: segmentMaterials!.selectedSegmentIndex) ?? "erro",
-                    quantity: "unidades",
-                    price: Decimal(segmentMaterials!.selectedSegmentIndex))
+        let material = materials[indexPath.row]
+        guard let name = material.name,
+                let quantity = material.quantity,
+                let measurement = material.measurement,
+                let cost = material.cost else { return UITableViewCell() }
+
+        cell.render(title: name,
+                    quantity: "\(quantity) \(measurement)",
+                    price: Decimal(cost))
         
         return cell
     }

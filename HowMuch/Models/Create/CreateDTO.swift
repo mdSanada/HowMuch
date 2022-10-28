@@ -11,7 +11,7 @@ import UIKit
 struct CreateDTO {
     let section: String
     let showTitle: Bool
-    let itens: [CreateType]
+    var itens: [CreateType]
 }
 
 extension CreateDTO {
@@ -30,21 +30,25 @@ extension CreateDTO {
         array.append(.text(TextFieldViewModelCell(item: CreateTextModel(key: "",
                                                                         title: "Nome",
                                                                         placeholder: "Nome",
+                                                                        initial: nil,
                                                                         textFieldType: .text,
                                                                         type: .title))))
         array.append(.text(TextFieldViewModelCell(item: CreateTextModel(key: "",
                                                                         title: "Descrição",
                                                                         placeholder: "Descrição",
+                                                                        initial: nil,
                                                                         textFieldType: .text,
                                                                         type: .body))))
         array.append(.text(TextFieldViewModelCell(item: CreateTextModel(key: "",
                                                                         title: "Lucro",
                                                                         placeholder: "Lucro",
+                                                                        initial: nil,
                                                                         textFieldType: .currency,
                                                                         type: .body))))
         array.append(.text(TextFieldViewModelCell(item: CreateTextModel(key: "",
                                                                         title: "Rendimento",
                                                                         placeholder: "Rendimento",
+                                                                        initial: nil,
                                                                         textFieldType: .currency,
                                                                         type: .body))))
         
@@ -90,6 +94,34 @@ extension CreateDTO {
         array.removeAll()
         
         return result
+    }
+    
+    static func editable(type: MaterialsType) -> [CreateDTO] {
+        switch type {
+        case .ingredient(let ingredient):
+            guard let ingredient = ingredient else {
+                return []
+            }
+            return IngredientsModel.editable(model: ingredient)
+        case .material(let material):
+            // MARK: - Material Section
+            guard let material = material else {
+                return []
+            }
+            return MaterialModel.editable(model: material)
+        case .taxes(let taxes):
+            // MARK: - Taxes Section
+            guard let taxes = taxes else {
+                return []
+            }
+            return TaxeModel.editable(model: taxes)
+        case .consumption(let consumption):
+            // MARK: - Consumption Section
+            guard let consumption = consumption else {
+                return []
+            }
+            return ConsumptionModel.editable(model: consumption)
+        }
     }
     
     static func materials(type: MaterialsType) -> [CreateDTO] {

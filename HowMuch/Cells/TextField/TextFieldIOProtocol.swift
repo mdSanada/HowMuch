@@ -20,5 +20,6 @@ protocol TextFieldOutputProtocol: AnyObject {
     func configure(type: TextFieldTableViewCellType,
                    title: String,
                    placeholder: String,
+                   initial: String?,
                    textFieldType: TextFieldTypes)
 }

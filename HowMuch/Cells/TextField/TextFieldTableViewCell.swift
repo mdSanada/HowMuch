@@ -90,6 +90,7 @@ class TextFieldTableViewCell: UITableViewCell, TextFieldOutputProtocol {
     func configure(type: TextFieldTableViewCellType,
                    title: String,
                    placeholder: String,
+                   initial: String?,
                    textFieldType: TextFieldTypes) {
         switch type {
         case .title:
@@ -112,6 +113,16 @@ class TextFieldTableViewCell: UITableViewCell, TextFieldOutputProtocol {
         }
         labelTitle.text = title
         self.textFieldType = textFieldType
+        switch textFieldType {
+        case .text:
+            fieldContent.rx.text.onNext(initial)
+        case .currency:
+            fieldContent.rx.text.onNext(initial?.currencyInputFormatting())
+        case .percent:
+            fieldContent.rx.text.onNext(initial?.percentFormatting())
+        case .number:
+            fieldContent.rx.text.onNext(initial?.numberFormatting())
+        }
         fieldContent.placeholder = placeholder
         fieldContent.keyboardType = textFieldType.keyboard()
     }

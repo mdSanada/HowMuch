@@ -29,27 +29,68 @@ struct IngredientsModel: Codable {
 }
 
 extension IngredientsModel: Creatable {
+    static func editable(model: IngredientsModel) -> [CreateDTO] {
+        var result:[CreateDTO] = []
+        var array:[CreateType]  = []
+        array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: IngredientsModel.CodingKeys.name.stringValue,
+                                                                                  title: "Nome",
+                                                                                  placeholder: "Nome",
+                                                                                  initial: model.name,
+                                                                                  textFieldType: .text,
+                                                                                  type: .title))))
+        array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: IngredientsModel.CodingKeys.ingredientsDescription.stringValue,
+                                                                                  title: "Descrição",
+                                                                                  placeholder: "Descrição",
+                                                                                  initial: model.ingredientsDescription,
+                                                                                  textFieldType: .text,
+                                                                                  type: .body))))
+        array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: IngredientsModel.CodingKeys.cost.stringValue,
+                                                                                  title: "Custo (R$)",
+                                                                                  placeholder: "R$ 0,00",
+                                                                                  initial: model.cost?.asString(),
+                                                                                  textFieldType: .currency,
+                                                                                  type: .body))))
+        array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: IngredientsModel.CodingKeys.quantity.stringValue,
+                                                                                  title: "Quantidade",
+                                                                                  placeholder: "Quantidade",
+                                                                                  initial: Double(model.quantity ?? 0).asString(digits: 0),
+                                                                                  textFieldType: .number,
+                                                                                  type: .menu(key: IngredientsModel.CodingKeys.measurement.stringValue,
+                                                                                              actions: MeasureType.allCases.map { $0.rawValue },
+                                                                                              initial: MeasureType.gramas.rawValue,
+                                                                                              hiddenInput: false)))))
+
+        result.append(CreateDTO(section: "Descrição",
+                                showTitle: false,
+                                itens: array))
+        return result
+    }
+
     static func create() -> [CreateDTO] {
         var result:[CreateDTO] = []
         var array:[CreateType]  = []
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: IngredientsModel.CodingKeys.name.stringValue,
                                                                                   title: "Nome",
                                                                                   placeholder: "Nome",
+                                                                                  initial: nil,
                                                                                   textFieldType: .text,
                                                                                   type: .title))))
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: IngredientsModel.CodingKeys.ingredientsDescription.stringValue,
                                                                                   title: "Descrição",
                                                                                   placeholder: "Descrição",
+                                                                                  initial: nil,
                                                                                   textFieldType: .text,
                                                                                   type: .body))))
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: IngredientsModel.CodingKeys.cost.stringValue,
                                                                                   title: "Custo (R$)",
                                                                                   placeholder: "R$ 0,00",
+                                                                                  initial: nil,
                                                                                   textFieldType: .currency,
                                                                                   type: .body))))
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: IngredientsModel.CodingKeys.quantity.stringValue,
                                                                                   title: "Quantidade",
                                                                                   placeholder: "Quantidade",
+                                                                                  initial: nil,
                                                                                   textFieldType: .number,
                                                                                   type: .menu(key: IngredientsModel.CodingKeys.measurement.stringValue,
                                                                                               actions: MeasureType.allCases.map { $0.rawValue },

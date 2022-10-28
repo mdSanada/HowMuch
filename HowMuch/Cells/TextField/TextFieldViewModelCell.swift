@@ -78,6 +78,7 @@ extension TextFieldViewModelCell: TextFieldInputProtocol {
         output?.configure(type: item.type ?? .body,
                           title: item.title ?? "",
                           placeholder: item.placeholder ?? "",
+                          initial: item.initial,
                           textFieldType: item.textFieldType ?? .text)
     }
     

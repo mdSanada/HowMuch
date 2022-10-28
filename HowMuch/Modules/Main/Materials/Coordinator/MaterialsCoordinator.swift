@@ -54,4 +54,13 @@ extension MaterialsCoordinator: MaterialsProtocol {
     
     func pushDetailed() {
     }
+    
+    func pushEdit(id: FirestoreId, type: MaterialsType) {
+        let viewModel = MaterialCreateViewModel()
+        let controller = materialStoryboard.instantiateViewController(identifier: "MaterialCreate") as? MaterialCreateViewController
+        controller?.flow = .update(uuid: id)
+        controller?.type = type
+        controller?.set(viewModel: viewModel)
+        navigation?.present(controller!, animated: true)
+    }
 }

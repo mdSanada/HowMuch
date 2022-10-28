@@ -124,6 +124,32 @@ extension String {
         return formatter.string(from: number)!
     }
     
+    func numberFormatting() -> String {
+        var number: NSNumber!
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 3
+        formatter.minimumFractionDigits = 0
+        formatter.decimalSeparator = ","
+        formatter.locale = Locale(identifier: "pt_BR")
+        
+        var amountWithPrefix = self
+        let regex = try? NSRegularExpression(pattern: "[^[.,0-9]+$]", options: .caseInsensitive)
+        amountWithPrefix = (regex?.stringByReplacingMatches(in: amountWithPrefix as! String,
+                                                            options: NSRegularExpression.MatchingOptions(rawValue: 0),
+                                                            range: NSRange(location: 0, length: self.count),
+                                                            withTemplate: "")) as! Self
+        
+        let double = (amountWithPrefix as! NSString).doubleValue
+        number = NSNumber(value: (double))
+        guard number != 0 as NSNumber else {
+            return ""
+        }
+        let sNumber = formatter.string(from: number) ?? "0"
+        return sNumber
+    }
+    
     func numberInputFormatting() -> Double {
         var number: NSNumber!
         

@@ -41,8 +41,16 @@ class MaterialCreateViewModel: SNViewModel<MaterialCreateStates> {
     override func configure() {
         type
             .compactMap { $0 }
-            .subscribe(onNext: { [weak self] type in
-                self?.itens = CreateDTO.materials(type: type)
+            .withLatestFrom(flow, resultSelector: {(type: $0, flow: $1)})
+            .subscribe(onNext: { [weak self] (type, flow) in
+                switch flow {
+                case .update:
+                    self?.itens = CreateDTO.editable(type: type)
+                case .save:
+                    self?.itens = CreateDTO.materials(type: type)
+                default:
+                    self?.emit(.error("Erro"))
+                }
             })
             .disposed(by: disposeBag)
         

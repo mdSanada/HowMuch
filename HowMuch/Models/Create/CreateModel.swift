@@ -12,6 +12,7 @@ struct CreateTextModel {
     let key: String?
     let title: String?
     let placeholder: String?
+    let initial: String?
     let textFieldType: TextFieldTypes?
     let type: TextFieldTableViewCellType?
 }

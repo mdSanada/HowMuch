@@ -7,14 +7,40 @@
 
 import Foundation
 
-enum MaterialsType: String, CaseIterable {
-    case ingredient = "Ingredientes"
-    case material = "Materiais"
-    case taxes = "Impostos"
-    case consumption = "Consumo"
+enum MaterialsType: CaseIterable {
+    static var allCases: [MaterialsType] = [.ingredient(nil), .material(nil), .taxes(nil), .consumption(nil)]
+    
+    case ingredient(IngredientsModel?)
+    case material(MaterialModel?)
+    case taxes(TaxeModel?)
+    case consumption(ConsumptionModel?)
 }
 
 extension MaterialsType {
+    static func fromTitle(_ title: String) -> MaterialsType? {
+        switch title {
+        case "Ingrediente": return .ingredient(nil)
+        case "Material": return .material(nil)
+        case "Taxa": return .taxes(nil)
+        case "Consumo": return .consumption(nil)
+        default:
+            return nil
+        }
+    }
+    
+    func title() -> String  {
+        switch self {
+        case .ingredient:
+            return "Ingrediente"
+        case .material:
+            return "Material"
+        case .taxes:
+            return "Taxa"
+        case .consumption:
+            return "Consumo"
+        }
+    }
+    
     func newTitle() -> String  {
         switch self {
         case .ingredient:

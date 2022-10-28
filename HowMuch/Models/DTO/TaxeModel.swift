@@ -29,22 +29,51 @@ struct TaxeModel: Codable {
 }
 
 extension TaxeModel: Creatable {
+    static func editable(model: TaxeModel) -> [CreateDTO] {
+        var result:[CreateDTO] = []
+        var array:[CreateType]  = []
+        array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: TaxeModel.CodingKeys.name.rawValue,
+                                                                                  title: "Nome",
+                                                                                  placeholder: "Nome",
+                                                                                  initial: model.name,
+                                                                                  textFieldType: .text,
+                                                                                  type: .title))))
+        array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: TaxeModel.CodingKeys.taxeDescription.rawValue,
+                                                                                  title: "Descrição",
+                                                                                  placeholder: "Descrição",
+                                                                                  initial: model.taxeDescription,
+                                                                                  textFieldType: .text,
+                                                                                  type: .body))))
+        array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: TaxeModel.CodingKeys.cost.rawValue,
+                                                                                  title: "Custo (%)",
+                                                                                  placeholder: "0 %",
+                                                                                  initial: model.cost?.asString(),
+                                                                                  textFieldType: .percent,
+                                                                                  type: .body))))
+        result.append(CreateDTO(section: "Descrição", showTitle: false, itens: array))
+
+        return result
+    }
+    
     static func create() -> [CreateDTO] {
         var result:[CreateDTO] = []
         var array:[CreateType]  = []
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: TaxeModel.CodingKeys.name.rawValue,
                                                                                   title: "Nome",
                                                                                   placeholder: "Nome",
+                                                                                  initial: nil,
                                                                                   textFieldType: .text,
                                                                                   type: .title))))
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: TaxeModel.CodingKeys.taxeDescription.rawValue,
                                                                                   title: "Descrição",
                                                                                   placeholder: "Descrição",
+                                                                                  initial: nil,
                                                                                   textFieldType: .text,
                                                                                   type: .body))))
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: TaxeModel.CodingKeys.cost.rawValue,
                                                                                   title: "Custo (%)",
                                                                                   placeholder: "0 %",
+                                                                                  initial: nil,
                                                                                   textFieldType: .percent,
                                                                                   type: .body))))
         result.append(CreateDTO(section: "Descrição", showTitle: false, itens: array))

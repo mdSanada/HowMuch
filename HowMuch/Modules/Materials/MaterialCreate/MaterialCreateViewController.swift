@@ -27,8 +27,8 @@ class MaterialCreateViewController: SNViewController<MaterialCreateStates, Mater
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTable()
-        viewModel?.type.onNext(type)
         viewModel?.flow.onNext(flow)
+        viewModel?.type.onNext(type)
     }
     
     override func configureViews() {

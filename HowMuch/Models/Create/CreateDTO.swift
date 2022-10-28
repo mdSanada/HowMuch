@@ -95,32 +95,32 @@ extension CreateDTO {
         
         return result
     }
-    
+        
     static func editable(type: MaterialsType) -> [CreateDTO] {
         switch type {
         case .ingredient(let ingredient):
             guard let ingredient = ingredient else {
                 return []
             }
-            return IngredientsModel.editable(model: ingredient)
+            return ingredient.editable()
         case .material(let material):
             // MARK: - Material Section
             guard let material = material else {
                 return []
             }
-            return MaterialModel.editable(model: material)
+            return material.editable()
         case .taxes(let taxes):
             // MARK: - Taxes Section
             guard let taxes = taxes else {
                 return []
             }
-            return TaxeModel.editable(model: taxes)
+            return taxes.editable()
         case .consumption(let consumption):
             // MARK: - Consumption Section
             guard let consumption = consumption else {
                 return []
             }
-            return ConsumptionModel.editable(model: consumption)
+            return consumption.editable()
         }
     }
     

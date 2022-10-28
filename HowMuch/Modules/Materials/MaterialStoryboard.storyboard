@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -73,11 +74,85 @@
             </objects>
             <point key="canvasLocation" x="628.98550724637687" y="197.54464285714286"/>
         </scene>
+        <!--Material Detailed View Controller-->
+        <scene sceneID="Hcy-FG-eh6">
+            <objects>
+                <viewController storyboardIdentifier="MaterialDetailed" id="OIQ-7k-Vlh" customClass="MaterialDetailedViewController" customModule="HowMuch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2ib-ph-2I1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wmY-Ig-WM5">
+                                <rect key="frame" x="20" y="49" width="316" height="48.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rbb-1O-hCt">
+                                        <rect key="frame" x="0.0" y="0.0" width="316" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xox-qY-rlM">
+                                        <rect key="frame" x="0.0" y="29" width="316" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btJ-Yr-1b4">
+                                <rect key="frame" x="346" y="49" width="48" height="48.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="1h6-aC-10F"/>
+                                </constraints>
+                                <color key="tintColor" name="Pink"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="ellipsis.circle" catalog="system" symbolScale="large"/>
+                                </state>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="42v-pf-HUO">
+                                <rect key="frame" x="0.0" y="97.5" width="414" height="798.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="QSt-W2-oIZ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="btJ-Yr-1b4" firstAttribute="leading" secondItem="wmY-Ig-WM5" secondAttribute="trailing" constant="10" id="8SE-cu-a3w"/>
+                            <constraint firstItem="btJ-Yr-1b4" firstAttribute="top" secondItem="QSt-W2-oIZ" secondAttribute="top" constant="5" id="F7E-Av-yK3"/>
+                            <constraint firstItem="btJ-Yr-1b4" firstAttribute="height" secondItem="wmY-Ig-WM5" secondAttribute="height" id="Fft-eD-L9i"/>
+                            <constraint firstItem="42v-pf-HUO" firstAttribute="leading" secondItem="QSt-W2-oIZ" secondAttribute="leading" id="NLu-TV-e7p"/>
+                            <constraint firstItem="42v-pf-HUO" firstAttribute="top" secondItem="wmY-Ig-WM5" secondAttribute="bottom" id="OIg-gz-DVj"/>
+                            <constraint firstItem="QSt-W2-oIZ" firstAttribute="trailing" secondItem="btJ-Yr-1b4" secondAttribute="trailing" constant="20" id="ajS-bL-1fk"/>
+                            <constraint firstItem="QSt-W2-oIZ" firstAttribute="trailing" secondItem="42v-pf-HUO" secondAttribute="trailing" id="jly-h8-PzZ"/>
+                            <constraint firstAttribute="bottom" secondItem="42v-pf-HUO" secondAttribute="bottom" id="oFw-Vm-hb9"/>
+                            <constraint firstItem="wmY-Ig-WM5" firstAttribute="top" secondItem="QSt-W2-oIZ" secondAttribute="top" constant="5" id="oXa-zS-e3A"/>
+                            <constraint firstItem="wmY-Ig-WM5" firstAttribute="leading" secondItem="QSt-W2-oIZ" secondAttribute="leading" constant="20" id="zwf-eG-LGU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buttonMore" destination="btJ-Yr-1b4" id="HRq-5v-0IE"/>
+                        <outlet property="labelDescription" destination="Xox-qY-rlM" id="DEt-FE-AyJ"/>
+                        <outlet property="labelTitle" destination="Rbb-1O-hCt" id="adp-EI-L3F"/>
+                        <outlet property="tableDetailed" destination="42v-pf-HUO" id="ago-gU-ZjM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qVw-Yf-NZT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1456.521739130435" y="197.54464285714286"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="ellipsis.circle" catalog="system" width="128" height="121"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.92500001192092896" blue="0.75700002908706665" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="Pink">
+            <color red="0.95300000905990601" green="0.25099998712539673" blue="0.57599997520446777" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

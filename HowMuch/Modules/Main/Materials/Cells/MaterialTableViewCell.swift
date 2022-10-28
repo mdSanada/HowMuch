@@ -22,10 +22,10 @@ class MaterialTableViewCell: UITableViewCell {
     
     public func render(title: String,
                        quantity: String,
-                       price: Decimal) {
+                       price: String) {
         self.labelTitle.text = title
         self.labelQuantity.text = quantity
-        self.labelPrice.text = price.asMoney()
+        self.labelPrice.text = price
     }
     
 }

@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 
 class FirestoreRepository {
-    static public let shared = FirestoreRepository()
+    static public let shared = FirestoreRepository() 
     private let db: Firestore
     private let user: DocumentReference
     private let budgets: CollectionReference
@@ -21,7 +21,7 @@ class FirestoreRepository {
     
     init() {
         self.db = Firestore.firestore()
-        self.user = db.collection(FirestoreConsts.Collections.users).document("JPJGimqm0vk6P5zvYE35")
+        self.user = db.collection(FirestoreConsts.Collections.users).document(AuthRepository.shared.token() ?? "")
         self.budgets = user.collection(FirestoreConsts.Collections.budgets)
         self.consumption = user.collection(FirestoreConsts.Collections.consumption)
         self.ingredients = user.collection(FirestoreConsts.Collections.ingredients)
@@ -55,7 +55,11 @@ class FirestoreRepository {
     public func getAllSales(source: FirestoreSource) {
         sales.getDocuments(source: source) { query, error in
             if let query = query {
-                let data = query.documents.compactMap{ $0.data().data }
+                let data = query.documents.compactMap { response -> Data? in
+                    var dict = response.data()
+                    dict["firestoreId"] = response.documentID
+                    return dict.data
+                }
                 let response = data.map { $0.map(to: SaleModel.self) }.compactMap { $0 }
                 print(response)
             } else {
@@ -68,7 +72,11 @@ class FirestoreRepository {
         taxes.getDocuments(source: source) { query, error in
             if let query = query {
                 query.documents.forEach { document in
-                    let data = query.documents.compactMap{ $0.data().data }
+                    let data = query.documents.compactMap { response -> Data? in
+                        var dict = response.data()
+                        dict["firestoreId"] = response.documentID
+                        return dict.data
+                    }
                     let response = data.map { $0.map(to: TaxeModel.self) }.compactMap { $0 }
                     print(response)
                 }
@@ -82,7 +90,11 @@ class FirestoreRepository {
         materials.getDocuments(source: source) { query, error in
             if let query = query {
                 query.documents.forEach { document in
-                    let data = query.documents.compactMap{ $0.data().data }
+                    let data = query.documents.compactMap { response -> Data? in
+                        var dict = response.data()
+                        dict["firestoreId"] = response.documentID
+                        return dict.data
+                    }
                     let response = data.map { $0.map(to: MaterialModel.self) }.compactMap { $0 }
                     print(response)
                 }
@@ -96,7 +108,11 @@ class FirestoreRepository {
         ingredients.getDocuments(source: source) { query, error in
             if let query = query {
                 query.documents.forEach { document in
-                    let data = query.documents.compactMap{ $0.data().data }
+                    let data = query.documents.compactMap { response -> Data? in
+                        var dict = response.data()
+                        dict["firestoreId"] = response.documentID
+                        return dict.data
+                    }
                     let response = data.map { $0.map(to: IngredientsModel.self) }.compactMap { $0 }
                     print(response)
                 }
@@ -110,7 +126,11 @@ class FirestoreRepository {
         consumption.getDocuments(source: source) { query, error in
             if let query = query {
                 query.documents.forEach { document in
-                    let data = query.documents.compactMap{ $0.data().data }
+                    let data = query.documents.compactMap { response -> Data? in
+                        var dict = response.data()
+                        dict["firestoreId"] = response.documentID
+                        return dict.data
+                    }
                     let response = data.map { $0.map(to: ConsumptionModel.self) }.compactMap { $0 }
                     print(response)
                 }
@@ -124,7 +144,12 @@ class FirestoreRepository {
         budgets.getDocuments(source: source) { query, error in
             if let query = query {
                 query.documents.forEach { document in
-                    let data = query.documents.compactMap{ $0.data().data }
+                    let data = query.documents.compactMap { response -> Data? in
+                        var dict = response.data()
+                        dict["firestoreId"] = response.documentID
+                        return dict.data
+                    }
+                    
                     let response = data.map { $0.map(to: BudgetModel.self) }.compactMap { $0 }
                     print(response)
                 }
@@ -135,38 +160,42 @@ class FirestoreRepository {
     }
     
     public func save(material: MaterialsType, data: Data, completion: @escaping (Bool) -> ()) {
+        guard let data = data.dictionary else {
+            completion(false)
+            return
+        }
         switch material {
         case .ingredient:
-            do {
-                let decoded = try JSONDecoder().decode(IngredientsModel.self, from: data)
-                Sanada.print("Save \(decoded)")
+            ingredients.addDocument(data: data) { error in
+                guard error == nil else {
+                    completion(false)
+                    return
+                }
                 completion(true)
-            } catch {
-                completion(false)
             }
         case .material:
-            do {
-                let decoded = try JSONDecoder().decode(MaterialModel.self, from: data)
-                Sanada.print("Save \(decoded)")
+            materials.addDocument(data: data) { error in
+                guard error == nil else {
+                    completion(false)
+                    return
+                }
                 completion(true)
-            } catch {
-                completion(false)
             }
         case .taxes:
-            do {
-                let decoded = try JSONDecoder().decode(TaxeModel.self, from: data)
-                Sanada.print("Save \(decoded)")
+            taxes.addDocument(data: data) { error in
+                guard error == nil else {
+                    completion(false)
+                    return
+                }
                 completion(true)
-            } catch {
-                completion(false)
             }
         case .consumption:
-            do {
-                let decoded = try JSONDecoder().decode(ConsumptionModel.self, from: data)
-                Sanada.print("Save \(decoded)")
+            consumption.addDocument(data: data) { error in
+                guard error == nil else {
+                    completion(false)
+                    return
+                }
                 completion(true)
-            } catch {
-                completion(false)
             }
         }
     }
@@ -176,15 +205,12 @@ class FirestoreRepository {
         case .ingredient:
             do {
                 let decoded = try JSONDecoder().decode(IngredientsModel.self, from: data)
-                Sanada.print("Save \(decoded)")
-                completion(true)
             } catch {
                 completion(false)
             }
         case .material:
             do {
                 let decoded = try JSONDecoder().decode(MaterialModel.self, from: data)
-                Sanada.print("Save \(decoded)")
                 completion(true)
             } catch {
                 completion(false)
@@ -192,7 +218,6 @@ class FirestoreRepository {
         case .taxes:
             do {
                 let decoded = try JSONDecoder().decode(TaxeModel.self, from: data)
-                Sanada.print("Save \(decoded)")
                 completion(true)
             } catch {
                 completion(false)
@@ -200,12 +225,15 @@ class FirestoreRepository {
         case .consumption:
             do {
                 let decoded = try JSONDecoder().decode(ConsumptionModel.self, from: data)
-                Sanada.print("Save \(decoded)")
                 completion(true)
             } catch {
                 completion(false)
             }
         }
+    }
+    
+    func save(user: FirestoreId, name: String) {
+        db.collection(FirestoreConsts.Collections.users).document(user).setData(["name": name])
     }
 
     public func fetch() {

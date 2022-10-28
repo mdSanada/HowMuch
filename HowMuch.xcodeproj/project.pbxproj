@@ -120,6 +120,11 @@
 		16D80CE82903574A00A3FC5A /* TaxeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D80CE72903574A00A3FC5A /* TaxeModel.swift */; };
 		16D80CEA2903576E00A3FC5A /* ConsumptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D80CE92903576E00A3FC5A /* ConsumptionModel.swift */; };
 		16D80CEC290357D200A3FC5A /* FirestoreId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D80CEB290357D200A3FC5A /* FirestoreId.swift */; };
+		16E76396290BFC7300F32124 /* MaterialDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E76395290BFC7300F32124 /* MaterialDetailedViewController.swift */; };
+		16E76398290BFC8300F32124 /* MaterialDetailedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E76397290BFC8300F32124 /* MaterialDetailedViewModel.swift */; };
+		16E7639B290C1DA500F32124 /* DetailedDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E7639A290C1DA500F32124 /* DetailedDTO.swift */; };
+		16E763F8290C7BA000F32124 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E763F7290C7BA000F32124 /* AuthRepository.swift */; };
+		16E763FA290C8ADA00F32124 /* FirestoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E763F9290C8ADA00F32124 /* FirestoreProtocol.swift */; };
 		16FE20B129073657000AC718 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE20AF29073657000AC718 /* TextFieldTableViewCell.swift */; };
 		16FE20B229073657000AC718 /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16FE20B029073657000AC718 /* TextFieldTableViewCell.xib */; };
 		16FE20B5290737F9000AC718 /* SalesCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE20B4290737F9000AC718 /* SalesCreateViewController.swift */; };
@@ -129,7 +134,7 @@
 		16FE20C02907433A000AC718 /* AddButtonFooterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16FE20BE2907433A000AC718 /* AddButtonFooterTableViewCell.xib */; };
 		16FF36592901ED4F000DFC50 /* SaleStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16FF36582901ED4F000DFC50 /* SaleStoryboard.storyboard */; };
 		16FF365B2901ED5F000DFC50 /* SaleDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FF365A2901ED5F000DFC50 /* SaleDetailedViewController.swift */; };
-		4523C970B55C09549FDF66DA /* Pods_HowMuch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4921D74E24EE008C70E29347 /* Pods_HowMuch.framework */; };
+		F579F798EC0839C0BB0EEAA0 /* Pods_HowMuch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B50D91F146320FCBD67BCC /* Pods_HowMuch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -248,6 +253,11 @@
 		16D80CE72903574A00A3FC5A /* TaxeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxeModel.swift; sourceTree = "<group>"; };
 		16D80CE92903576E00A3FC5A /* ConsumptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumptionModel.swift; sourceTree = "<group>"; };
 		16D80CEB290357D200A3FC5A /* FirestoreId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreId.swift; sourceTree = "<group>"; };
+		16E76395290BFC7300F32124 /* MaterialDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialDetailedViewController.swift; sourceTree = "<group>"; };
+		16E76397290BFC8300F32124 /* MaterialDetailedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialDetailedViewModel.swift; sourceTree = "<group>"; };
+		16E7639A290C1DA500F32124 /* DetailedDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedDTO.swift; sourceTree = "<group>"; };
+		16E763F7290C7BA000F32124 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		16E763F9290C8ADA00F32124 /* FirestoreProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreProtocol.swift; sourceTree = "<group>"; };
 		16FE20AF29073657000AC718 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		16FE20B029073657000AC718 /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		16FE20B4290737F9000AC718 /* SalesCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesCreateViewController.swift; sourceTree = "<group>"; };
@@ -257,9 +267,9 @@
 		16FE20BE2907433A000AC718 /* AddButtonFooterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddButtonFooterTableViewCell.xib; sourceTree = "<group>"; };
 		16FF36582901ED4F000DFC50 /* SaleStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SaleStoryboard.storyboard; sourceTree = "<group>"; };
 		16FF365A2901ED5F000DFC50 /* SaleDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleDetailedViewController.swift; sourceTree = "<group>"; };
-		4921D74E24EE008C70E29347 /* Pods_HowMuch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HowMuch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4EAEA848C81209C1FBDA3C9F /* Pods-HowMuch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HowMuch.debug.xcconfig"; path = "Target Support Files/Pods-HowMuch/Pods-HowMuch.debug.xcconfig"; sourceTree = "<group>"; };
-		CC754F44828695265B9B6BD3 /* Pods-HowMuch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HowMuch.release.xcconfig"; path = "Target Support Files/Pods-HowMuch/Pods-HowMuch.release.xcconfig"; sourceTree = "<group>"; };
+		6E261EFF42122ACE2D90074A /* Pods-HowMuch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HowMuch.debug.xcconfig"; path = "Target Support Files/Pods-HowMuch/Pods-HowMuch.debug.xcconfig"; sourceTree = "<group>"; };
+		B732416C402537830D5BA57A /* Pods-HowMuch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HowMuch.release.xcconfig"; path = "Target Support Files/Pods-HowMuch/Pods-HowMuch.release.xcconfig"; sourceTree = "<group>"; };
+		E3B50D91F146320FCBD67BCC /* Pods_HowMuch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HowMuch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,7 +277,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4523C970B55C09549FDF66DA /* Pods_HowMuch.framework in Frameworks */,
+				F579F798EC0839C0BB0EEAA0 /* Pods_HowMuch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +320,7 @@
 				16D80CE92903576E00A3FC5A /* ConsumptionModel.swift */,
 				16D80CEB290357D200A3FC5A /* FirestoreId.swift */,
 				162B5585290B4D83000F9477 /* Creatable.swift */,
+				16E763F9290C8ADA00F32124 /* FirestoreProtocol.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -353,6 +364,7 @@
 			children = (
 				1646643A2908A7FF008892EB /* MaterialStoryboard.storyboard */,
 				162ECD43290A16C90005B6A4 /* Keys.swift */,
+				16E76394290BFC3C00F32124 /* MaterialDetailed */,
 				164664362908A6FE008892EB /* MaterialCreate */,
 			);
 			path = Materials;
@@ -422,7 +434,7 @@
 				16AE04072900A05C00490465 /* HowMuch */,
 				16AE04062900A05C00490465 /* Products */,
 				1C46DEF0A05DF2D2E3193350 /* Pods */,
-				CAF1CA470E78761DFFB1F175 /* Frameworks */,
+				935707F664E6CA533D3FBF9F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -797,6 +809,7 @@
 			children = (
 				16D80CDA29033A7400A3FC5A /* FirestoreRepository.swift */,
 				16D80CDC29033AB900A3FC5A /* FirestoreConsts.swift */,
+				16E763F7290C7BA000F32124 /* AuthRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -804,12 +817,30 @@
 		16D80CDE2903566D00A3FC5A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				16E76399290C1D9A00F32124 /* Detailed */,
 				162ECD2E290996C00005B6A4 /* Create */,
 				162ECD2F290996D50005B6A4 /* DTO */,
 				162ECD30290996DF0005B6A4 /* Type */,
 				162B5580290B4A5F000F9477 /* KeyValue.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		16E76394290BFC3C00F32124 /* MaterialDetailed */ = {
+			isa = PBXGroup;
+			children = (
+				16E76395290BFC7300F32124 /* MaterialDetailedViewController.swift */,
+				16E76397290BFC8300F32124 /* MaterialDetailedViewModel.swift */,
+			);
+			path = MaterialDetailed;
+			sourceTree = "<group>";
+		};
+		16E76399290C1D9A00F32124 /* Detailed */ = {
+			isa = PBXGroup;
+			children = (
+				16E7639A290C1DA500F32124 /* DetailedDTO.swift */,
+			);
+			path = Detailed;
 			sourceTree = "<group>";
 		};
 		16FE20AE2907363A000AC718 /* TextField */ = {
@@ -873,16 +904,16 @@
 		1C46DEF0A05DF2D2E3193350 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4EAEA848C81209C1FBDA3C9F /* Pods-HowMuch.debug.xcconfig */,
-				CC754F44828695265B9B6BD3 /* Pods-HowMuch.release.xcconfig */,
+				6E261EFF42122ACE2D90074A /* Pods-HowMuch.debug.xcconfig */,
+				B732416C402537830D5BA57A /* Pods-HowMuch.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		CAF1CA470E78761DFFB1F175 /* Frameworks */ = {
+		935707F664E6CA533D3FBF9F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4921D74E24EE008C70E29347 /* Pods_HowMuch.framework */,
+				E3B50D91F146320FCBD67BCC /* Pods_HowMuch.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -894,11 +925,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 16AE041C2900A05E00490465 /* Build configuration list for PBXNativeTarget "HowMuch" */;
 			buildPhases = (
-				FDC8C8DEE0762C2E284C5F86 /* [CP] Check Pods Manifest.lock */,
+				E4801644DFBF04703A6B04D7 /* [CP] Check Pods Manifest.lock */,
 				16AE04012900A05C00490465 /* Sources */,
 				16AE04022900A05C00490465 /* Frameworks */,
 				16AE04032900A05C00490465 /* Resources */,
-				5320C2CBB59F4CAEC7F18827 /* [CP] Embed Pods Frameworks */,
+				F5C54F224C066421F7EE7FE3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -971,24 +1002,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5320C2CBB59F4CAEC7F18827 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HowMuch/Pods-HowMuch-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HowMuch/Pods-HowMuch-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HowMuch/Pods-HowMuch-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FDC8C8DEE0762C2E284C5F86 /* [CP] Check Pods Manifest.lock */ = {
+		E4801644DFBF04703A6B04D7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1008,6 +1022,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F5C54F224C066421F7EE7FE3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HowMuch/Pods-HowMuch-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HowMuch/Pods-HowMuch-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HowMuch/Pods-HowMuch-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1042,11 +1073,13 @@
 				162B5588290B75C6000F9477 /* Extension + Double.swift in Sources */,
 				162ECD36290999970005B6A4 /* CreateDTO.swift in Sources */,
 				16AE04AA2900A12600490465 /* SNRefresher.swift in Sources */,
+				16E76398290BFC8300F32124 /* MaterialDetailedViewModel.swift in Sources */,
 				16D80CDB29033A7400A3FC5A /* FirestoreRepository.swift in Sources */,
 				162B557F290B4818000F9477 /* MaterialsFlow.swift in Sources */,
 				16AE04092900A05C00490465 /* AppDelegate.swift in Sources */,
 				16AE04AF2900A12600490465 /* SNNetworkManager.swift in Sources */,
 				16AE04D02900A12700490465 /* SettingsProtocol.swift in Sources */,
+				16E7639B290C1DA500F32124 /* DetailedDTO.swift in Sources */,
 				16AE04A52900A12600490465 /* StatusView.swift in Sources */,
 				16AE040B2900A05C00490465 /* SceneDelegate.swift in Sources */,
 				16AE04AD2900A12600490465 /* Sanada.swift in Sources */,
@@ -1059,6 +1092,7 @@
 				16AE04132900A05C00490465 /* HowMuch.xcdatamodeld in Sources */,
 				16AE04B72900A12600490465 /* SNDynamic.swift in Sources */,
 				16D80CEA2903576E00A3FC5A /* ConsumptionModel.swift in Sources */,
+				16E76396290BFC7300F32124 /* MaterialDetailedViewController.swift in Sources */,
 				16AE04B32900A12600490465 /* SNCoordinator.swift in Sources */,
 				16AE04E22900A12700490465 /* LoginViewModel.swift in Sources */,
 				16AE04C12900A12700490465 /* MyReceiptViewController.swift in Sources */,
@@ -1076,6 +1110,7 @@
 				16AE04C22900A12700490465 /* MyReceiptViewModel.swift in Sources */,
 				16AE04B22900A12600490465 /* SNRequestable.swift in Sources */,
 				16AE04B82900A12600490465 /* SNViewModel.swift in Sources */,
+				16E763FA290C8ADA00F32124 /* FirestoreProtocol.swift in Sources */,
 				16D80CDD29033AB900A3FC5A /* FirestoreConsts.swift in Sources */,
 				162ECD322909997A0005B6A4 /* ItemType.swift in Sources */,
 				16AE04B52900A12600490465 /* SNViewController.swift in Sources */,
@@ -1083,6 +1118,7 @@
 				16AE04B02900A12600490465 /* SNNetworkMethod.swift in Sources */,
 				16AE049D2900A12600490465 /* Extension + Table.swift in Sources */,
 				16AE04C92900A12700490465 /* EstimateTableViewCell.swift in Sources */,
+				16E763F8290C7BA000F32124 /* AuthRepository.swift in Sources */,
 				16D80CE62903571E00A3FC5A /* MaterialModel.swift in Sources */,
 				16AE04C82900A12700490465 /* MaterialsViewController.swift in Sources */,
 				16AE04972900A12600490465 /* AppLauncher.swift in Sources */,
@@ -1262,7 +1298,7 @@
 		};
 		16AE041D2900A05E00490465 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4EAEA848C81209C1FBDA3C9F /* Pods-HowMuch.debug.xcconfig */;
+			baseConfigurationReference = 6E261EFF42122ACE2D90074A /* Pods-HowMuch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1294,7 +1330,7 @@
 		};
 		16AE041E2900A05E00490465 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CC754F44828695265B9B6BD3 /* Pods-HowMuch.release.xcconfig */;
+			baseConfigurationReference = B732416C402537830D5BA57A /* Pods-HowMuch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

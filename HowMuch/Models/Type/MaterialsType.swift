@@ -41,6 +41,19 @@ extension MaterialsType {
         }
     }
     
+    func editTitle() -> String  {
+        switch self {
+        case .ingredient:
+            return "Editar Ingrediente"
+        case .material:
+            return "Editar Material"
+        case .taxes:
+            return "Editar Taxa"
+        case .consumption:
+            return "Editar Consumo"
+        }
+    }
+    
     func newTitle() -> String  {
         switch self {
         case .ingredient:

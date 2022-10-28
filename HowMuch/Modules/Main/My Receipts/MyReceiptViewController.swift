@@ -38,6 +38,16 @@ class MyReceiptViewController: UIViewController {
         configureTable()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.largeTitleDisplayMode = .automatic
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationItem.largeTitleDisplayMode = .never
+    }
+    
     private func configureTable() {
         filtered = array
         tableReceipt.register(type: ReceiptTableViewCell.self)

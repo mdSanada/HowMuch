@@ -33,7 +33,7 @@ class MaterialCreateViewModel: SNViewModel<MaterialCreateStates> {
         }
     }
     var cellViewModels: [CellViewModel] = []
-    var disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     var result: [String: Any] = [:]
 

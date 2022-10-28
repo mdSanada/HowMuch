@@ -21,6 +21,16 @@ class EstimateViewController: UIViewController {
         navigationItem.searchController = searchController
         configureBindings()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.largeTitleDisplayMode = .automatic
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationItem.largeTitleDisplayMode = .never
+    }
 
     private func configureBindings() {
         searchText

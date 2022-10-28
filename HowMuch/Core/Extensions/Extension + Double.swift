@@ -8,12 +8,12 @@
 import UIKit
 
 extension Double {
-    public func asString(digits: Int = 2) -> String {
+    public func asString(digits: Int = 2, minimum: Int = 2) -> String {
         let currencyFormatter = NumberFormatter()
         currencyFormatter.usesGroupingSeparator = true
         currencyFormatter.numberStyle = .decimal
         currencyFormatter.decimalSeparator = ","
-        currencyFormatter.minimumFractionDigits = digits
+        currencyFormatter.minimumFractionDigits = minimum
         currencyFormatter.maximumFractionDigits = digits
         currencyFormatter.locale = Locale(identifier: "pt_BR")
         let formattedNumber = NSNumber(value: self)

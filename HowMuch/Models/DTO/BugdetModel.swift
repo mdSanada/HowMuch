@@ -8,11 +8,13 @@
 import Foundation
 
 // MARK: - BudgetModel
-struct BudgetModel: Codable {
+struct BudgetModel: Codable, FirestoreProtocol {
+    var firestoreId: FirestoreId?
     let name, budgetDescription: String?
     let itens: [Item]?
 
     enum CodingKeys: String, CodingKey {
+        case firestoreId
         case name
         case budgetDescription = "description"
         case itens

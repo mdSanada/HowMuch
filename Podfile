@@ -21,6 +21,7 @@ target 'HowMuch' do
   pod 'ParallaxHeader', '~> 3.0.0'
   
   pod 'FirebaseFirestore'
+  pod 'FirebaseAuth'
   #Mock
   pod 'OHHTTPStubs',           '~> 9.1.0'
   pod 'OHHTTPStubs/Swift',     '~> 9.1.0'

@@ -8,13 +8,15 @@
 import Foundation
 
 // MARK: - ConsumptionModel
-struct ConsumptionModel: Codable {
+struct ConsumptionModel: Codable, FirestoreProtocol {
+    var firestoreId: FirestoreId?
     var name, consumptionDescription, level: String?
     var time: Double?
     var measurement: String?
     var consumption: String?
-
+    
     enum CodingKeys: String, CodingKey {
+        case firestoreId
         case name
         case consumptionDescription = "description"
         case measurement
@@ -22,6 +24,7 @@ struct ConsumptionModel: Codable {
     }
     
     internal init(name: String? = nil, consumptionDescription: String? = nil, measurement: String? = nil, level: String? = nil, time: Double? = nil, consumption: String? = nil) {
+        self.firestoreId = nil
         self.name = name
         self.consumptionDescription = consumptionDescription
         self.level = level
@@ -32,19 +35,55 @@ struct ConsumptionModel: Codable {
 }
 
 extension ConsumptionModel: Creatable {
-    static func editable(model: ConsumptionModel) -> [CreateDTO] {
+    static func mock() -> [ConsumptionModel] {
+        return [ConsumptionModel(name: "Consumo",
+                                 consumptionDescription: "Consumo",
+                                 measurement: "min",
+                                 level: "Baixo",
+                                 time: 30,
+                                 consumption: "Gás"),
+                ConsumptionModel(name: "Consumo",
+                                 consumptionDescription: "Consumo",
+                                 measurement: "min",
+                                 level: "Médio",
+                                 time: 180,
+                                 consumption: "Água"),
+                ConsumptionModel(name: "Consumo",
+                                 consumptionDescription: "Consumo",
+                                 measurement: "h",
+                                 level: "Alto",
+                                 time: 1,
+                                 consumption: "Eletricidade")]
+    }
+    
+    func detailed() -> [DetailedDTO] {
+        var result: [DetailedDTO] = []
+        result.append(DetailedDTO(title: "Nome",
+                                  description: self.name))
+        result.append(DetailedDTO(title: "Descrição",
+                                  description: self.consumptionDescription))
+        result.append(DetailedDTO(title: "Consumo",
+                                  description: self.consumption))
+        result.append(DetailedDTO(title: "Nível",
+                                  description: self.level))
+        result.append(DetailedDTO(title: "Tempo",
+                                  description: (self.time?.asString(digits: 2, minimum: 0) ?? "") + " " + (self.measurement ?? "")))
+        return result
+    }
+    
+    func editable() -> [CreateDTO] {
         var result:[CreateDTO] = []
         var array:[CreateType]  = []
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: ConsumptionModel.CodingKeys.name.rawValue,
                                                                                   title: "Nome",
                                                                                   placeholder: "Nome",
-                                                                                  initial: model.name,
+                                                                                  initial: self.name,
                                                                                   textFieldType: .text,
                                                                                   type: .title))))
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: ConsumptionModel.CodingKeys.consumptionDescription.rawValue,
                                                                                   title: "Descrição",
                                                                                   placeholder: "Descrição",
-                                                                                  initial: model.consumptionDescription,
+                                                                                  initial: self.consumptionDescription,
                                                                                   textFieldType: .text,
                                                                                   type: .body))))
         
@@ -55,7 +94,7 @@ extension ConsumptionModel: Creatable {
                                                                                   textFieldType: .text,
                                                                                   type: .menu(key: ConsumptionModel.CodingKeys.consumption.rawValue,
                                                                                               actions: ConsumptionType.allCases.map { $0.rawValue },
-                                                                                              initial: model.consumption ?? ConsumptionType.gas.rawValue,
+                                                                                              initial: self.consumption ?? ConsumptionType.gas.rawValue,
                                                                                               hiddenInput: true)))))
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: nil,
                                                                                   title: "Nível",
@@ -64,19 +103,17 @@ extension ConsumptionModel: Creatable {
                                                                                   textFieldType: .currency,
                                                                                   type: .menu(key: ConsumptionModel.CodingKeys.level.rawValue,
                                                                                               actions: NivelType.allCases.map { $0.rawValue },
-                                                                                              initial: model.level ?? NivelType.low.rawValue,
+                                                                                              initial: self.level ?? NivelType.low.rawValue,
                                                                                               hiddenInput: true)))))
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: ConsumptionModel.CodingKeys.time.rawValue,
                                                                                   title: "Tempo",
                                                                                   placeholder: "Tempo",
-                                                                                  initial: nil,
+                                                                                  initial: self.time?.asString(),
                                                                                   textFieldType: .number,
                                                                                   type: .menu(key: ConsumptionModel.CodingKeys.measurement.rawValue,
                                                                                               actions: TimeType.allCases.map { $0.rawValue },
-                                                                                              initial: model.measurement ?? TimeType.min.rawValue,
+                                                                                              initial: self.measurement ?? TimeType.min.rawValue,
                                                                                               hiddenInput: false)))))
-        
-        
         result.append(CreateDTO(section: "Descrição", showTitle: false, itens: array))
         
         return result

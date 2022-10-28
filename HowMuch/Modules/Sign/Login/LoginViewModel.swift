@@ -18,15 +18,20 @@ enum LoginStates: SNStateful {
 class LoginViewModel: SNViewModel<LoginStates> {
     // Inputs
     let login = PublishSubject<(email: String, password: String)>()
-    let repository = FirestoreRepository.shared
+    let repository = AuthRepository.shared
 //    fileprivate let repository = SNNetworkManager<SNLoginService>()
     var disposeBag = DisposeBag()
     
     override func configure() {
         login
             .subscribe(onNext: { [weak self] _ in
-                self?.emit(.success(""))
-                self?.repository.fetchAll()
+//                self?.repository.fetchAll()
+                self?.repository.authenticate(with: "maatheusdavid@me.com", and: "123456") { [weak self] success in
+                    if success {
+                        self?.emit(.success(""))
+                        FirestoreRepository.shared.getAllMaterials(source: .server)
+                    }
+                }
             })
             .disposed(by: disposeBag)
     }

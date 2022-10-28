@@ -52,15 +52,37 @@ extension MaterialsCoordinator: MaterialsProtocol {
         navigation?.present(controller!, animated: true)
     }
     
-    func pushDetailed() {
+    func pushDetailed(id: FirestoreId, type: MaterialsType) {
+        let viewModel = MaterialDetailedViewModel(id: id, type: type)
+        guard let controller = materialStoryboard.instantiateViewController(identifier: "MaterialDetailed") as? MaterialDetailedViewController else { return }
+        controller.set(viewModel: viewModel)
+        controller.delegate = self
+        navigation?.pushViewController(controller, animated: true)
     }
     
-    func pushEdit(id: FirestoreId, type: MaterialsType) {
+    func presentDetailed(id: FirestoreId, type: MaterialsType) {
+        let viewModel = MaterialDetailedViewModel(id: id, type: type)
+        let controller = materialStoryboard.instantiateViewController(identifier: "MaterialDetailed") as? MaterialDetailedViewController
+        controller?.set(viewModel: viewModel)
+        controller?.delegate = self
+        navigation?.present(controller!, animated: true)
+    }
+    
+    func presentEdit(id: FirestoreId, type: MaterialsType) {
         let viewModel = MaterialCreateViewModel()
         let controller = materialStoryboard.instantiateViewController(identifier: "MaterialCreate") as? MaterialCreateViewController
         controller?.flow = .update(uuid: id)
         controller?.type = type
         controller?.set(viewModel: viewModel)
         navigation?.present(controller!, animated: true)
+    }
+    
+    func pushEdit(id: FirestoreId, type: MaterialsType) {
+        let viewModel = MaterialCreateViewModel()
+        guard let controller = materialStoryboard.instantiateViewController(identifier: "MaterialCreate") as? MaterialCreateViewController else { return }
+        controller.flow = .update(uuid: id)
+        controller.type = type
+        controller.set(viewModel: viewModel)
+        navigation?.pushViewController(controller, animated: true)
     }
 }

@@ -31,13 +31,25 @@ class MaterialCreateViewController: SNViewController<MaterialCreateStates, Mater
         viewModel?.type.onNext(type)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.largeTitleDisplayMode = .never
+    }
+    
     override func configureViews() {
         super.configureViews()
         guard let type = type else {
             dismiss(animated: true)
             return
         }
-        labelTitle.text = type.newTitle()
+        switch flow {
+        case .save:
+            labelTitle.text = type.newTitle()
+        case .update:
+            labelTitle.text = type.editTitle()
+        default:
+            dismiss(animated: true, completion: nil)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {

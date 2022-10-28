@@ -7,4 +7,4 @@
 
 import Foundation
 
-typealias FirestoreId = String
+public typealias FirestoreId = String

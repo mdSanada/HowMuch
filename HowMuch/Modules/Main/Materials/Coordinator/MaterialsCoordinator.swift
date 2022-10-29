@@ -85,4 +85,12 @@ extension MaterialsCoordinator: MaterialsProtocol {
         controller.set(viewModel: viewModel)
         navigation?.pushViewController(controller, animated: true)
     }
+    
+    func dismiss() {
+        self.navigation?.dismiss(animated: true, completion: nil)
+    }
+    
+    func popToRoot() {
+        self.navigation?.popToRootViewController(animated: true)
+    }
 }

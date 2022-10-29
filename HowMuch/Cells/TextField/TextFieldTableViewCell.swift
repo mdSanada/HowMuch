@@ -12,7 +12,7 @@ import RxCocoa
 enum TextFieldTableViewCellType {
     case title
     case body
-    case menu(key: String, actions: [String], initial: String, hiddenInput: Bool)
+    case menu(key: String, actionsWithInitial: MenuProtocol, hiddenInput: Bool)
 }
 
 class TextFieldTableViewCell: UITableViewCell, TextFieldOutputProtocol {
@@ -101,13 +101,15 @@ class TextFieldTableViewCell: UITableViewCell, TextFieldOutputProtocol {
             labelTitle.font = UIFont.systemFont(ofSize: 14, weight: .regular)
             fieldContent.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             buttonMenu.isHidden = true
-        case .menu(let key, let actions, let initial, let hiddenInput):
+        case .menu(let key, let menu, let hiddenInput):
             labelTitle.font = UIFont.systemFont(ofSize: 14, weight: .regular)
             fieldContent.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             buttonMenu.isHidden = false
             fieldContent.isUserInteractionEnabled = !hiddenInput
-            buttonMenu.setTitle(initial, for: .normal)
-            viewModel?.menuDidChange(initial)
+            
+            let actions = menu.dict()
+            buttonMenu.setTitle(menu.defaultValue(), for: .normal)
+            viewModel?.menuDidChange(menu.defaultValue())
             viewModel?.setMenuKey(key)
             configureMenu(actions: actions)
         }
@@ -141,12 +143,12 @@ class TextFieldTableViewCell: UITableViewCell, TextFieldOutputProtocol {
         layoutIfNeeded()
     }
     
-    private func configureMenu(actions: [String]) {
+    private func configureMenu(actions: [String: String]) {
         var children: [UIAction] = []
         actions.forEach { title in
-            let action = UIAction(title: title) { [weak self] (action) in
+            let action = UIAction(title: title.value) { [weak self] (action) in
                 self?.buttonMenu.setTitle(action.title, for: .normal)
-                self?.viewModel?.menuDidChange(action.title)
+                self?.viewModel?.menuDidChange(title.key)
            }
             children.append(action)
         }

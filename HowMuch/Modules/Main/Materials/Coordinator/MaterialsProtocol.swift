@@ -13,4 +13,6 @@ protocol MaterialsProtocol: AnyObject {
     func presentDetailed(id: FirestoreId, type: MaterialsType)
     func pushEdit(id: FirestoreId, type: MaterialsType)
     func presentEdit(id: FirestoreId, type: MaterialsType)
+    func dismiss()
+    func popToRoot()
 }

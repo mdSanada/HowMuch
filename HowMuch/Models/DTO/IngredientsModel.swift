@@ -90,8 +90,7 @@ extension IngredientsModel: Creatable {
                                                                                   initial: Double(self.quantity ?? 0).asString(digits: 0),
                                                                                   textFieldType: .number,
                                                                                   type: .menu(key: IngredientsModel.CodingKeys.measurement.stringValue,
-                                                                                              actions: MeasureType.allCases.map { $0.rawValue },
-                                                                                              initial: self.measurement ?? MeasureType.gramas.rawValue,
+                                                                                              actionsWithInitial: MeasureType(rawValue: self.measurement ?? "") ?? .grams,
                                                                                               hiddenInput: false)))))
         
         result.append(CreateDTO(section: "Descrição",
@@ -127,8 +126,7 @@ extension IngredientsModel: Creatable {
                                                                                   initial: nil,
                                                                                   textFieldType: .number,
                                                                                   type: .menu(key: IngredientsModel.CodingKeys.measurement.stringValue,
-                                                                                              actions: MeasureType.allCases.map { $0.rawValue },
-                                                                                              initial: MeasureType.gramas.rawValue,
+                                                                                              actionsWithInitial: MeasureType.grams,
                                                                                               hiddenInput: false)))))
         
         result.append(CreateDTO(section: "Descrição",

@@ -18,10 +18,26 @@ class MaterialsViewController: UIViewController {
     fileprivate let searchText = PublishSubject<String>()
     private let searchController = UISearchController()
     private var disposeBag = DisposeBag()
-    var materials: [MaterialModel] = MaterialModel.mock()
-    var ingredients: [IngredientsModel] = IngredientsModel.mock()
-    var taxes: [TaxeModel] = TaxeModel.mock()
-    var consumptions: [ConsumptionModel] = ConsumptionModel.mock()
+    var materials: [MaterialModel] {
+        get {
+            return FirestoreInteractor.shared.materials
+        }
+    }
+    var ingredients: [IngredientsModel] {
+        get {
+            return FirestoreInteractor.shared.ingredients
+        }
+    }
+    var taxes: [TaxeModel] {
+        get {
+            return FirestoreInteractor.shared.taxes
+        }
+    }
+    var consumptions: [ConsumptionModel] {
+        get {
+            return FirestoreInteractor.shared.consumption
+        }
+    }
     var filtered: [Any] = []
     
     override func viewDidLoad() {
@@ -31,11 +47,26 @@ class MaterialsViewController: UIViewController {
         navigationItem.searchController = searchController
         configureBindings()
         configureTable()
+        configureListeners()
+    }
+    
+    private func configureListeners() {
+        SNNotificationCenter.shared.addObserver(self,
+                                                selector: #selector(configure(_:)),
+                                                name: SNNotificationCenter.materials.name,
+                                                object: nil)
+    }
+    
+    @objc private func configure(_ notification: NSNotification) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.filter(text: self.searchController.searchBar.text ?? "")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.largeTitleDisplayMode = .automatic
+        tableMaterials.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -167,17 +198,17 @@ extension MaterialsViewController: UITableViewDataSource, UITableViewDelegate {
         guard let material = MaterialsType.fromTitle(stringType) else { return }
         switch material {
         case .ingredient:
-            guard let ingredient = filtered[indexPath.row] as? IngredientsModel else { return }
-            delegate?.pushDetailed(id: "id", type: .ingredient(ingredient))
+            guard let ingredient = filtered[indexPath.row] as? IngredientsModel, let firestoreId = ingredient.firestoreId else { return }
+            delegate?.pushDetailed(id: firestoreId, type: .ingredient(ingredient))
         case .material:
-            guard let material = filtered[indexPath.row] as? MaterialModel else { return }
-            delegate?.pushDetailed(id: "id", type: .material(material))
+            guard let material = filtered[indexPath.row] as? MaterialModel, let firestoreId = material.firestoreId else { return }
+            delegate?.pushDetailed(id: firestoreId, type: .material(material))
         case .taxes:
-            guard let taxes = filtered[indexPath.row] as? TaxeModel else { return }
-            delegate?.pushDetailed(id: "id", type: .taxes(taxes))
+            guard let taxes = filtered[indexPath.row] as? TaxeModel, let firestoreId = taxes.firestoreId else { return }
+            delegate?.pushDetailed(id: firestoreId, type: .taxes(taxes))
         case .consumption:
-            guard let consumption = filtered[indexPath.row] as? ConsumptionModel else { return }
-            delegate?.pushDetailed(id: "id", type: .consumption(consumption))
+            guard let consumption = filtered[indexPath.row] as? ConsumptionModel, let firestoreId = consumption.firestoreId else { return }
+            delegate?.pushDetailed(id: firestoreId, type: .consumption(consumption))
         }
     }
     

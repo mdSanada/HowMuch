@@ -11,7 +11,6 @@ class MaterialDetailedViewController: SNViewController<MaterialDetailedStates, M
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
     @IBOutlet weak var buttonMore: UIButton!
-    @IBOutlet weak var buttonBack: UIButton!
     @IBOutlet weak var tableDetailed: UITableView!
     weak var delegate: MaterialsProtocol?
     var firestoreId: String? = nil
@@ -64,6 +63,8 @@ class MaterialDetailedViewController: SNViewController<MaterialDetailedStates, M
             labelDescription.text = type.title()
             rows = DetailedDTO.detailed(type: type)
             tableDetailed.reloadData()
+        case .deleted:
+            delegate?.popToRoot()
         }
     }
 }
@@ -75,7 +76,8 @@ extension MaterialDetailedViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     private func delete() {
-        
+        guard let firestoreId = self.firestoreId, let material = self.material else { return }
+        viewModel?.delete(material: material, id: firestoreId)
     }
     
     func makeContextMenu() -> UIMenu {
@@ -83,8 +85,8 @@ extension MaterialDetailedViewController: UITableViewDelegate, UITableViewDataSo
             self?.edit()
         }
         
-        let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { action in
-            print("delete")
+        let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] action in
+            self?.delete()
         }
 
         return UIMenu(title: "Configurações", children: [edit, delete])

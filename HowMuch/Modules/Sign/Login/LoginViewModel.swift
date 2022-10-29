@@ -28,8 +28,9 @@ class LoginViewModel: SNViewModel<LoginStates> {
 //                self?.repository.fetchAll()
                 self?.repository.authenticate(with: "maatheusdavid@me.com", and: "123456") { [weak self] success in
                     if success {
-                        self?.emit(.success(""))
-                        FirestoreRepository.shared.getAllMaterials(source: .server)
+                        FirestoreRepository.shared.fetchAll { sucess in
+                            self?.emit(.success(""))
+                        }
                     }
                 }
             })

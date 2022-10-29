@@ -7,9 +7,11 @@
 
 import Foundation
 import FirebaseFirestore
+import RxSwift
 
 class FirestoreRepository {
-    static public let shared = FirestoreRepository() 
+    static public let shared = FirestoreRepository()
+    private var disposeBag = DisposeBag()
     private let db: Firestore
     private let user: DocumentReference
     private let budgets: CollectionReference
@@ -28,31 +30,134 @@ class FirestoreRepository {
         self.materials = user.collection(FirestoreConsts.Collections.materials)
         self.sales = user.collection(FirestoreConsts.Collections.sales)
         self.taxes = user.collection(FirestoreConsts.Collections.taxes)
+        configureListeners()
     }
     
-    public func fetchAll() {
-        let source = FirestoreSource.cache
-        getProfile(source: source)
-        getAllSales(source: source)
-        getAllTaxes(source: source)
-        getAllMaterials(source: source)
-        getAllIngredients(source: source)
-        getAllConsumption(source: source)
-        getAllBudget(source: source)
+    fileprivate func configureListeners() {
+        user.addSnapshotListener { querySnapshot, error in
+            guard error == nil else {
+                return
+            }
+            self.getProfile(source: .default) { success in
+                guard success else {
+                    return
+                }
+                Sanada.print("Notification warn update profile")
+            }
+        }
+
+        budgets.addSnapshotListener { querySnapshot, error in
+            guard error == nil else {
+                return
+            }
+            self.getAllBudget(source: .default) { success in
+                guard success else {
+                    return
+                }
+                Sanada.print("Notification warn update budgets")
+            }
+        }
+        
+        sales.addSnapshotListener { querySnapshot, error in
+            guard error == nil else {
+                return
+            }
+            self.getAllSales(source: .default) { success in
+                guard success else {
+                    return
+                }
+                Sanada.print("Notification warn update sales")
+            }
+        }
+
+        consumption.addSnapshotListener { querySnapshot, error in
+            guard error == nil else {
+                return
+            }
+            self.getAllConsumption(source: .default) { success in
+                guard success else {
+                    return
+                }
+                Sanada.print("Notification warn update consumption")
+            }
+        }
+
+        ingredients.addSnapshotListener { querySnapshot, error in
+            guard error == nil else {
+                return
+            }
+            self.getAllIngredients(source: .default) { success in
+                guard success else {
+                    return
+                }
+                Sanada.print("Notification warn update ingredients")
+            }
+        }
+
+        materials.addSnapshotListener { querySnapshot, error in
+            guard error == nil else {
+                return
+            }
+            self.getAllMaterials(source: .default) { success in
+                guard success else {
+                    return
+                }
+                Sanada.print("Notification warn update materials")
+            }
+        }
+        
+        taxes.addSnapshotListener { querySnapshot, error in
+            guard error == nil else {
+                return
+            }
+            self.getAllTaxes(source: .default) { success in
+                guard success else {
+                    return
+                }
+                Sanada.print("Notification warn update taxes")
+            }
+        }
+    }
+
+    
+    public func fetchAll(completion: @escaping (Bool) -> ()) {
+        let source = FirestoreSource.default
+        let requestList = [getProfile, getAllSales, getAllTaxes, getAllMaterials, getAllIngredients, getAllConsumption, getAllBudget]
+        var finishRequests = requestList.map { _ in false }
+        let observable = Observable.of(finishRequests)
+        requestList.enumerated().forEach { index, request in
+            request(source) { [weak self] success in
+                finishRequests[index] = success
+            }
+        }
+        
+        observable
+            .map { $0.allSatisfy { $0 } }
+            .subscribe(onNext: { [weak self] _ in
+                completion(true)
+            })
+            .disposed(by: disposeBag)
+//        getProfile(source: source)
+//        getAllSales(source: source)
+//        getAllTaxes(source: source)
+//        getAllMaterials(source: source)
+//        getAllIngredients(source: source)
+//        getAllConsumption(source: source)
+//        getAllBudget(source: source)
     }
     
-    public func getProfile(source: FirestoreSource) {
+    public func getProfile(source: FirestoreSource, completion: @escaping (Bool) -> ()) {
         user.getDocument(source: source) { document, error in
             if let document = document {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("🔥 \(dataDescription)")
+                completion(true)
             } else {
-                print("Does not exist")
+                completion(false)
             }
         }
     }
     
-    public func getAllSales(source: FirestoreSource) {
+    public func getAllSales(source: FirestoreSource, completion: @escaping (Bool) -> ()) {
         sales.getDocuments(source: source) { query, error in
             if let query = query {
                 let data = query.documents.compactMap { response -> Data? in
@@ -61,14 +166,15 @@ class FirestoreRepository {
                     return dict.data
                 }
                 let response = data.map { $0.map(to: SaleModel.self) }.compactMap { $0 }
-                print(response)
+                FirestoreInteractor.shared.sales = response
+                completion(true)
             } else {
-                print("Does not exist")
+                completion(false)
             }
         }
     }
     
-    public func getAllTaxes(source: FirestoreSource) {
+    public func getAllTaxes(source: FirestoreSource, completion: @escaping (Bool) -> ()) {
         taxes.getDocuments(source: source) { query, error in
             if let query = query {
                 query.documents.forEach { document in
@@ -78,15 +184,39 @@ class FirestoreRepository {
                         return dict.data
                     }
                     let response = data.map { $0.map(to: TaxeModel.self) }.compactMap { $0 }
-                    print(response)
+                    FirestoreInteractor.shared.taxes = response
+                    completion(true)
                 }
             } else {
-                print("Does not exist")
+                completion(false)
             }
         }
     }
+    
+    public func getTaxes(source: FirestoreSource, id: FirestoreId, completion: @escaping (TaxeModel?) -> ()) {
+        ingredients.document(id).getDocument(source: source) { document, error in
+            if let document = document {
+                var dict = document.data()
+                dict?["firestoreId"] = id
+                let response = dict?.data?.map(to: TaxeModel.self)
+                completion(response)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
+    public func deleteTaxes(id: FirestoreId, completion: @escaping (Bool) -> ()) {
+        taxes.document(id).delete { error in
+            guard error == nil else {
+                completion(false)
+                return
+            }
+            completion(true)
+        }
+    }
 
-    public func getAllMaterials(source: FirestoreSource) {
+    public func getAllMaterials(source: FirestoreSource, completion: @escaping (Bool) -> ()) {
         materials.getDocuments(source: source) { query, error in
             if let query = query {
                 query.documents.forEach { document in
@@ -96,15 +226,39 @@ class FirestoreRepository {
                         return dict.data
                     }
                     let response = data.map { $0.map(to: MaterialModel.self) }.compactMap { $0 }
-                    print(response)
+                    FirestoreInteractor.shared.materials = response
+                    completion(true)
                 }
             } else {
-                print("Does not exist")
+                completion(false)
             }
         }
     }
+    
+    public func getMaterial(source: FirestoreSource, id: FirestoreId, completion: @escaping (MaterialModel?) -> ()) {
+        materials.document(id).getDocument(source: source) { document, error in
+            if let document = document {
+                var dict = document.data()
+                dict?["firestoreId"] = id
+                let response = dict?.data?.map(to: MaterialModel.self)
+                completion(response)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
+    public func deleteMaterial(id: FirestoreId, completion: @escaping (Bool) -> ()) {
+        materials.document(id).delete { error in
+            guard error == nil else {
+                completion(false)
+                return
+            }
+            completion(true)
+        }
+    }
 
-    public func getAllIngredients(source: FirestoreSource) {
+    public func getAllIngredients(source: FirestoreSource, completion: @escaping (Bool) -> ()) {
         ingredients.getDocuments(source: source) { query, error in
             if let query = query {
                 query.documents.forEach { document in
@@ -114,15 +268,40 @@ class FirestoreRepository {
                         return dict.data
                     }
                     let response = data.map { $0.map(to: IngredientsModel.self) }.compactMap { $0 }
-                    print(response)
+                    FirestoreInteractor.shared.ingredients = response
+                    completion(true)
                 }
             } else {
-                print("Does not exist")
+                completion(false)
             }
         }
     }
+    
+    public func getIngredient(source: FirestoreSource, id: FirestoreId, completion: @escaping (IngredientsModel?) -> ()) {
+        ingredients.document(id).getDocument(source: source) { document, error in
+            if let document = document {
+                var dict = document.data()
+                dict?["firestoreId"] = id
+                let response = dict?.data?.map(to: IngredientsModel.self)
+                completion(response)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
+    public func deleteIngredient(id: FirestoreId, completion: @escaping (Bool) -> ()) {
+        ingredients.document(id).delete { error in
+            guard error == nil else {
+                completion(false)
+                return
+            }
+            completion(true)
+        }
+    }
 
-    public func getAllConsumption(source: FirestoreSource) {
+
+    public func getAllConsumption(source: FirestoreSource, completion: @escaping (Bool) -> ()) {
         consumption.getDocuments(source: source) { query, error in
             if let query = query {
                 query.documents.forEach { document in
@@ -132,15 +311,40 @@ class FirestoreRepository {
                         return dict.data
                     }
                     let response = data.map { $0.map(to: ConsumptionModel.self) }.compactMap { $0 }
-                    print(response)
+                    FirestoreInteractor.shared.consumption = response
+                    completion(true)
                 }
             } else {
-                print("Does not exist")
+                completion(false)
             }
         }
     }
+    
+    public func getConsumption(source: FirestoreSource, id: FirestoreId, completion: @escaping (ConsumptionModel?) -> ()) {
+        consumption.document(id).getDocument(source: source) { document, error in
+            if let document = document {
+                var dict = document.data()
+                dict?["firestoreId"] = id
+                let response = dict?.data?.map(to: ConsumptionModel.self)
+                completion(response)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
+    public func deleteConsumption(id: FirestoreId, completion: @escaping (Bool) -> ()) {
+        consumption.document(id).delete { error in
+            guard error == nil else {
+                completion(false)
+                return
+            }
+            completion(true)
+        }
+    }
 
-    public func getAllBudget(source: FirestoreSource) {
+
+    public func getAllBudget(source: FirestoreSource, completion: @escaping (Bool) -> ()) {
         budgets.getDocuments(source: source) { query, error in
             if let query = query {
                 query.documents.forEach { document in
@@ -151,11 +355,26 @@ class FirestoreRepository {
                     }
                     
                     let response = data.map { $0.map(to: BudgetModel.self) }.compactMap { $0 }
-                    print(response)
+                    FirestoreInteractor.shared.budgets = response
+                    completion(true)
                 }
             } else {
-                print("Does not exist")
+                completion(false)
             }
+        }
+    }
+    
+    public func fetch(material: MaterialsType, completion: @escaping (Bool) -> ()) {
+        let source = FirestoreSource.default
+        switch material {
+        case .ingredient:
+            getAllIngredients(source: source, completion: completion)
+        case .material:
+            getAllMaterials(source: source, completion: completion)
+        case .taxes:
+            getAllTaxes(source: source, completion: completion)
+        case .consumption:
+            getAllConsumption(source: source, completion: completion)
         }
     }
     
@@ -201,60 +420,47 @@ class FirestoreRepository {
     }
 
     public func update(uuid: FirestoreId, material: MaterialsType, data: Data, completion: @escaping (Bool) -> ()) {
+        guard let data = data.dictionary else {
+            completion(false)
+            return
+        }
         switch material {
         case .ingredient:
-            do {
-                let decoded = try JSONDecoder().decode(IngredientsModel.self, from: data)
-            } catch {
-                completion(false)
+            ingredients.document(uuid).setData(data, merge: true) { error in
+                guard error == nil else {
+                    completion(false)
+                    return
+                }
+                completion(true)
             }
         case .material:
-            do {
-                let decoded = try JSONDecoder().decode(MaterialModel.self, from: data)
+            materials.document(uuid).setData(data, merge: true) { error in
+                guard error == nil else {
+                    completion(false)
+                    return
+                }
                 completion(true)
-            } catch {
-                completion(false)
             }
         case .taxes:
-            do {
-                let decoded = try JSONDecoder().decode(TaxeModel.self, from: data)
+            taxes.document(uuid).setData(data, merge: true) { error in
+                guard error == nil else {
+                    completion(false)
+                    return
+                }
                 completion(true)
-            } catch {
-                completion(false)
             }
         case .consumption:
-            do {
-                let decoded = try JSONDecoder().decode(ConsumptionModel.self, from: data)
+            consumption.document(uuid).setData(data, merge: true) { error in
+                guard error == nil else {
+                    completion(false)
+                    return
+                }
                 completion(true)
-            } catch {
-                completion(false)
             }
         }
     }
     
     func save(user: FirestoreId, name: String) {
         db.collection(FirestoreConsts.Collections.users).document(user).setData(["name": name])
-    }
-
-    public func fetch() {
-        // Firebase documentation
-//        let docRef = db.collection("cities").document("BJ")
-//
-//        docRef.getDocument(as: String.self) { result in
-//            // The Result type encapsulates deserialization errors or
-//            // successful deserialization, and can be handled as follows:
-//            //
-//            //      Result
-//            //        /\
-//            //   Error  City
-//            switch result {
-//            case .success(let city):
-//                // A `City` value was successfully initialized from the DocumentSnapshot.
-//                print("City: \(city)")
-//            case .failure(let error):
-//                // A `City` value could not be initialized from the DocumentSnapshot.
-//                print("Error decoding city: \(error)")
-//            }
-//        }
     }
 }

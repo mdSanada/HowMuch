@@ -93,8 +93,7 @@ extension ConsumptionModel: Creatable {
                                                                                   initial: nil,
                                                                                   textFieldType: .text,
                                                                                   type: .menu(key: ConsumptionModel.CodingKeys.consumption.rawValue,
-                                                                                              actions: ConsumptionType.allCases.map { $0.rawValue },
-                                                                                              initial: self.consumption ?? ConsumptionType.gas.rawValue,
+                                                                                              actionsWithInitial: ConsumptionType(rawValue: self.consumption ?? "") ?? .gas,
                                                                                               hiddenInput: true)))))
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: nil,
                                                                                   title: "Nível",
@@ -102,8 +101,7 @@ extension ConsumptionModel: Creatable {
                                                                                   initial: nil,
                                                                                   textFieldType: .currency,
                                                                                   type: .menu(key: ConsumptionModel.CodingKeys.level.rawValue,
-                                                                                              actions: NivelType.allCases.map { $0.rawValue },
-                                                                                              initial: self.level ?? NivelType.low.rawValue,
+                                                                                              actionsWithInitial: NivelType(rawValue: self.level ?? "") ?? .low,
                                                                                               hiddenInput: true)))))
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: ConsumptionModel.CodingKeys.time.rawValue,
                                                                                   title: "Tempo",
@@ -111,8 +109,7 @@ extension ConsumptionModel: Creatable {
                                                                                   initial: self.time?.asString(),
                                                                                   textFieldType: .number,
                                                                                   type: .menu(key: ConsumptionModel.CodingKeys.measurement.rawValue,
-                                                                                              actions: TimeType.allCases.map { $0.rawValue },
-                                                                                              initial: self.measurement ?? TimeType.min.rawValue,
+                                                                                              actionsWithInitial: TimeType(rawValue: self.measurement ?? "") ?? .min,
                                                                                               hiddenInput: false)))))
         result.append(CreateDTO(section: "Descrição", showTitle: false, itens: array))
         
@@ -141,8 +138,7 @@ extension ConsumptionModel: Creatable {
                                                                                   initial: nil,
                                                                                   textFieldType: .text,
                                                                                   type: .menu(key: ConsumptionModel.CodingKeys.consumption.rawValue,
-                                                                                              actions: ConsumptionType.allCases.map { $0.rawValue },
-                                                                                              initial: ConsumptionType.gas.rawValue,
+                                                                                              actionsWithInitial: ConsumptionType.gas,
                                                                                               hiddenInput: true)))))
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: nil,
                                                                                   title: "Nível",
@@ -150,8 +146,7 @@ extension ConsumptionModel: Creatable {
                                                                                   initial: nil,
                                                                                   textFieldType: .currency,
                                                                                   type: .menu(key: ConsumptionModel.CodingKeys.level.rawValue,
-                                                                                              actions: NivelType.allCases.map { $0.rawValue },
-                                                                                              initial: NivelType.low.rawValue,
+                                                                                              actionsWithInitial: NivelType.low,
                                                                                               hiddenInput: true)))))
         array.append(CreateType.text(TextFieldViewModelCell(item: CreateTextModel(key: ConsumptionModel.CodingKeys.time.rawValue,
                                                                                   title: "Tempo",
@@ -159,8 +154,7 @@ extension ConsumptionModel: Creatable {
                                                                                   initial: nil,
                                                                                   textFieldType: .number,
                                                                                   type: .menu(key: ConsumptionModel.CodingKeys.measurement.rawValue,
-                                                                                              actions: TimeType.allCases.map { $0.rawValue },
-                                                                                              initial: TimeType.min.rawValue,
+                                                                                              actionsWithInitial: TimeType.min,
                                                                                               hiddenInput: false)))))
         
         

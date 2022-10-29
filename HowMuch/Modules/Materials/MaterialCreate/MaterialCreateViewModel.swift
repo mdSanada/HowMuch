@@ -136,6 +136,8 @@ extension MaterialCreateViewModel {
             guard let json = result.data else { return }
             repository.update(uuid: uuid, material: _type, data: json) { [weak self] success in
                 self?.emit(.success("Salvo com sucesso"))
+                let notification = SNNotificationModel(notification: "MaterialDetailed.\(uuid)")
+                SNNotificationCenter.post(notification: notification.notification, arguments: [:])
             }
         } catch {
             emit(.error("Erro"))

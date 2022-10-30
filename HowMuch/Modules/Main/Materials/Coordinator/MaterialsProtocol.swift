@@ -15,4 +15,5 @@ protocol MaterialsProtocol: AnyObject {
     func presentEdit(id: FirestoreId, type: MaterialsType)
     func dismiss()
     func popToRoot()
+    func showDeleteAlert(handler: @escaping (() -> ()))
 }

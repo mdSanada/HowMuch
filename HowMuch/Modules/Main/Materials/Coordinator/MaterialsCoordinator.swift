@@ -93,4 +93,17 @@ extension MaterialsCoordinator: MaterialsProtocol {
     func popToRoot() {
         self.navigation?.popToRootViewController(animated: true)
     }
+    
+    func showDeleteAlert(handler: @escaping (() -> ())) {
+        let viewModel = AlertViewModel()
+        let controller = AlertViewController.create(with: viewModel)
+        controller.set(viewModel: viewModel)
+        
+        controller.text = (title: "Atenção", description: "Ao apagar este item, qualquer irá apagar de qualquer lugar que é utilizado")
+        controller.setup(handler: handler)
+//        controller.configure(action: (title: "Deletar", color: .red),
+//                             dismiss: (title: "Cancelar", color: .clear))
+        controller.modalPresentationStyle = .overCurrentContext
+        navigation?.present(controller, animated: false, completion: nil)
+    }
 }

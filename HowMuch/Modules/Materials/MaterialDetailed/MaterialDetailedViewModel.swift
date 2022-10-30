@@ -40,6 +40,25 @@ class MaterialDetailedViewModel: SNViewModel<MaterialDetailedStates> {
             })
             .disposed(by: disposeBag)
     }
+    
+    
+    private func configureListener() {
+        do {
+            let id = try firestoreId.value()
+            let notification = SNNotificationModel(notification: "MaterialDetailed.\(id)")
+            print("MaterialDetailed.\(id)")
+            SNNotificationCenter.shared.addObserver(self,
+                                                    selector: #selector(configure(_:)),
+                                                    name: notification.name,
+                                                    object: nil)
+        } catch {
+            Sanada.print("Erro")
+        }
+    }
+    
+    @objc private func configure(_ notification: NSNotification) {
+        reloadData()
+    }
 }
 
 extension MaterialDetailedViewModel {
@@ -80,20 +99,6 @@ extension MaterialDetailedViewModel {
         }
     }
     
-    func configureListener() {
-        do {
-            let id = try firestoreId.value()
-            let notification = SNNotificationModel(notification: "MaterialDetailed.\(id)")
-            print("MaterialDetailed.\(id)")
-            SNNotificationCenter.shared.addObserver(self,
-                                                    selector: #selector(configure(_:)),
-                                                    name: notification.name,
-                                                    object: nil)
-        } catch {
-            Sanada.print("Erro")
-        }
-    }
-    
     func reloadData() {
         do {
             let id = try firestoreId.value()
@@ -131,9 +136,5 @@ extension MaterialDetailedViewModel {
         } catch {
             Sanada.print("Erro")
         }
-    }
-    
-    @objc private func configure(_ notification: NSNotification) {
-        reloadData()
     }
 }

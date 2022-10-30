@@ -113,6 +113,7 @@ class MaterialsViewController: UIViewController {
         }
     }
     
+    // TODO: Change to view model
     private func filter(text: String) {
         guard let segmentMaterials = segmentMaterials,
               let segmentTitle = segmentMaterials.titleForSegment(at: segmentMaterials.selectedSegmentIndex),
@@ -170,6 +171,7 @@ extension MaterialsViewController: UITableViewDataSource, UITableViewDelegate {
                 guard let index = segmentMaterials?.selectedSegmentIndex else { return }
                 let stringType = segmentItems[index]
                 guard let material = MaterialsType.fromTitle(stringType) else { return }
+                Vibration.success.vibrate()
                 switch material {
                 case .ingredient:
                     guard let ingredient = filtered[indexPath.row] as? IngredientsModel,

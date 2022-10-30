@@ -77,7 +77,9 @@ extension MaterialDetailedViewController: UITableViewDelegate, UITableViewDataSo
     
     private func delete() {
         guard let firestoreId = self.firestoreId, let material = self.material else { return }
-        viewModel?.delete(material: material, id: firestoreId)
+        delegate?.showDeleteAlert { [weak self] in
+            self?.viewModel?.delete(material: material, id: firestoreId)
+        }
     }
     
     func makeContextMenu() -> UIMenu {

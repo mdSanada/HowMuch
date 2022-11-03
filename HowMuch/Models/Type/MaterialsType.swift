@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MaterialsType: CaseIterable {
+enum MaterialsType: CaseIterable, Equatable {
     static var allCases: [MaterialsType] = [.ingredient(nil), .material(nil), .taxes(nil), .consumption(nil)]
     
     case ingredient(IngredientsModel?)
@@ -18,15 +18,27 @@ enum MaterialsType: CaseIterable {
 
 extension MaterialsType {
     static func fromTitle(_ title: String) -> MaterialsType? {
-        switch title {
-        case "Ingrediente": return .ingredient(nil)
-        case "Material": return .material(nil)
-        case "Taxa": return .taxes(nil)
-        case "Consumo": return .consumption(nil)
+        switch title.uppercased() {
+        case "Ingrediente".uppercased(): return .ingredient(nil)
+        case "Material".uppercased(): return .material(nil)
+        case "Taxa".uppercased(): return .taxes(nil)
+        case "Consumo".uppercased(): return .consumption(nil)
         default:
             return nil
         }
     }
+    
+    static func fromSection(_ section: String) -> MaterialsType? {
+        switch section.uppercased() {
+        case "Ingredientes".uppercased(): return .ingredient(nil)
+        case "Materiais".uppercased(): return .material(nil)
+        case "Impostos".uppercased(): return .taxes(nil)
+        case "Consumo".uppercased(): return .consumption(nil)
+        default:
+            return nil
+        }
+    }
+    
     
     func title() -> String  {
         switch self {
@@ -64,6 +76,21 @@ extension MaterialsType {
             return "Nova Taxa"
         case .consumption:
             return "Novo Consumo"
+        }
+    }
+    
+    static func ==(lhs: MaterialsType, rhs: MaterialsType) -> Bool {
+        switch (lhs, rhs) {
+        case (.ingredient, .ingredient):
+            return true
+        case (.material, .material):
+            return true
+        case (.taxes, .taxes):
+            return true
+        case (.consumption, .consumption):
+            return true
+        default:
+            return false
         }
     }
 }

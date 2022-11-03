@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class MaterialsViewController: UIViewController {
+class MaterialsViewController: SNViewController<MaterialsStates, MaterialsViewModel> {
     @IBOutlet weak var tableMaterials: UITableView!
     let segmentItems = MaterialsType.allCases.map { $0.title() }
     var segmentMaterials: UISegmentedControl?
@@ -18,51 +18,16 @@ class MaterialsViewController: UIViewController {
     fileprivate let searchText = PublishSubject<String>()
     private let searchController = UISearchController()
     private var disposeBag = DisposeBag()
-    var materials: [MaterialModel] {
-        get {
-            return FirestoreInteractor.shared.materials
-        }
-    }
-    var ingredients: [IngredientsModel] {
-        get {
-            return FirestoreInteractor.shared.ingredients
-        }
-    }
-    var taxes: [TaxeModel] {
-        get {
-            return FirestoreInteractor.shared.taxes
-        }
-    }
-    var consumptions: [ConsumptionModel] {
-        get {
-            return FirestoreInteractor.shared.consumption
-        }
-    }
     var filtered: [Any] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureViews()
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
-        configureBindings()
         configureTable()
-        configureListeners()
+        viewModel?.didLoad.onNext(())
     }
-    
-    private func configureListeners() {
-        SNNotificationCenter.shared.addObserver(self,
-                                                selector: #selector(configure(_:)),
-                                                name: SNNotificationCenter.materials.name,
-                                                object: nil)
-    }
-    
-    @objc private func configure(_ notification: NSNotification) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.filter(text: self.searchController.searchBar.text ?? "")
-        }
-    }
-    
+        
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.largeTitleDisplayMode = .automatic
@@ -74,29 +39,28 @@ class MaterialsViewController: UIViewController {
         navigationController?.navigationItem.largeTitleDisplayMode = .never
     }
     
-    private func configureViews() {
+    override func configureViews() {
         segmentMaterials = UISegmentedControl(items: segmentItems)
         segmentMaterials?.selectedSegmentIndex = 0
-        let stringType = segmentItems[0]
-        title = stringType
-        filter(text: "")
         segmentMaterials?.addTarget(self, action: #selector(segmentControl(_:)), for: .valueChanged)
     }
-    
+        
     @objc func segmentControl(_ segmentedControl: UISegmentedControl) {
+        Vibration.light.vibrate()
         let index = segmentedControl.selectedSegmentIndex
         let stringType = segmentItems[index]
         title = stringType
-        filter(text: searchController.searchBar.text ?? "")
+        viewModel?.choosedSubject.onNext(segmentItems[index])
+        viewModel?.filteredText.onNext(searchController.searchBar.text ?? "")
         tableMaterials.reloadData()
     }
     
-    private func configureBindings() {
+    override func configureBindings() {
         searchText
             .distinctUntilChanged()
             .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] text in
-                self?.filter(text: text)
+                self?.viewModel?.filteredText.onNext(text)
             })
             .disposed(by: disposeBag)
     }
@@ -113,46 +77,25 @@ class MaterialsViewController: UIViewController {
         }
     }
     
-    // TODO: Change to view model
-    private func filter(text: String) {
-        guard let segmentMaterials = segmentMaterials,
-              let segmentTitle = segmentMaterials.titleForSegment(at: segmentMaterials.selectedSegmentIndex),
-              let type = MaterialsType.fromTitle(segmentTitle)
-        else { return  }
-        switch type {
-        case .ingredient:
-            if text.isEmpty {
-                filtered = ingredients
-            } else {
-                filtered = ingredients.filter({ $0.name?.lowercased().contains(text.lowercased()) ?? false })
-            }
-        case .material:
-            if text.isEmpty {
-                filtered = materials
-            } else {
-                filtered = materials.filter({ $0.name?.lowercased().contains(text.lowercased()) ?? false })
-            }
-        case .taxes:
-            if text.isEmpty {
-                filtered = taxes
-            } else {
-                filtered = taxes.filter({ $0.name?.lowercased().contains(text.lowercased()) ?? false })
-            }
-        case .consumption:
-            if text.isEmpty {
-                filtered = consumptions
-            } else {
-                filtered = consumptions.filter({ $0.name?.lowercased().contains(text.lowercased()) ?? false })
-            }
-        }
-        tableMaterials.reloadData()
-    }
-    
     @IBAction func actionAdd(_ sender: Any) {
         guard let index = segmentMaterials?.selectedSegmentIndex else { return }
         let stringType = segmentItems[index]
         guard let material = MaterialsType.fromTitle(stringType) else { return }
+        Vibration.light.vibrate()
         delegate?.create(type: material)
+    }
+    
+    override func render(states: MaterialsStates) {
+        switch states {
+        case .didLoad:
+            let stringType = segmentItems[0]
+            title = stringType
+            viewModel?.choosedSubject.onNext(segmentItems[0])
+            viewModel?.filteredText.onNext(searchController.searchBar.text ?? "")
+        case .filter(let result):
+            filtered = result
+            tableMaterials.reloadData()
+        }
     }
 }
 
@@ -171,7 +114,6 @@ extension MaterialsViewController: UITableViewDataSource, UITableViewDelegate {
                 guard let index = segmentMaterials?.selectedSegmentIndex else { return }
                 let stringType = segmentItems[index]
                 guard let material = MaterialsType.fromTitle(stringType) else { return }
-                Vibration.success.vibrate()
                 switch material {
                 case .ingredient:
                     guard let ingredient = filtered[indexPath.row] as? IngredientsModel,
@@ -235,10 +177,12 @@ extension MaterialsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let fallbackCell = UITableViewCell()
+        fallbackCell.backgroundView?.backgroundColor = .clear
         guard let segmentMaterials = segmentMaterials,
               let segmentTitle = segmentMaterials.titleForSegment(at: segmentMaterials.selectedSegmentIndex),
               let type = MaterialsType.fromTitle(segmentTitle)
-        else { return UITableViewCell() }
+        else { return fallbackCell }
         
         let cell: MaterialTableViewCell = tableView.dequeueReusableCell(indexPath)
         
@@ -248,7 +192,7 @@ extension MaterialsViewController: UITableViewDataSource, UITableViewDelegate {
             guard let name = ingredient.name,
                   let quantity = ingredient.quantity,
                   let measurement = ingredient.measurement,
-                  let cost = ingredient.cost else { return UITableViewCell() }
+                  let cost = ingredient.cost else { return fallbackCell }
             
             cell.render(title: name,
                         quantity: "\(quantity) \(measurement)",
@@ -258,7 +202,7 @@ extension MaterialsViewController: UITableViewDataSource, UITableViewDelegate {
             guard let name = material.name,
                   let quantity = material.quantity,
                   let measurement = material.measurement,
-                  let cost = material.cost else { return UITableViewCell() }
+                  let cost = material.cost else { return fallbackCell }
             
             cell.render(title: name,
                         quantity: "\(quantity) \(measurement)",
@@ -267,7 +211,7 @@ extension MaterialsViewController: UITableViewDataSource, UITableViewDelegate {
             guard let taxes = filtered[indexPath.row] as? TaxeModel else { return UITableViewCell() }
             guard let name = taxes.name,
                   let description = taxes.taxeDescription,
-                  let cost = taxes.cost else { return UITableViewCell() }
+                  let cost = taxes.cost else { return fallbackCell }
             
             cell.render(title: name,
                         quantity: description,
@@ -276,7 +220,7 @@ extension MaterialsViewController: UITableViewDataSource, UITableViewDelegate {
             guard let consumption = filtered[indexPath.row] as? ConsumptionModel else { return UITableViewCell() }
             guard let name = consumption.name,
                   let _consumption = consumption.consumption,
-                  let level = consumption.level  else { return UITableViewCell() }
+                  let level = consumption.level  else { return fallbackCell }
             
             cell.render(title: name,
                         quantity: _consumption,

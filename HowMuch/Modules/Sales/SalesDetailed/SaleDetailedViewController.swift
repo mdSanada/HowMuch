@@ -19,7 +19,6 @@ class SaleDetailedViewController: UIViewController {
         super.viewDidLoad()
         configureView()
         configureTable()
-        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewWillLayoutSubviews() {
@@ -28,6 +27,10 @@ class SaleDetailedViewController: UIViewController {
         self.tableDetailed.bringSubviewToFront(headerView)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.largeTitleDisplayMode = .never
+    }
     
     private func configureView() {
     }
@@ -47,7 +50,8 @@ class SaleDetailedViewController: UIViewController {
         tableDetailed.parallaxHeader.view = headerView ?? UIView()
         tableDetailed.parallaxHeader.height = 200
         tableDetailed.parallaxHeader.mode = .fill
-        tableDetailed.parallaxHeader.minimumHeight = 100
+        tableDetailed.parallaxHeader.minimumHeight = 80 + (navigationController?.navigationBar.frame.size.height ?? 0)
+        tableDetailed.parallaxHeader.ignoreTopSafeAreaInset = true
         self.tableDetailed.bringSubviewToFront(headerView!)
     }
     
@@ -147,7 +151,7 @@ extension SaleDetailedViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 20 : 18
+        return section == 0 ? 30 : 18
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

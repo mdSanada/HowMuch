@@ -18,7 +18,7 @@ target 'HowMuch' do
   pod 'SnapKit'
   pod 'IQKeyboardManagerSwift'
   pod 'InputMask'
-  pod 'ParallaxHeader', '~> 3.0.0'
+  pod 'ParallaxHeader'#, '~> 3.0.0'
   
   pod 'FirebaseFirestore'
   pod 'FirebaseAuth'

@@ -45,7 +45,7 @@ class MyReceiptViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationItem.largeTitleDisplayMode = .never
+        navigationController?.navigationItem.largeTitleDisplayMode = .never
     }
     
     private func configureTable() {
@@ -76,18 +76,16 @@ class MyReceiptViewController: UIViewController {
             filtered = array.filter({ $0.title.lowercased().contains(text.lowercased()) })
         }
     }
+    
     @IBAction func addSale(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "SaleStoryboard", bundle: nil)
-        let controller = storyboard.instantiateViewController(identifier: "SaleCreate") as? SalesCreateViewController
-        navigationController?.present(controller!, animated: true)
+        Vibration.light.vibrate()
+        delegate?.presentSaleCreate()
     }
 }
 
 extension MyReceiptViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "SaleStoryboard", bundle: nil)
-        let controller = storyboard.instantiateViewController(identifier: "SaleDetailed") as? SaleDetailedViewController
-        navigationController?.present(controller!, animated: true)
+        delegate?.pushSaleDatailed()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

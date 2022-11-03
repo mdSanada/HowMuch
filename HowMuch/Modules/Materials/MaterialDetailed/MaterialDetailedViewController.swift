@@ -38,7 +38,7 @@ class MaterialDetailedViewController: SNViewController<MaterialDetailedStates, M
         buttonMore.menu = makeContextMenu()
         buttonMore.showsMenuAsPrimaryAction = true
     }
-
+    
     override func render(states: MaterialDetailedStates) {
         switch states {
         case .success(let string):
@@ -72,13 +72,16 @@ class MaterialDetailedViewController: SNViewController<MaterialDetailedStates, M
 extension MaterialDetailedViewController: UITableViewDelegate, UITableViewDataSource {
     private func edit() {
         guard let firestoreId = self.firestoreId, let material = self.material else { return }
+        Vibration.light.vibrate()
         delegate?.presentEdit(id: firestoreId, type: material)
     }
     
     private func delete() {
         guard let firestoreId = self.firestoreId, let material = self.material else { return }
+        Vibration.error.vibrate()
         delegate?.showDeleteAlert { [weak self] in
             self?.viewModel?.delete(material: material, id: firestoreId)
+            self?.delegate?.popToRoot()
         }
     }
     

@@ -8,6 +8,6 @@
 import Foundation
 
 enum ItemType {
-    case item
+    case item(MaterialsType, quantity: Double)
     case add
 }

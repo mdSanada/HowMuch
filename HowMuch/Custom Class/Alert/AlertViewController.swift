@@ -20,12 +20,16 @@ internal class AlertViewController: SNViewController<AlertViewState, AlertViewMo
 
     private var effect: UIVisualEffect?
     var text: (title: String, description: String) = (title: "", description: "")
+    var action: (title: String, color: UIColor) = (title: "", color: .accent)
+    var dismiss: (title: String, color: UIColor) = (title: "", color: .clear)
     private var handler: (() -> ())? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setTitle(text.title)
         setDescription(text.description)
+        configure(action: action,
+                  dismiss: dismiss)
         effect = blurEffect.effect
         blurEffect.effect = nil
         viewAlert.isHidden = true
@@ -37,7 +41,6 @@ internal class AlertViewController: SNViewController<AlertViewState, AlertViewMo
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        Vibration.medium.vibrate()
         animateIn()
     }
     
@@ -45,14 +48,14 @@ internal class AlertViewController: SNViewController<AlertViewState, AlertViewMo
         self.handler = handler
     }
     
-    internal func configure(action: (title: String, color: UIColor),
+    private func configure(action: (title: String, color: UIColor),
                             dismiss: (title: String, color: UIColor)) {
-//        buttonAction.setTitle(action.title, for: .normal)
-//        buttonAction.setTitleColor(.white, for: .normal)
-//        buttonAction.backgroundColor = action.color
-//        buttonCancel.setTitle(dismiss.title, for: .normal)
-//        buttonCancel.setTitleColor(.secondaryLabel, for: .normal)
-//        buttonCancel.backgroundColor = dismiss.color
+        buttonAction.setTitle(action.title, for: .normal)
+        buttonAction.setTitleColor(.white, for: .normal)
+        buttonAction.backgroundColor = action.color
+        buttonCancel.setTitle(dismiss.title, for: .normal)
+        buttonCancel.setTitleColor(.secondaryLabel, for: .normal)
+        buttonCancel.backgroundColor = dismiss.color
     }
     
     private func animateIn() {
@@ -118,10 +121,12 @@ internal class AlertViewController: SNViewController<AlertViewState, AlertViewMo
     }
     
     @IBAction func finish(_ sender: Any) {
+        Vibration.light.vibrate()
         animateOut()
     }
     
     @IBAction func handleAction(_ sender: Any) {
+        Vibration.success.vibrate()
         animateOut(handler: handler)
     }
 }

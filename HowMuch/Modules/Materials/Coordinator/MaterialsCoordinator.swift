@@ -25,7 +25,9 @@ class MaterialsCoordinator: SNCoordinator {
     }
 
     init() {
+        let viewModel = MaterialsViewModel()
         let viewController = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MaterialsViewController") as? MaterialsViewController
+        viewController?.set(viewModel: viewModel)
         let navigation = UINavigationController(rootViewController: viewController!)
         navigation.tabBarItem.image = UIImage.init(systemName: "bag")
         navigation.tabBarItem.title = "Materiais"
@@ -100,10 +102,10 @@ extension MaterialsCoordinator: MaterialsProtocol {
         controller.set(viewModel: viewModel)
         
         controller.text = (title: "Atenção", description: "Ao apagar este item, qualquer irá apagar de qualquer lugar que é utilizado")
+        controller.action = (title: "Deletar", color: .red)
+        controller.dismiss = (title: "Cancelar", color: .clear)
         controller.setup(handler: handler)
-//        controller.configure(action: (title: "Deletar", color: .red),
-//                             dismiss: (title: "Cancelar", color: .clear))
         controller.modalPresentationStyle = .overCurrentContext
-        navigation?.present(controller, animated: false, completion: nil)
+        parent?.navigation?.present(controller, animated: false, completion: nil)
     }
 }

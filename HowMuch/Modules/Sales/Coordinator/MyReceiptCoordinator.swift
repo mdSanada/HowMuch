@@ -51,10 +51,10 @@ extension MyReceiptCoordinator: MyReceiptProtocol {
     }
     
     func presentSaleCreate() {
-        let viewModel = SalesCreateViewModel()
+//        let viewModel = SalesCreateViewModel()
         guard let controller = saleStoryboard.instantiateViewController(identifier: "SaleCreate") as? SalesCreateViewController else { return }
-        controller.set(viewModel: viewModel)
-        controller.flow = .save
+//        controller.set(viewModel: viewModel)
+//        controller.flow = .save
         controller.delegate = self
         let newNavigation = UINavigationController(rootViewController: controller)
         presentNavigation = newNavigation

@@ -6,35 +6,65 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
-import RxGesture
 
-class SalesCreateViewController: SNViewController<SalesCreateStates, SalesCreateViewModel> {
+class SalesCreateViewController: UIViewController {
     @IBOutlet weak var createTable: UITableView!
     @IBOutlet weak var buttonComplete: UIButton!
-    
     weak var delegate: MyReceiptProtocol? = nil
-    var itens: [CreateDTO] = []
-    var flow: MaterialsFlow?
+    var itens: [CreateDTO] = CreateDTO.sales() {
+        didSet {
+            for item in itens {
+                item.itens.forEach { type in
+                    switch type {
+                    case .image:
+                        print("image")
+                    case .text(let viewModel):
+                        viewModels.append(viewModel)
+                    case .item(let viewModel):
+                        viewModels.append(viewModel)
+                    }
+                }
+            }
+        }
+    }
     
-    private var disposeBag = DisposeBag()
-
+    // Change to View Model
+    var viewModels: [CellViewModel] = []
+    var result: [String: Any] = [:] {
+        didSet {
+            Sanada.print(result)
+        }
+    }
+    
+    func completion(_ item: KeyValue?, _ menu: KeyValue?) {
+        if let item = item {
+            if let dict = (result[item.key] as? Dictionary<String, Any>),
+               let value = (item.value as? Dictionary<String, Any>) {
+                result[item.key] = dict.merging(value) { (_, new) in new }
+            } else if let value = (item.value as? [Dictionary<String, Any>]) {
+                if var dict = (result[item.key] as? [Dictionary<String, Any>]) {
+                    dict.append(contentsOf: value)
+                    result[item.key] = dict
+                } else {
+                    var dict: [Dictionary<String, Any>] = []
+                    dict.append(contentsOf: value)
+                    result[item.key] = dict
+                }
+            } else {
+                result[item.key] = item.value
+            }
+        }
+        
+        if let menu = menu {
+            result[menu.key] = menu.value
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTable()
         title = "Adicionar"
-        viewModel?.flow.onNext(flow)
-    }
-    
-    override func configureViews() {
-        view.rx
-            .tapGesture()
-            .when(.recognized)
-            .subscribe(onNext: { [weak self] _ in
-                self?.view.endEditing(true)
-            })
-            .disposed(by: disposeBag)
     }
     
     func configureTable() {
@@ -46,40 +76,29 @@ class SalesCreateViewController: SNViewController<SalesCreateStates, SalesCreate
         createTable.dataSource = self
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        didDisappear()
-        viewModel?.clean()
+    private func create() {
+        
     }
     
-    private func didDisappear() {
-        itens = []
-    }
-    
-    override func render(states: SalesCreateStates) {
-        switch states {
-        case .success(let string):
-            Sanada.print(string)
-            self.dismiss(animated: true, completion: nil)
-        case .loading(let bool):
-            break
-        case .error(let string):
-            Sanada.print(string)
-            self.dismiss(animated: true, completion: nil)
-        case .button(let enabled):
-            buttonComplete.isEnabled = enabled
-        case .configure(let itens):
-            self.itens = itens
-            createTable.reloadData()
-        case .reload(new: let itens, section: let section):
-            self.itens = itens
-            createTable.reloadData()
-            createTable.reloadSections(IndexSet(integer: section), with: .automatic)
-        }
-    }
-
     @IBAction func actionSave(_ sender: Any) {
-        view.endEditing(true)
-        viewModel?.complete()
+        result = [:]
+
+        itens.forEach { item in
+            item.itens.forEach { _item in
+                switch _item {
+                case .item(let viewModel):
+                    viewModel.complete()
+                case .text(let viewModel):
+                    viewModel.complete()
+                default:
+                    break
+                }
+            }
+        }
+//        viewModels.forEach { viewModel in
+//            viewModel.complete()
+//        }
+        //        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -108,7 +127,7 @@ extension SalesCreateViewController: UITableViewDataSource, UITableViewDelegate 
             return cell
         case .text(let viewModel):
             let cell: TextFieldTableViewCell = tableView.dequeueReusableCell(indexPath)
-            viewModel.completion = self.viewModel?.completion
+            viewModel.completion = completion
             cell.bind(viewModel: viewModel)
             return cell
         case .item(let viewModel):
@@ -116,7 +135,7 @@ extension SalesCreateViewController: UITableViewDataSource, UITableViewDelegate 
             switch type {
             case .item:
                 let cell: AddItemTableViewCell = tableView.dequeueReusableCell(indexPath)
-                viewModel.completion = self.viewModel?.completion
+                viewModel.completion = completion
                 cell.bind(viewModel: viewModel,
                           index: (section: indexPath.section, row: indexPath.row))
                 cell.delegate = self
@@ -138,12 +157,25 @@ extension SalesCreateViewController: UITableViewDataSource, UITableViewDelegate 
 
 extension SalesCreateViewController: DidSelectMaterialProtocol {
     func didSelect(type: MaterialsType, quantity: Double) {
-        viewModel?.addItem.onNext((type: type, quantity: quantity))
+        for (index, create) in itens.enumerated() {
+            guard let material = MaterialsType.fromSection(create.section) else { continue }
+            
+            if material == type {
+                let item = CreateItemModel(title: SaleModel.from(material: material),
+                                           itemType: .item(type, quantity: quantity))
+                let viewModel = AddItemViewModelCell(item: item)
+                itens[index].itens.insert(.item(viewModel), at: 0)
+                createTable.reloadSections(IndexSet(integer: index), with: .automatic)
+                break
+            }
+            continue
+        }
     }
 }
 
 extension SalesCreateViewController: DidExcludeItemProtocol {
     func exclude(section: Int, row: Int) {
-        viewModel?.removeItem.onNext((section: section, row: row))
+        itens[section].itens.remove(at: row)
+        createTable.reloadSections(IndexSet(integer: section), with: .automatic)
     }
 }

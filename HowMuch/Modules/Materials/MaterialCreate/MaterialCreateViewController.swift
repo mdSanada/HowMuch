@@ -123,10 +123,8 @@ extension MaterialCreateViewController: UITableViewDataSource, UITableViewDelega
             let cell: TextFieldTableViewCell = tableView.dequeueReusableCell(indexPath)
             cell.render(constraint: (top: indexPath.row == 0 ? 0 : nil,
                                      bottom: indexPath.row == (item.itens.count - 1) ? 0 : nil))
-            viewModel.completion = self.viewModel?.completion
             cell.configureError(validate: .equalMore(count: 1))
             cell.bind(viewModel: viewModel)
-
             return cell
         default:
             return UITableViewCell()

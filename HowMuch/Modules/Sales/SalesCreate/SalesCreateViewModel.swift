@@ -28,7 +28,22 @@ class SalesCreateViewModel: SNViewModel<SalesCreateStates> {
     let repository = FirestoreRepository.shared
     
     // MARK: - Itens
-    var itens: [CreateDTO] = []
+    var itens: [CreateDTO] = [] {
+        didSet {
+            for item in itens {
+                item.itens.forEach { type in
+                    switch type {
+                    case .image:
+                        Sanada.print("image")
+                    case .text(let viewModel):
+                        viewModel.bind(completion: self.completion)
+                    case .item(let viewModel):
+                        viewModel.bind(completion: self.completion)
+                    }
+                }
+            }
+        }
+    }
 
     var result: [String: Any] = [:] {
         didSet {
@@ -167,7 +182,6 @@ extension SalesCreateViewModel {
                 let item = CreateItemModel(title: SaleModel.from(material: material),
                                            itemType: .item(type, quantity: quantity))
                 let viewModel = AddItemViewModelCell(item: item)
-//                viewModel.completion = self.completion
                 self.itens[index].itens.insert(.item(viewModel), at: 0)
                 emit(.reload(new: itens, section: index))
                 break

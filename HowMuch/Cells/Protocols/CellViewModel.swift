@@ -12,6 +12,7 @@ import RxCocoa
 protocol CellViewModel {
     var completion: ((_ item: KeyValue?, _ menu: KeyValue?) -> Void)? { get set }
     var isValid: BehaviorSubject<Bool> { get }
+    func bind(completion: @escaping ((KeyValue?, KeyValue?) -> Void))
     func complete()
     func clean()
 }

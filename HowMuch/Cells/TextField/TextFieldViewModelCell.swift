@@ -67,6 +67,10 @@ class TextFieldViewModelCell: CellViewModel {
         }()
         completion?(item, menu)
     }
+    
+    func bind(completion: @escaping ((KeyValue?, KeyValue?) -> Void)) {
+        self.completion = completion
+    }
 }
 
 extension TextFieldViewModelCell: TextFieldInputProtocol {

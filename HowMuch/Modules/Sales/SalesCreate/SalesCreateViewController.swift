@@ -108,7 +108,6 @@ extension SalesCreateViewController: UITableViewDataSource, UITableViewDelegate 
             return cell
         case .text(let viewModel):
             let cell: TextFieldTableViewCell = tableView.dequeueReusableCell(indexPath)
-            viewModel.completion = self.viewModel?.completion
             cell.bind(viewModel: viewModel)
             return cell
         case .item(let viewModel):
@@ -116,7 +115,6 @@ extension SalesCreateViewController: UITableViewDataSource, UITableViewDelegate 
             switch type {
             case .item:
                 let cell: AddItemTableViewCell = tableView.dequeueReusableCell(indexPath)
-                viewModel.completion = self.viewModel?.completion
                 cell.bind(viewModel: viewModel,
                           index: (section: indexPath.section, row: indexPath.row))
                 cell.delegate = self

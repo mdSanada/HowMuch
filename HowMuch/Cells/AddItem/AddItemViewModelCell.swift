@@ -35,6 +35,10 @@ class AddItemViewModelCell: CellViewModel {
         self.type = item.itemType
         self.title = item.title
     }
+    
+    func bind(completion: @escaping ((KeyValue?, KeyValue?) -> Void)) {
+        self.completion = completion
+    }
 }
 
 extension AddItemViewModelCell: AddItemInputProtocol {

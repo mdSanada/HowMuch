@@ -106,6 +106,7 @@ extension MaterialCreateViewModel {
             section.itens.forEach { row in
                 switch row {
                 case .text(let viewModel):
+                    viewModel.bind(completion: completion)
                     cellViewModels.append(viewModel)
                 default:
                     break

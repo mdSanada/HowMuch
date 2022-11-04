@@ -10,9 +10,7 @@ import RxSwift
 import RxCocoa
 
 class TextFieldViewModelCell: CellViewModel {
-    private let item: CreateTextModel
     weak var output: TextFieldOutputProtocol?
-    private var disposeBag = DisposeBag()
     
     fileprivate let result = PublishSubject<Any?>()
     fileprivate let menu = PublishSubject<String>()
@@ -24,12 +22,14 @@ class TextFieldViewModelCell: CellViewModel {
     var extractedValue: Any? = nil
     var extractedMenu: String? = nil
     
+    private let item: CreateTextModel
+    private var disposeBag = DisposeBag()
+
     deinit {
         Sanada.print("Deinitializing: \(self)")
         disposeBag = DisposeBag()
         result.onCompleted()
         menu.onCompleted()
-        completion = nil
     }
     
     init(item: CreateTextModel) {
@@ -70,6 +70,24 @@ class TextFieldViewModelCell: CellViewModel {
 }
 
 extension TextFieldViewModelCell: TextFieldInputProtocol {
+    func viewWillAppear() {
+        switch item.textFieldType {
+        case .text:
+            output?.setField(extractedValue as? String)
+        case .currency:
+            let number = (extractedValue as? Double)?.asString(digits: 2, minimum: 2)
+            output?.setField(number?.currencyInputFormatting())
+        case .percent:
+            let number = (extractedValue as? Double)?.asString(digits: 2, minimum: 0)
+            output?.setField(number?.percentFormatting())
+        case .number:
+            let number = (extractedValue as? Double)?.asString(digits: 2, minimum: 0)
+            output?.setField(number?.numberFormatting())
+        default:
+            output?.setField(nil)
+        }
+    }
+    
     func setMenuKey(_ key: String) {
         menuKey = key
     }

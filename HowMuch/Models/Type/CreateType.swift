@@ -10,5 +10,5 @@ import Foundation
 enum CreateType {
     case image
     case text(TextFieldViewModelCell)
-    case item(CreateItemModel?)
+    case item(AddItemViewModelCell)
 }

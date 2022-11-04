@@ -24,3 +24,18 @@ struct SaleModel: Codable, FirestoreProtocol {
 }
 
 typealias SalesModel = [SaleModel]
+
+extension SaleModel {
+    static func from(material: MaterialsType) -> String {
+        switch material {
+        case .ingredient:
+            return SaleModel.CodingKeys.ingredients.stringValue
+        case .material:
+            return SaleModel.CodingKeys.materials.stringValue
+        case .taxes:
+            return SaleModel.CodingKeys.taxes.stringValue
+        case .consumption:
+            return SaleModel.CodingKeys.consumption.stringValue
+        }
+    }
+}

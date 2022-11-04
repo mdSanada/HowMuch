@@ -30,11 +30,14 @@ class AddItemTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    public func render(title: String, quantity: String, value: String, index: (section: Int, row: Int), constraint: (top: CGFloat?, bottom: CGFloat?)? = nil) {
-        self.labelTitle.text = title
-        self.labelQuantity.text = quantity
-        self.labelValue.text = value
+    public func bind(viewModel: AddItemViewModelCell, index: (section: Int, row: Int)) {
+        self.viewModel = viewModel
+        self.viewModel?.output = self
+        self.viewModel?.awake()
         self.index = index
+    }
+    
+    public func render(constraint: (top: CGFloat?, bottom: CGFloat?)? = nil) {
         if let top = constraint?.top {
             self.constraintTop.constant = top
         }
@@ -48,4 +51,15 @@ class AddItemTableViewCell: UITableViewCell {
         guard let section = index?.section, let row = index?.row else { return }
         delegate?.exclude(section: section, row: row)
     }
+}
+
+extension AddItemTableViewCell: AddItemOutputProtocol {
+    
+    func configure(title: String, quantity: String, value: String) {
+        self.labelTitle.text = title
+        self.labelQuantity.text = quantity
+        self.labelValue.text = value
+        layoutIfNeeded()
+    }
+
 }

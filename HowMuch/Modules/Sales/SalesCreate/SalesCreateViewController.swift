@@ -6,17 +6,35 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxGesture
 
-class SalesCreateViewController: UIViewController {
+class SalesCreateViewController: SNViewController<SalesCreateStates, SalesCreateViewModel> {
     @IBOutlet weak var createTable: UITableView!
+    @IBOutlet weak var buttonComplete: UIButton!
     
     weak var delegate: MyReceiptProtocol? = nil
-    var itens: [CreateDTO] = CreateDTO.sales()
+    var itens: [CreateDTO] = []
+    var flow: MaterialsFlow?
     
+    private var disposeBag = DisposeBag()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTable()
         title = "Adicionar"
+        viewModel?.flow.onNext(flow)
+    }
+    
+    override func configureViews() {
+        view.rx
+            .tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
     }
     
     func configureTable() {
@@ -28,12 +46,40 @@ class SalesCreateViewController: UIViewController {
         createTable.dataSource = self
     }
     
-    private func create() {
-        
+    override func viewDidDisappear(_ animated: Bool) {
+        didDisappear()
+        viewModel?.clean()
     }
     
+    private func didDisappear() {
+        itens = []
+    }
+    
+    override func render(states: SalesCreateStates) {
+        switch states {
+        case .success(let string):
+            Sanada.print(string)
+            self.dismiss(animated: true, completion: nil)
+        case .loading(let bool):
+            break
+        case .error(let string):
+            Sanada.print(string)
+            self.dismiss(animated: true, completion: nil)
+        case .button(let enabled):
+            buttonComplete.isEnabled = enabled
+        case .configure(let itens):
+            self.itens = itens
+            createTable.reloadData()
+        case .reload(new: let itens, section: let section):
+            self.itens = itens
+            createTable.reloadData()
+            createTable.reloadSections(IndexSet(integer: section), with: .automatic)
+        }
+    }
+
     @IBAction func actionSave(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        view.endEditing(true)
+        viewModel?.complete()
     }
 }
 
@@ -62,39 +108,23 @@ extension SalesCreateViewController: UITableViewDataSource, UITableViewDelegate 
             return cell
         case .text(let viewModel):
             let cell: TextFieldTableViewCell = tableView.dequeueReusableCell(indexPath)
+            viewModel.completion = self.viewModel?.completion
             cell.bind(viewModel: viewModel)
             return cell
-        case .item(let model):
-            guard let type = model?.itemType else { return UITableViewCell() }
+        case .item(let viewModel):
+            guard let type = viewModel.type else { return UITableViewCell() }
             switch type {
-            case .item(let material):
+            case .item:
                 let cell: AddItemTableViewCell = tableView.dequeueReusableCell(indexPath)
-                let quantity = material.quantity.asString(digits: 2, minimum: 0) + " unidades"
-                switch material.0 {
-                case .ingredient(let ingredient):
-                    let title = ingredient?.name ?? ""
-                    let value = Decimal((ingredient?.cost ?? 0) * material.quantity)
-                    cell.render(title: title, quantity: quantity, value: value.asMoney(), index: (section: indexPath.section, row: indexPath.row))
-                case .material(let _material):
-                    let title = _material?.name ?? ""
-                    let value = Decimal((_material?.cost ?? 0) * material.quantity)
-                    cell.render(title: title, quantity: quantity, value: value.asMoney(), index: (section: indexPath.section, row: indexPath.row))
-                case .taxes(let taxes):
-                    let title = taxes?.name ?? ""
-                    let value = (taxes?.cost ?? 0).asString().percentFormatting()
-                    cell.render(title: title, quantity: "", value: value, index: (section: indexPath.section, row: indexPath.row))
-                case .consumption(let consumption):
-                    let title = consumption?.name ?? ""
-                    let _consumption = consumption?.consumption ?? ""
-                    let nivel = consumption?.level ?? ""
-                    cell.render(title: title, quantity: nivel, value: _consumption, index: (section: indexPath.section, row: indexPath.row))
-                }
+                viewModel.completion = self.viewModel?.completion
+                cell.bind(viewModel: viewModel,
+                          index: (section: indexPath.section, row: indexPath.row))
                 cell.delegate = self
                 return cell
             case .add:
                 let type = MaterialsType.fromSection(item.section)
                 let cell: AddButtonFooterTableViewCell = tableView.dequeueReusableCell(indexPath)
-                cell.render(title: model?.title ?? "Adicionar") { [weak self] in
+                cell.render(title: viewModel.title ?? "Adicionar") { [weak self] in
                     guard let type = type else { return }
                     self?.delegate?.pushSelectMaterial(type: type)
                 }
@@ -108,22 +138,12 @@ extension SalesCreateViewController: UITableViewDataSource, UITableViewDelegate 
 
 extension SalesCreateViewController: DidSelectMaterialProtocol {
     func didSelect(type: MaterialsType, quantity: Double) {
-        for (index, create) in itens.enumerated() {
-            guard let material = MaterialsType.fromSection(create.section) else { continue }
-            if material == type {
-                let item = CreateItemModel(title: nil, itemType: .item(type, quantity: quantity))
-                itens[index].itens.insert(.item(item), at: 0)
-                createTable.reloadSections(IndexSet(integer: index), with: .automatic)
-                break
-            }
-            continue
-        }
+        viewModel?.addItem.onNext((type: type, quantity: quantity))
     }
 }
 
 extension SalesCreateViewController: DidExcludeItemProtocol {
     func exclude(section: Int, row: Int) {
-        itens[section].itens.remove(at: row)
-        createTable.reloadSections(IndexSet(integer: section), with: .automatic)
+        viewModel?.removeItem.onNext((section: section, row: row))
     }
 }

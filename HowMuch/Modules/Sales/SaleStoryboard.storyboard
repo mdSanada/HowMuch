@@ -85,6 +85,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonComplete" destination="hPT-oA-mlc" id="bce-W7-f6X"/>
                         <outlet property="createTable" destination="qqc-h2-nqV" id="cYY-bk-SEQ"/>
                     </connections>
                 </viewController>

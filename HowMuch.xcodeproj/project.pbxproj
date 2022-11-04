@@ -138,6 +138,8 @@
 		16E763FC290D73FF00F32124 /* MenuProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E763FB290D73FF00F32124 /* MenuProtocol.swift */; };
 		16E763FE290D87D800F32124 /* FirestoreInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E763FD290D87D800F32124 /* FirestoreInteractor.swift */; };
 		16E76400290D92DA00F32124 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E763FF290D92DA00F32124 /* NotificationCenter.swift */; };
+		16FB4255291445A700CB5AD9 /* AddItemIOProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FB4254291445A700CB5AD9 /* AddItemIOProtocol.swift */; };
+		16FB425729148DF900CB5AD9 /* SalesCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FB425629148DF900CB5AD9 /* SalesCreateViewModel.swift */; };
 		16FE20B129073657000AC718 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE20AF29073657000AC718 /* TextFieldTableViewCell.swift */; };
 		16FE20B229073657000AC718 /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16FE20B029073657000AC718 /* TextFieldTableViewCell.xib */; };
 		16FE20B5290737F9000AC718 /* SalesCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE20B4290737F9000AC718 /* SalesCreateViewController.swift */; };
@@ -283,6 +285,8 @@
 		16E763FB290D73FF00F32124 /* MenuProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuProtocol.swift; sourceTree = "<group>"; };
 		16E763FD290D87D800F32124 /* FirestoreInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreInteractor.swift; sourceTree = "<group>"; };
 		16E763FF290D92DA00F32124 /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
+		16FB4254291445A700CB5AD9 /* AddItemIOProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemIOProtocol.swift; sourceTree = "<group>"; };
+		16FB425629148DF900CB5AD9 /* SalesCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesCreateViewModel.swift; sourceTree = "<group>"; };
 		16FE20AF29073657000AC718 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		16FE20B029073657000AC718 /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		16FE20B4290737F9000AC718 /* SalesCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesCreateViewController.swift; sourceTree = "<group>"; };
@@ -925,6 +929,7 @@
 			children = (
 				1646642829088B21008892EB /* Models */,
 				16FE20B4290737F9000AC718 /* SalesCreateViewController.swift */,
+				16FB425629148DF900CB5AD9 /* SalesCreateViewModel.swift */,
 			);
 			path = SalesCreate;
 			sourceTree = "<group>";
@@ -942,6 +947,7 @@
 			isa = PBXGroup;
 			children = (
 				162ECD392909E4520005B6A4 /* AddItemViewModelCell.swift */,
+				16FB4254291445A700CB5AD9 /* AddItemIOProtocol.swift */,
 				16FE20B8290739DB000AC718 /* AddItemTableViewCell.swift */,
 				16FE20B9290739DB000AC718 /* AddItemTableViewCell.xib */,
 			);
@@ -1155,6 +1161,7 @@
 				16E7639B290C1DA500F32124 /* DetailedDTO.swift in Sources */,
 				16AE04A52900A12600490465 /* StatusView.swift in Sources */,
 				16AE040B2900A05C00490465 /* SceneDelegate.swift in Sources */,
+				16FB4255291445A700CB5AD9 /* AddItemIOProtocol.swift in Sources */,
 				16AE04AD2900A12600490465 /* Sanada.swift in Sources */,
 				16AE04CC2900A12700490465 /* EstimateProtocol.swift in Sources */,
 				1649F9A72912B21500144C17 /* SelectMaterialsViewModel.swift in Sources */,
@@ -1221,6 +1228,7 @@
 				16AE049B2900A12600490465 /* Extension + Dictionary.swift in Sources */,
 				16AE04A12900A12600490465 /* Registering.swift in Sources */,
 				164664482908BA2A008892EB /* MeasureMenu.swift in Sources */,
+				16FB425729148DF900CB5AD9 /* SalesCreateViewModel.swift in Sources */,
 				16AE049F2900A12600490465 /* Extension + UIImage.swift in Sources */,
 				16AE04C72900A12700490465 /* MaterialsProtocol.swift in Sources */,
 				16AE04B12900A12600490465 /* SNNetworkTask.swift in Sources */,

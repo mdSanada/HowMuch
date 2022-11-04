@@ -27,29 +27,29 @@ extension CreateDTO {
         array.removeAll()
         
         // MARK: - Description Section
-        array.append(.text(TextFieldViewModelCell(item: CreateTextModel(key: "",
+        array.append(.text(TextFieldViewModelCell(item: CreateTextModel(key: SaleModel.CodingKeys.name.stringValue,
                                                                         title: "Nome",
                                                                         placeholder: "Nome",
                                                                         initial: nil,
                                                                         textFieldType: .text,
                                                                         type: .title))))
-        array.append(.text(TextFieldViewModelCell(item: CreateTextModel(key: "",
+        array.append(.text(TextFieldViewModelCell(item: CreateTextModel(key: SaleModel.CodingKeys.salesDescription.stringValue,
                                                                         title: "Descrição",
                                                                         placeholder: "Descrição",
                                                                         initial: nil,
                                                                         textFieldType: .text,
                                                                         type: .body))))
-        array.append(.text(TextFieldViewModelCell(item: CreateTextModel(key: "",
+        array.append(.text(TextFieldViewModelCell(item: CreateTextModel(key: SaleModel.CodingKeys.profit.stringValue,
                                                                         title: "Lucro",
                                                                         placeholder: "Lucro",
                                                                         initial: nil,
-                                                                        textFieldType: .currency,
+                                                                        textFieldType: .percent,
                                                                         type: .body))))
-        array.append(.text(TextFieldViewModelCell(item: CreateTextModel(key: "",
+        array.append(.text(TextFieldViewModelCell(item: CreateTextModel(key: SaleModel.CodingKeys.yield.stringValue,
                                                                         title: "Rendimento",
                                                                         placeholder: "Rendimento",
                                                                         initial: nil,
-                                                                        textFieldType: .currency,
+                                                                        textFieldType: .number,
                                                                         type: .body))))
         
         result.append(CreateDTO(section: "Descrição",
@@ -58,8 +58,8 @@ extension CreateDTO {
         array.removeAll()
         
         // MARK: - Ingredients Section
-        array.append(CreateType.item(CreateItemModel(title: "Adicionar novo",
-                                                     itemType: .add)))
+        array.append(CreateType.item(AddItemViewModelCell(item: CreateItemModel(title: "Adicionar novo",
+                                                                                itemType: .add))))
         
         result.append(CreateDTO(section: "Ingredientes",
                                 showTitle: true,
@@ -67,27 +67,27 @@ extension CreateDTO {
         array.removeAll()
         
         // MARK: - Materials Section
-        array.append(CreateType.item(CreateItemModel(title: "Adicionar novo",
-                                                     itemType: .add)))
-        
+        array.append(CreateType.item(AddItemViewModelCell(item: CreateItemModel(title: "Adicionar novo",
+                                                                                itemType: .add))))
+
         result.append(CreateDTO(section: "Materiais",
                                 showTitle: true,
                                 itens: array))
         array.removeAll()
         
         // MARK: - Taxes Section
-        array.append(CreateType.item(CreateItemModel(title: "Adicionar novo",
-                                                     itemType: .add)))
-        
+        array.append(CreateType.item(AddItemViewModelCell(item: CreateItemModel(title: "Adicionar novo",
+                                                                                itemType: .add))))
+
         result.append(CreateDTO(section: "Impostos",
                                 showTitle: true,
                                 itens: array))
         array.removeAll()
         
         // MARK: - Consumption Section
-        array.append(CreateType.item(CreateItemModel(title: "Adicionar novo",
-                                                     itemType: .add)))
-        
+        array.append(CreateType.item(AddItemViewModelCell(item: CreateItemModel(title: "Adicionar novo",
+                                                                                itemType: .add))))
+
         result.append(CreateDTO(section: "Consumo",
                                 showTitle: true,
                                 itens: array))

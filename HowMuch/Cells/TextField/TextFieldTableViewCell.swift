@@ -85,6 +85,7 @@ class TextFieldTableViewCell: UITableViewCell, TextFieldOutputProtocol {
         self.viewModel = viewModel
         self.viewModel?.output = self
         self.viewModel?.awake()
+        self.viewModel?.viewWillAppear()
     }
 
     func configure(type: TextFieldTableViewCellType,
@@ -157,6 +158,11 @@ class TextFieldTableViewCell: UITableViewCell, TextFieldOutputProtocol {
                           children: children)
         buttonMenu.menu = menu
         buttonMenu.showsMenuAsPrimaryAction = true
+    }
+    
+    func setField(_ text: String?) {
+        guard let text = text else { return }
+        fieldContent.rx.text.onNext(text)
     }
 }
 

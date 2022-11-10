@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol DidExcludeItemProtocol: AnyObject {
-    func exclude(section: Int, row: Int)
-}
-
 class AddItemTableViewCell: UITableViewCell {
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelQuantity: UILabel!
@@ -61,5 +57,8 @@ extension AddItemTableViewCell: AddItemOutputProtocol {
         self.labelValue.text = value
         layoutIfNeeded()
     }
-
+    
+    func clean() {
+        delegate = nil
+    }
 }

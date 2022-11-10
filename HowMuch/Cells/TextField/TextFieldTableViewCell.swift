@@ -109,8 +109,8 @@ class TextFieldTableViewCell: UITableViewCell, TextFieldOutputProtocol {
             fieldContent.isUserInteractionEnabled = !hiddenInput
             
             let actions = menu.dict()
-            buttonMenu.setTitle(menu.defaultValue(), for: .normal)
-            viewModel?.menuDidChange(menu.defaultValue())
+            buttonMenu.setTitle(menu.defaultValue().value, for: .normal)
+            viewModel?.menuDidChange(menu.defaultValue().key)
             viewModel?.setMenuKey(key)
             configureMenu(actions: actions)
         }

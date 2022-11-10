@@ -19,6 +19,10 @@ class SalesCreateViewController: SNViewController<SalesCreateStates, SalesCreate
     var flow: MaterialsFlow?
     
     private var disposeBag = DisposeBag()
+    
+    deinit {
+        Sanada.print("Deinitializing: \(self)")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,15 +48,22 @@ class SalesCreateViewController: SNViewController<SalesCreateStates, SalesCreate
         createTable.register(type: AddImageTableViewCell.self)
         createTable.delegate = self
         createTable.dataSource = self
+        if #available(iOS 15.0, *) {
+            createTable.sectionHeaderTopPadding = 0
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        didDisappear()
-        viewModel?.clean()
+        if self.isBeingDismissed || (navigationController?.isBeingDismissed ?? false) {
+            didDisappear()
+            viewModel?.clean()
+            delegate?.dismissFromParent()
+        }
     }
     
     private func didDisappear() {
         itens = []
+        disposeBag = DisposeBag()
     }
     
     override func render(states: SalesCreateStates) {
@@ -80,6 +91,8 @@ class SalesCreateViewController: SNViewController<SalesCreateStates, SalesCreate
     @IBAction func actionSave(_ sender: Any) {
         view.endEditing(true)
         viewModel?.complete()
+        didDisappear()
+        delegate?.dismissFromParent()
     }
 }
 
@@ -100,11 +113,12 @@ extension SalesCreateViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = itens[indexPath.section]
         let row = item.itens[indexPath.row]
-        
+
         switch row {
-        case .image:
+        case .image(let viewModel):
             let cell: AddImageTableViewCell = tableView.dequeueReusableCell(indexPath)
-            cell.render(image: nil)
+            cell.bind(viewModel: viewModel)
+            cell.parentController = self
             return cell
         case .text(let viewModel):
             let cell: TextFieldTableViewCell = tableView.dequeueReusableCell(indexPath)
@@ -135,7 +149,7 @@ extension SalesCreateViewController: UITableViewDataSource, UITableViewDelegate 
 }
 
 extension SalesCreateViewController: DidSelectMaterialProtocol {
-    func didSelect(type: MaterialsType, quantity: Double) {
+    func didSelect(type: MaterialsType, quantity: QuantityModel) {
         viewModel?.addItem.onNext((type: type, quantity: quantity))
     }
 }

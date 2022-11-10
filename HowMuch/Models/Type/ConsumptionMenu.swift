@@ -18,8 +18,8 @@ extension ConsumptionType: MenuProtocol {
         ConsumptionType.dict()
     }
     
-    func defaultValue() -> String {
-        return dict()[self.rawValue] ?? ""
+    func defaultValue() -> (key: String, value: String) {
+        return (key: self.rawValue.uppercased(), value: dict()[self.rawValue.uppercased()] ?? "")
     }
 
     static func dict() -> [String: String] {

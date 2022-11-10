@@ -9,5 +9,5 @@ import Foundation
 
 protocol MenuProtocol {
     func dict() -> [String: String]
-    func defaultValue() -> String
+    func defaultValue() -> (key: String, value: String)
 }

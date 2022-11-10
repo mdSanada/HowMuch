@@ -234,14 +234,26 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="placeholder" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="XMU-E1-HTf">
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="daR-0q-gBT">
                                         <rect key="frame" x="0.0" y="25.5" width="374" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="YTe-ka-1ds"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="placeholder" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="XMU-E1-HTf">
+                                                <rect key="frame" x="0.0" y="0.0" width="282" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="YTe-ka-1ds"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jzg-XO-upC">
+                                                <rect key="frame" x="282" y="0.0" width="92" height="40"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="square.and.pencil" catalog="system" title="Menu" imagePadding="5">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QsE-fK-pzh">
@@ -279,6 +291,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonMenu" destination="Jzg-XO-upC" id="Lli-4h-cGl"/>
                         <outlet property="buttonSave" destination="QsE-fK-pzh" id="lNp-Xw-r5S"/>
                         <outlet property="fieldValue" destination="XMU-E1-HTf" id="FCP-ZZ-jCl"/>
                         <outlet property="labelDescription" destination="Ybf-Dw-42c" id="SZM-C4-9Ma"/>
@@ -294,6 +307,7 @@
     </scenes>
     <resources>
         <image name="ellipsis.circle" catalog="system" width="128" height="123"/>
+        <image name="square.and.pencil" catalog="system" width="128" height="113"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.92500001192092896" blue="0.75700002908706665" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

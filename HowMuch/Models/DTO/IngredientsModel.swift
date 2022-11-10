@@ -8,10 +8,10 @@
 import Foundation
 
 // MARK: - IngredientsModel
-struct IngredientsModel: Codable, FirestoreProtocol {
+struct IngredientsModel: Codable, FirestoreProtocol, Hashable {
     var firestoreId: FirestoreId?
     var name, ingredientsDescription, measurement: String?
-    var quantity: Int?
+    var quantity: Double?
     var cost: Double?
     
     enum CodingKeys: String, CodingKey {
@@ -21,7 +21,7 @@ struct IngredientsModel: Codable, FirestoreProtocol {
         case measurement, quantity, cost
     }
     
-    internal init(name: String? = nil, ingredientsDescription: String? = nil, measurement: String? = nil, quantity: Int? = nil, cost: Double? = nil) {
+    internal init(name: String? = nil, ingredientsDescription: String? = nil, measurement: String? = nil, quantity: Double? = nil, cost: Double? = nil) {
         self.firestoreId = nil
         self.name = name
         self.ingredientsDescription = ingredientsDescription
@@ -48,6 +48,10 @@ extension IngredientsModel: Creatable {
                                  measurement: "g",
                                  quantity: 3,
                                  cost: 3)]
+    }
+    
+    func calculate(quantity: QuantityModelDTO) -> Double {
+        return (self.cost ?? 0) * (quantity.quantity ?? 1)
     }
     
     func detailed() -> [DetailedDTO] {

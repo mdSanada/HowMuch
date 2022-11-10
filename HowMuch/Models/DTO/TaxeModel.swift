@@ -50,6 +50,10 @@ extension TaxeModel: Creatable {
                           cost: 3.3)]
     }
     
+    func calculate(quantity: QuantityModelDTO) -> Double {
+        return (self.cost ?? 0) * (quantity.quantity ?? 1)
+    }
+
     func detailed() -> [DetailedDTO] {
         var result: [DetailedDTO] = []
         result.append(DetailedDTO(title: "Nome",

@@ -178,13 +178,15 @@ class FirestoreRepository {
         taxes.getDocuments(source: source) { query, error in
             if let query = query {
                 query.documents.forEach { document in
-                    let data = query.documents.compactMap { response -> Data? in
+                    let data = query.documents.compactMap { response -> TaxeModel? in
                         var dict = response.data()
                         dict["firestoreId"] = response.documentID
-                        return dict.data
-                    }
-                    let response = data.map { $0.map(to: TaxeModel.self) }.compactMap { $0 }
-                    FirestoreInteractor.shared.taxes = response
+                        
+                        guard let taxes = dict.data?.map(to: TaxeModel.self) else { return nil }
+                        FirestoreInteractor.shared.taxesDict[response.documentID] = taxes
+                        return taxes
+                    }.compactMap { $0 }
+                    FirestoreInteractor.shared.taxes = data
                     completion(true)
                 }
             } else {
@@ -220,13 +222,14 @@ class FirestoreRepository {
         materials.getDocuments(source: source) { query, error in
             if let query = query {
                 query.documents.forEach { document in
-                    let data = query.documents.compactMap { response -> Data? in
+                    let data = query.documents.compactMap { response -> MaterialModel? in
                         var dict = response.data()
                         dict["firestoreId"] = response.documentID
-                        return dict.data
-                    }
-                    let response = data.map { $0.map(to: MaterialModel.self) }.compactMap { $0 }
-                    FirestoreInteractor.shared.materials = response
+                        guard let material = dict.data?.map(to: MaterialModel.self) else { return nil }
+                        FirestoreInteractor.shared.materialsDict[response.documentID] = material
+                        return material
+                    }.compactMap { $0 }
+                    FirestoreInteractor.shared.materials = data
                     completion(true)
                 }
             } else {
@@ -262,13 +265,15 @@ class FirestoreRepository {
         ingredients.getDocuments(source: source) { query, error in
             if let query = query {
                 query.documents.forEach { document in
-                    let data = query.documents.compactMap { response -> Data? in
+                    let data = query.documents.compactMap { response -> IngredientsModel? in
                         var dict = response.data()
                         dict["firestoreId"] = response.documentID
-                        return dict.data
-                    }
-                    let response = data.map { $0.map(to: IngredientsModel.self) }.compactMap { $0 }
-                    FirestoreInteractor.shared.ingredients = response
+                        let data = dict.data
+                        guard let ingredient = data?.map(to: IngredientsModel.self) else { return nil }
+                        FirestoreInteractor.shared.ingredientsDict[response.documentID] = ingredient
+                        return ingredient
+                    }.compactMap { $0 }
+                    FirestoreInteractor.shared.ingredients = data
                     completion(true)
                 }
             } else {
@@ -290,6 +295,39 @@ class FirestoreRepository {
         }
     }
     
+    public func getIngredients(source: FirestoreSource,
+                               ids: [FirestoreId],
+                               completion: @escaping ([IngredientsModel]?) -> ()) {
+        let ingredientsQuery = ingredients.whereField(FirebaseFirestore.FieldPath.documentID(), in: ids)
+        ingredientsQuery.getDocuments { query, error in
+            if let query = query {
+                query.documents.forEach { document in
+                    let data = query.documents.compactMap { response -> Data? in
+                        var dict = response.data()
+                        dict["firestoreId"] = response.documentID
+                        return dict.data
+                    }
+                    let response = data.map { $0.map(to: IngredientsModel.self) }.compactMap { $0 }
+                    FirestoreInteractor.shared.ingredients = response
+                    completion(response)
+                }
+            } else {
+                completion(nil)
+            }
+        }
+//        ingredients.document(id).getDocument(source: source) { document, error in
+//            if let document = document {
+//                var dict = document.data()
+//                dict?["firestoreId"] = id
+//                let response = dict?.data?.map(to: IngredientsModel.self)
+//                completion(response)
+//            } else {
+//                completion(nil)
+//            }
+//        }
+    }
+
+    
     public func deleteIngredient(id: FirestoreId, completion: @escaping (Bool) -> ()) {
         ingredients.document(id).delete { error in
             guard error == nil else {
@@ -305,13 +343,16 @@ class FirestoreRepository {
         consumption.getDocuments(source: source) { query, error in
             if let query = query {
                 query.documents.forEach { document in
-                    let data = query.documents.compactMap { response -> Data? in
+                    let data = query.documents.compactMap { response -> ConsumptionModel? in
                         var dict = response.data()
                         dict["firestoreId"] = response.documentID
-                        return dict.data
-                    }
-                    let response = data.map { $0.map(to: ConsumptionModel.self) }.compactMap { $0 }
-                    FirestoreInteractor.shared.consumption = response
+                        
+                        guard let consumption = dict.data?.map(to: ConsumptionModel.self) else { return nil }
+                        FirestoreInteractor.shared.consumptionDict[response.documentID] = consumption
+
+                        return consumption
+                    }.compactMap { $0 }
+                    FirestoreInteractor.shared.consumption = data
                     completion(true)
                 }
             } else {
@@ -375,6 +416,20 @@ class FirestoreRepository {
             getAllTaxes(source: source, completion: completion)
         case .consumption:
             getAllConsumption(source: source, completion: completion)
+        }
+    }
+    
+    public func save(sale: Data, completion: @escaping (Bool) -> ()) {
+        guard let data = sale.dictionary else {
+            completion(false)
+            return
+        }
+        sales.addDocument(data: data)  { error in
+            guard error == nil else {
+                completion(false)
+                return
+            }
+            completion(true)
         }
     }
     

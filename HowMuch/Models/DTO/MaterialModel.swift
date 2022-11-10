@@ -11,7 +11,7 @@ import Foundation
 struct MaterialModel: Codable, FirestoreProtocol {
     var firestoreId: FirestoreId?
     var name, materialDescription, measurement: String?
-    var quantity: Int?
+    var quantity: Double?
     var cost: Double?
     
     enum CodingKeys: String, CodingKey {
@@ -21,7 +21,7 @@ struct MaterialModel: Codable, FirestoreProtocol {
         case measurement, quantity, cost
     }
         
-    internal init(name: String? = nil, materialDescription: String? = nil, measurement: String? = nil, quantity: Int? = nil, cost: Double? = nil) {
+    internal init(name: String? = nil, materialDescription: String? = nil, measurement: String? = nil, quantity: Double? = nil, cost: Double? = nil) {
         self.firestoreId = nil
         self.name = name
         self.materialDescription = materialDescription
@@ -50,6 +50,10 @@ extension MaterialModel: Creatable {
                               cost: 3)]
     }
     
+    func calculate(quantity: QuantityModelDTO) -> Double {
+        return (self.cost ?? 0) * (quantity.quantity ?? 1)
+    }
+
     func detailed() -> [DetailedDTO] {
         var result: [DetailedDTO] = []
         result.append(DetailedDTO(title: "Nome",

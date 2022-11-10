@@ -45,18 +45,22 @@ extension AddItemViewModelCell: AddItemInputProtocol {
     func awake() {
         guard let type = type else { return }
         switch type {
-        case .item(let material, let quantity):
-            let _quantity = quantity.asString(digits: 2, minimum: 0) + " unidades"
+        case .item(let material, let quantityDict):
+            let quantity = quantityDict.data?.map(to: QuantityModelDTO.self) ?? QuantityModelDTO(quantity: 0, type: "UNIT")
+            
+            let unitType = MeasureType.init(rawValue: quantity.type ?? "")
+            let value = (quantity.quantity ?? 0)?.asString(digits: 2, minimum: 0) ?? ""
+            let _quantity = value + (unitType?.defaultValue().value ?? "")
             switch material {
             case .ingredient(let ingredient):
                 let title = ingredient?.name ?? ""
-                let value = Decimal((ingredient?.cost ?? 0) * quantity)
+                let value = Decimal((ingredient?.cost ?? 0) * (quantity.quantity ?? 1))
                 output?.configure(title: title,
                                   quantity: _quantity,
                                   value: value.asMoney())
             case .material(let _material):
                 let title = _material?.name ?? ""
-                let value = Decimal((_material?.cost ?? 0) * quantity)
+                let value = Decimal((_material?.cost ?? 0) * (quantity.quantity ?? 1))
                 
                 output?.configure(title: title,
                                   quantity: _quantity,
@@ -116,6 +120,9 @@ extension AddItemViewModelCell {
     
     func clean() {
         completion = nil
+        isValid.onCompleted()
+        result.onCompleted()
+        output?.clean()
     }
     
 }

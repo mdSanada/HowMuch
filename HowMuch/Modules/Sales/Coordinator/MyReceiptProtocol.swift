@@ -11,4 +11,5 @@ protocol MyReceiptProtocol: AnyObject {
     func pushSaleDatailed()
     func presentSaleCreate()
     func pushSelectMaterial(type: MaterialsType)
+    func dismissFromParent()
 }

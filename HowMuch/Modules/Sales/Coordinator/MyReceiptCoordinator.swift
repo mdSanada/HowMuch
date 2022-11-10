@@ -27,9 +27,11 @@ class MyReceiptCoordinator: SNCoordinator {
     }
 
     init() {
-        let viewController = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MyReceiptViewController") as? MyReceiptViewController
+        let viewModel = SalesViewModel()
+        let viewController = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MyReceiptViewController") as? SalesViewController
         let navigation = UINavigationController(rootViewController: viewController!)
         viewController?.title = "Vendas"
+        viewController?.set(viewModel: viewModel)
         navigation.tabBarItem.image = UIImage.init(systemName: "list.bullet.rectangle.portrait")
         navigation.tabBarItem.title = "Vendas"
         navigation.navigationBar.prefersLargeTitles = true
@@ -69,6 +71,12 @@ extension MyReceiptCoordinator: MyReceiptProtocol {
         controller.set(viewModel: viewModel)
         presentNavigation?.pushViewController(controller, animated: true)
     }
+    
+    func dismissFromParent() {
+        presentNavigation?.dismiss(animated: true, completion: { [weak self] in
+            self?.presentNavigation = nil
+        })
+    }
 }
 
 extension MyReceiptCoordinator: SelectMaterialsProtocol {
@@ -85,7 +93,7 @@ extension MyReceiptCoordinator: SelectMaterialsProtocol {
 }
 
 extension MyReceiptCoordinator: QuantityMaterialProtocol {
-    func pushAdded(type: MaterialsType, quantity: Double) {
+    func pushAdded(type: MaterialsType, quantity: QuantityModel) {
         presentNavigation?.popToRootViewController(animated: true)
     }
     

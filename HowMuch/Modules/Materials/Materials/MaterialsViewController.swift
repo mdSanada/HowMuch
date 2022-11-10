@@ -25,7 +25,6 @@ class MaterialsViewController: SNViewController<MaterialsStates, MaterialsViewMo
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
         configureTable()
-        viewModel?.didLoad.onNext(())
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +42,8 @@ class MaterialsViewController: SNViewController<MaterialsStates, MaterialsViewMo
         segmentMaterials = UISegmentedControl(items: segmentItems)
         segmentMaterials?.selectedSegmentIndex = 0
         segmentMaterials?.addTarget(self, action: #selector(segmentControl(_:)), for: .valueChanged)
+        viewModel?.choosedSubject.onNext(segmentItems[0])
+        viewModel?.filteredText.onNext(searchController.searchBar.text ?? "")
     }
         
     @objc func segmentControl(_ segmentedControl: UISegmentedControl) {

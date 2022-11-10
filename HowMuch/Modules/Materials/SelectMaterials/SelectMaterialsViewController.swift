@@ -10,7 +10,7 @@ import RxCocoa
 import RxSwift
 
 protocol DidSelectMaterialProtocol: AnyObject {
-    func didSelect(type: MaterialsType, quantity: Double)
+    func didSelect(type: MaterialsType, quantity: QuantityModel)
 }
 
 protocol SelectMaterialsProtocol: AnyObject {

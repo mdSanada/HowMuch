@@ -19,7 +19,7 @@ extension CreateDTO {
         var result:[CreateDTO] = []
         var array:[CreateType]  = []
         // MARK: - Image Section
-        array.append(CreateType.image)
+        array.append(CreateType.image(AddImageViewModelCell()))
         
         result.append(CreateDTO(section: "Imagem",
                                 showTitle: false,
@@ -69,7 +69,7 @@ extension CreateDTO {
         // MARK: - Materials Section
         array.append(CreateType.item(AddItemViewModelCell(item: CreateItemModel(title: "Adicionar novo",
                                                                                 itemType: .add))))
-
+        
         result.append(CreateDTO(section: "Materiais",
                                 showTitle: true,
                                 itens: array))
@@ -78,7 +78,7 @@ extension CreateDTO {
         // MARK: - Taxes Section
         array.append(CreateType.item(AddItemViewModelCell(item: CreateItemModel(title: "Adicionar novo",
                                                                                 itemType: .add))))
-
+        
         result.append(CreateDTO(section: "Impostos",
                                 showTitle: true,
                                 itens: array))
@@ -87,7 +87,7 @@ extension CreateDTO {
         // MARK: - Consumption Section
         array.append(CreateType.item(AddItemViewModelCell(item: CreateItemModel(title: "Adicionar novo",
                                                                                 itemType: .add))))
-
+        
         result.append(CreateDTO(section: "Consumo",
                                 showTitle: true,
                                 itens: array))
@@ -95,7 +95,7 @@ extension CreateDTO {
         
         return result
     }
-        
+    
     static func editable(type: MaterialsType) -> [CreateDTO] {
         switch type {
         case .ingredient(let ingredient):

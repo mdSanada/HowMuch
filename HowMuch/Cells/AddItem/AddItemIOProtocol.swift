@@ -13,4 +13,9 @@ protocol AddItemInputProtocol: AnyObject {
 
 protocol AddItemOutputProtocol: AnyObject {
     func configure(title: String, quantity: String, value: String)
+    func clean()
+}
+
+protocol DidExcludeItemProtocol: AnyObject {
+    func exclude(section: Int, row: Int)
 }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0B6939AFC51F49BA6528FC35 /* Pods_HowMuch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A8BDDC22943BE17224F28C /* Pods_HowMuch.framework */; };
+		1622E22C29153D7B0007AC8F /* AddImageIOProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1622E22B29153D7B0007AC8F /* AddImageIOProtocol.swift */; };
+		1622E22F291552BF0007AC8F /* CameraHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1622E22E291552BF0007AC8F /* CameraHandler.swift */; };
 		162B557B290B23CE000F9477 /* Listeners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B557A290B23CE000F9477 /* Listeners.swift */; };
 		162B557D290B2FA3000F9477 /* TextFieldTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B557C290B2FA3000F9477 /* TextFieldTypes.swift */; };
 		162B557F290B4818000F9477 /* MaterialsFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B557E290B4818000F9477 /* MaterialsFlow.swift */; };
@@ -45,6 +47,7 @@
 		164664522908C632008892EB /* NivelMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164664512908C632008892EB /* NivelMenu.swift */; };
 		1649F9A52912B20B00144C17 /* SelectMaterialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1649F9A42912B20B00144C17 /* SelectMaterialsViewController.swift */; };
 		1649F9A72912B21500144C17 /* SelectMaterialsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1649F9A62912B21500144C17 /* SelectMaterialsViewModel.swift */; };
+		1650A281291AEC2F002AD2C6 /* SaleDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1650A280291AEC2F002AD2C6 /* SaleDTO.swift */; };
 		1684C0D5290234A100249C7B /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684C0D3290234A100249C7B /* ItemTableViewCell.swift */; };
 		1684C0D6290234A100249C7B /* ItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1684C0D4290234A100249C7B /* ItemTableViewCell.xib */; };
 		1684C0D92902405100249C7B /* ParallaxGroupedSectionHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684C0D82902405100249C7B /* ParallaxGroupedSectionHeaderTableView.swift */; };
@@ -92,8 +95,8 @@
 		16AE04BB2900A12600490465 /* MainProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE04552900A12600490465 /* MainProtocol.swift */; };
 		16AE04BF2900A12700490465 /* MyReceiptCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE045E2900A12600490465 /* MyReceiptCoordinator.swift */; };
 		16AE04C02900A12700490465 /* MyReceiptProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE045F2900A12600490465 /* MyReceiptProtocol.swift */; };
-		16AE04C12900A12700490465 /* MyReceiptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE04602900A12600490465 /* MyReceiptViewController.swift */; };
-		16AE04C22900A12700490465 /* MyReceiptViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE04612900A12600490465 /* MyReceiptViewModel.swift */; };
+		16AE04C12900A12700490465 /* SalesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE04602900A12600490465 /* SalesViewController.swift */; };
+		16AE04C22900A12700490465 /* SalesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE04612900A12600490465 /* SalesViewModel.swift */; };
 		16AE04C32900A12700490465 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16AE04622900A12600490465 /* MainStoryboard.storyboard */; };
 		16AE04C62900A12700490465 /* MaterialsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE04682900A12600490465 /* MaterialsCoordinator.swift */; };
 		16AE04C72900A12700490465 /* MaterialsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE04692900A12600490465 /* MaterialsProtocol.swift */; };
@@ -140,6 +143,9 @@
 		16E76400290D92DA00F32124 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E763FF290D92DA00F32124 /* NotificationCenter.swift */; };
 		16FB4255291445A700CB5AD9 /* AddItemIOProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FB4254291445A700CB5AD9 /* AddItemIOProtocol.swift */; };
 		16FB425729148DF900CB5AD9 /* SalesCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FB425629148DF900CB5AD9 /* SalesCreateViewModel.swift */; };
+		16FBF4A1291C3933001CD231 /* Measures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FBF4A0291C3933001CD231 /* Measures.swift */; };
+		16FBF4A3291C3E50001CD231 /* MeasuresHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FBF4A2291C3E50001CD231 /* MeasuresHelp.swift */; };
+		16FBF4A5291C717D001CD231 /* QuantityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FBF4A4291C717D001CD231 /* QuantityModel.swift */; };
 		16FE20B129073657000AC718 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE20AF29073657000AC718 /* TextFieldTableViewCell.swift */; };
 		16FE20B229073657000AC718 /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16FE20B029073657000AC718 /* TextFieldTableViewCell.xib */; };
 		16FE20B5290737F9000AC718 /* SalesCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE20B4290737F9000AC718 /* SalesCreateViewController.swift */; };
@@ -153,6 +159,8 @@
 
 /* Begin PBXFileReference section */
 		09A8BDDC22943BE17224F28C /* Pods_HowMuch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HowMuch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1622E22B29153D7B0007AC8F /* AddImageIOProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageIOProtocol.swift; sourceTree = "<group>"; };
+		1622E22E291552BF0007AC8F /* CameraHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHandler.swift; sourceTree = "<group>"; };
 		162B557A290B23CE000F9477 /* Listeners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listeners.swift; sourceTree = "<group>"; };
 		162B557C290B2FA3000F9477 /* TextFieldTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTypes.swift; sourceTree = "<group>"; };
 		162B557E290B4818000F9477 /* MaterialsFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialsFlow.swift; sourceTree = "<group>"; };
@@ -190,6 +198,7 @@
 		164664512908C632008892EB /* NivelMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NivelMenu.swift; sourceTree = "<group>"; };
 		1649F9A42912B20B00144C17 /* SelectMaterialsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMaterialsViewController.swift; sourceTree = "<group>"; };
 		1649F9A62912B21500144C17 /* SelectMaterialsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMaterialsViewModel.swift; sourceTree = "<group>"; };
+		1650A280291AEC2F002AD2C6 /* SaleDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleDTO.swift; sourceTree = "<group>"; };
 		1684C0D3290234A100249C7B /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		1684C0D4290234A100249C7B /* ItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemTableViewCell.xib; sourceTree = "<group>"; };
 		1684C0D82902405100249C7B /* ParallaxGroupedSectionHeaderTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxGroupedSectionHeaderTableView.swift; sourceTree = "<group>"; };
@@ -239,8 +248,8 @@
 		16AE04552900A12600490465 /* MainProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainProtocol.swift; sourceTree = "<group>"; };
 		16AE045E2900A12600490465 /* MyReceiptCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyReceiptCoordinator.swift; sourceTree = "<group>"; };
 		16AE045F2900A12600490465 /* MyReceiptProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyReceiptProtocol.swift; sourceTree = "<group>"; };
-		16AE04602900A12600490465 /* MyReceiptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyReceiptViewController.swift; sourceTree = "<group>"; };
-		16AE04612900A12600490465 /* MyReceiptViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyReceiptViewModel.swift; sourceTree = "<group>"; };
+		16AE04602900A12600490465 /* SalesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalesViewController.swift; sourceTree = "<group>"; };
+		16AE04612900A12600490465 /* SalesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalesViewModel.swift; sourceTree = "<group>"; };
 		16AE04622900A12600490465 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		16AE04682900A12600490465 /* MaterialsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialsCoordinator.swift; sourceTree = "<group>"; };
 		16AE04692900A12600490465 /* MaterialsProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialsProtocol.swift; sourceTree = "<group>"; };
@@ -287,6 +296,9 @@
 		16E763FF290D92DA00F32124 /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		16FB4254291445A700CB5AD9 /* AddItemIOProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemIOProtocol.swift; sourceTree = "<group>"; };
 		16FB425629148DF900CB5AD9 /* SalesCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesCreateViewModel.swift; sourceTree = "<group>"; };
+		16FBF4A0291C3933001CD231 /* Measures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measures.swift; sourceTree = "<group>"; };
+		16FBF4A2291C3E50001CD231 /* MeasuresHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasuresHelp.swift; sourceTree = "<group>"; };
+		16FBF4A4291C717D001CD231 /* QuantityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityModel.swift; sourceTree = "<group>"; };
 		16FE20AF29073657000AC718 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		16FE20B029073657000AC718 /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		16FE20B4290737F9000AC718 /* SalesCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesCreateViewController.swift; sourceTree = "<group>"; };
@@ -312,6 +324,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1622E22D291552B40007AC8F /* CameraHandler */ = {
+			isa = PBXGroup;
+			children = (
+				1622E22E291552BF0007AC8F /* CameraHandler.swift */,
+			);
+			path = CameraHandler;
+			sourceTree = "<group>";
+		};
 		162B5579290B23BA000F9477 /* Listeners */ = {
 			isa = PBXGroup;
 			children = (
@@ -400,6 +420,7 @@
 			isa = PBXGroup;
 			children = (
 				162ECD3B2909E45F0005B6A4 /* AddImageViewModelCell.swift */,
+				1622E22B29153D7B0007AC8F /* AddImageIOProtocol.swift */,
 				1646642C290892E0008892EB /* AddImageTableViewCell.swift */,
 				1646642D290892E0008892EB /* AddImageTableViewCell.xib */,
 			);
@@ -529,6 +550,7 @@
 		16AE041F2900A12600490465 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				1622E22D291552B40007AC8F /* CameraHandler */,
 				16407A08290DDB1A00CD1B26 /* Vibration */,
 				16E763FF290D92DA00F32124 /* NotificationCenter.swift */,
 				162B5579290B23BA000F9477 /* Listeners */,
@@ -722,8 +744,8 @@
 			children = (
 				16AE04EB2900E38500490465 /* Models */,
 				16AE04E42900DBC300490465 /* Cell */,
-				16AE04602900A12600490465 /* MyReceiptViewController.swift */,
-				16AE04612900A12600490465 /* MyReceiptViewModel.swift */,
+				16AE04602900A12600490465 /* SalesViewController.swift */,
+				16AE04612900A12600490465 /* SalesViewModel.swift */,
 			);
 			path = Sales;
 			sourceTree = "<group>";
@@ -860,6 +882,7 @@
 			isa = PBXGroup;
 			children = (
 				16AE04EC2900E39100490465 /* ReceiptsModel.swift */,
+				1650A280291AEC2F002AD2C6 /* SaleDTO.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -887,11 +910,13 @@
 		16D80CDE2903566D00A3FC5A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				16FBF49F291C3924001CD231 /* Measures */,
 				16E76399290C1D9A00F32124 /* Detailed */,
 				162ECD2E290996C00005B6A4 /* Create */,
 				162ECD2F290996D50005B6A4 /* DTO */,
 				162ECD30290996DF0005B6A4 /* Type */,
 				162B5580290B4A5F000F9477 /* KeyValue.swift */,
+				16FBF4A4291C717D001CD231 /* QuantityModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -911,6 +936,15 @@
 				16E7639A290C1DA500F32124 /* DetailedDTO.swift */,
 			);
 			path = Detailed;
+			sourceTree = "<group>";
+		};
+		16FBF49F291C3924001CD231 /* Measures */ = {
+			isa = PBXGroup;
+			children = (
+				16FBF4A0291C3933001CD231 /* Measures.swift */,
+				16FBF4A2291C3E50001CD231 /* MeasuresHelp.swift */,
+			);
+			path = Measures;
 			sourceTree = "<group>";
 		};
 		16FE20AE2907363A000AC718 /* TextField */ = {
@@ -1143,7 +1177,10 @@
 				162ECD3A2909E4520005B6A4 /* AddItemViewModelCell.swift in Sources */,
 				16DE7355291139F900938743 /* MaterialsViewModel.swift in Sources */,
 				1684C0D5290234A100249C7B /* ItemTableViewCell.swift in Sources */,
+				16FBF4A1291C3933001CD231 /* Measures.swift in Sources */,
+				16FBF4A3291C3E50001CD231 /* MeasuresHelp.swift in Sources */,
 				16D80CE4290356DC00A3FC5A /* SalesModel.swift in Sources */,
+				1650A281291AEC2F002AD2C6 /* SaleDTO.swift in Sources */,
 				16AE04B92900A12600490465 /* SNViewModelProtocol.swift in Sources */,
 				16AE04CB2900A12700490465 /* EstimateCoordinator.swift in Sources */,
 				16AE04BB2900A12600490465 /* MainProtocol.swift in Sources */,
@@ -1178,10 +1215,11 @@
 				16E76396290BFC7300F32124 /* MaterialDetailedViewController.swift in Sources */,
 				16AE04B32900A12600490465 /* SNCoordinator.swift in Sources */,
 				16AE04E22900A12700490465 /* LoginViewModel.swift in Sources */,
-				16AE04C12900A12700490465 /* MyReceiptViewController.swift in Sources */,
+				16AE04C12900A12700490465 /* SalesViewController.swift in Sources */,
 				16D80CEC290357D200A3FC5A /* FirestoreId.swift in Sources */,
 				164664342908976C008892EB /* MaterialTableViewCell.swift in Sources */,
 				16D80CE2290356BB00A3FC5A /* IngredientsModel.swift in Sources */,
+				16FBF4A5291C717D001CD231 /* QuantityModel.swift in Sources */,
 				16AE04D12900A12700490465 /* SettingsViewController.swift in Sources */,
 				16AE04E72900DBD900490465 /* ReceiptTableViewCell.swift in Sources */,
 				164664502908C526008892EB /* TimeMenu.swift in Sources */,
@@ -1190,7 +1228,7 @@
 				162ECD34290999810005B6A4 /* CreateType.swift in Sources */,
 				16AE04992900A12600490465 /* DateHelper.swift in Sources */,
 				16AE04B62900A12600490465 /* SNViewControllerProtocol.swift in Sources */,
-				16AE04C22900A12700490465 /* MyReceiptViewModel.swift in Sources */,
+				16AE04C22900A12700490465 /* SalesViewModel.swift in Sources */,
 				16AE04B22900A12600490465 /* SNRequestable.swift in Sources */,
 				16AE04B82900A12600490465 /* SNViewModel.swift in Sources */,
 				16E763FA290C8ADA00F32124 /* FirestoreProtocol.swift in Sources */,
@@ -1224,12 +1262,14 @@
 				162ECD402909E6BA0005B6A4 /* TextFieldIOProtocol.swift in Sources */,
 				1646643E2908AA5D008892EB /* MaterialsType.swift in Sources */,
 				16AE04E02900A12700490465 /* LoginProtocol.swift in Sources */,
+				1622E22F291552BF0007AC8F /* CameraHandler.swift in Sources */,
 				16AE04AC2900A12600490465 /* SNRefreshTokenService.swift in Sources */,
 				16AE049B2900A12600490465 /* Extension + Dictionary.swift in Sources */,
 				16AE04A12900A12600490465 /* Registering.swift in Sources */,
 				164664482908BA2A008892EB /* MeasureMenu.swift in Sources */,
 				16FB425729148DF900CB5AD9 /* SalesCreateViewModel.swift in Sources */,
 				16AE049F2900A12600490465 /* Extension + UIImage.swift in Sources */,
+				1622E22C29153D7B0007AC8F /* AddImageIOProtocol.swift in Sources */,
 				16AE04C72900A12700490465 /* MaterialsProtocol.swift in Sources */,
 				16AE04B12900A12600490465 /* SNNetworkTask.swift in Sources */,
 				16AE04CF2900A12700490465 /* SettingsCoordinator.swift in Sources */,

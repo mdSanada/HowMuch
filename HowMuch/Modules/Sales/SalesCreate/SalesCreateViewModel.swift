@@ -21,20 +21,23 @@ enum SalesCreateStates: SNStateful {
 class SalesCreateViewModel: SNViewModel<SalesCreateStates> {
     // MARK: - Inputs
     let flow = BehaviorSubject<MaterialsFlow?>(value: nil)
-    let addItem = PublishSubject<(type: MaterialsType, quantity: Double)>()
+    let addItem = PublishSubject<(type: MaterialsType, quantity: QuantityModel)>()
     let removeItem = PublishSubject<(section: Int, row: Int)>()
+
+    private var disposeBag = DisposeBag()
 
     // MARK: - Repository
     let repository = FirestoreRepository.shared
     
     // MARK: - Itens
-    var itens: [CreateDTO] = [] {
+    var itens: [CreateDTO] = []
+    {
         didSet {
             for item in itens {
                 item.itens.forEach { type in
                     switch type {
-                    case .image:
-                        Sanada.print("image")
+                    case .image(let viewModel):
+                        viewModel.bind(completion: self.completion)
                     case .text(let viewModel):
                         viewModel.bind(completion: self.completion)
                     case .item(let viewModel):
@@ -50,8 +53,6 @@ class SalesCreateViewModel: SNViewModel<SalesCreateStates> {
             Sanada.print(result)
         }
     }
-
-    private var disposeBag = DisposeBag()
 
     override func configure() {
         addItem
@@ -83,7 +84,7 @@ class SalesCreateViewModel: SNViewModel<SalesCreateStates> {
             .disposed(by: disposeBag)
         
         let isValidObservable = Observable.combineLatest(getCellViewModels().map { $0.isValid })
-        
+
         isValidObservable
             .map { $0.allSatisfy { $0 } }
             .subscribe(onNext: { [weak self] _valid in
@@ -102,8 +103,8 @@ extension SalesCreateViewModel {
         for item in itens {
             for type in item.itens {
                 switch type {
-                case .image:
-                    Sanada.print("image")
+                case .image(let viewModel):
+                    viewModel.complete()
                 case .text(let viewModel):
                     viewModel.complete()
                 case .item(let viewModel):
@@ -112,18 +113,17 @@ extension SalesCreateViewModel {
             }
         }
 
-//        emit(.success(""))
-//        do {
-//            guard let _flow = try flow.value() else { return }
-//            switch _flow {
-//            case .save:
-//                save()
-//            case .update(let uuid):
+        do {
+            guard let _flow = try flow.value() else { return }
+            switch _flow {
+            case .save:
+                save()
+            case .update(let uuid): break
 //                update(uuid: uuid)
-//            }
-//        } catch {
-//            emit(.error("Erro"))
-//        }
+            }
+        } catch {
+            emit(.error("Erro"))
+        }
     }
         
     func completion(_ item: KeyValue?, _ menu: KeyValue?) {
@@ -146,7 +146,7 @@ extension SalesCreateViewModel {
         }
         
         if let menu = menu {
-            result[menu.key] = menu.value
+           result[menu.key] = menu.value
         }
     }
 }
@@ -154,7 +154,19 @@ extension SalesCreateViewModel {
 // MARK: - LIFE CYCLE
 extension SalesCreateViewModel {
     func clean() {
-        getCellViewModels().forEach { $0.clean() }
+        for item in itens {
+            item.itens.forEach { type in
+                switch type {
+                case .image(let viewModel):
+                    viewModel.clean()
+                case .text(let viewModel):
+                    viewModel.clean()
+                case .item(let viewModel):
+                    viewModel.clean()
+                }
+            }
+        }
+        itens = []
     }
 
     func getCellViewModels() -> [CellViewModel] {
@@ -162,8 +174,8 @@ extension SalesCreateViewModel {
         for item in itens {
             item.itens.forEach { type in
                 switch type {
-                case .image:
-                    Sanada.print("image")
+                case .image(let viewModel):
+                    cellViewModels.append(viewModel)
                 case .text(let viewModel):
                     cellViewModels.append(viewModel)
                 case .item(let viewModel):
@@ -174,7 +186,7 @@ extension SalesCreateViewModel {
         return cellViewModels
     }
     
-    func addItem(type: MaterialsType, quantity: Double) {
+    func addItem(type: MaterialsType, quantity: QuantityModel) {
         for (index, create) in itens.enumerated() {
             guard let material = MaterialsType.fromSection(create.section) else { continue }
             
@@ -191,6 +203,15 @@ extension SalesCreateViewModel {
     }
     
     func removeItem(section: Int, row: Int) {
+        switch itens[section].itens[row] {
+        case .image(let viewModel):
+            viewModel.clean()
+        case .text(let viewModel):
+            viewModel.clean()
+        case .item(let viewModel):
+            viewModel.clean()
+        }
+        
         itens[section].itens.remove(at: row)
         emit(.reload(new: itens, section: section))
     }
@@ -199,4 +220,27 @@ extension SalesCreateViewModel {
 
 // MARK: - REPOSITORY
 extension SalesCreateViewModel {
+    func save() {
+        guard let json = result.data else { return }
+        repository.save(sale: json) { [weak self] success in
+            self?.emit(.success("Salvo com sucesso"))
+        }
+        Sanada.print(result)
+    }
+    
+    func update(uuid: FirestoreId) {
+//        do {
+//            guard let _type = try type.value() else { return }
+//            guard let json = result.data else { return }
+//            repository.update(uuid: uuid, material: _type, data: json) { [weak self] success in
+//                self?.emit(.success("Salvo com sucesso"))
+//                let notification = SNNotificationModel(notification: "MaterialDetailed.\(uuid)")
+//                SNNotificationCenter.post(notification: notification.notification, arguments: [:])
+//            }
+//        } catch {
+//            emit(.error("Erro"))
+//        }
+//        Sanada.print(result)
+    }
 }
+

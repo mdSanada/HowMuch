@@ -20,21 +20,29 @@ struct FirestoreInteractor {
             SNNotificationCenter.post(notification: SNNotificationCenter.materials.notification, arguments: ["material": MaterialsType.material(nil).title()])
         }
     }
+    public var materialsDict: [FirestoreId: MaterialModel] = [:]
+
     public var ingredients: [IngredientsModel] = []{
         didSet {
             SNNotificationCenter.post(notification: SNNotificationCenter.materials.notification, arguments: ["material": MaterialsType.ingredient(nil).title()])
         }
     }
+    public var ingredientsDict: [FirestoreId: IngredientsModel] = [:]
+
     public var taxes: [TaxeModel] = []{
         didSet {
             SNNotificationCenter.post(notification: SNNotificationCenter.materials.notification, arguments: ["material": MaterialsType.taxes(nil).title()])
         }
     }
+    public var taxesDict: [FirestoreId: TaxeModel] = [:]
+
     public var consumption: [ConsumptionModel] = []{
         didSet {
             SNNotificationCenter.post(notification: SNNotificationCenter.materials.notification, arguments: ["material": MaterialsType.consumption(nil).title()])
         }
     }
+    public var consumptionDict: [FirestoreId: ConsumptionModel] = [:]
+
     public var sales: [SaleModel] = []{
         didSet {
             SNNotificationCenter.post(notification: SNNotificationCenter.sales.notification, arguments: ["material": "sales"])

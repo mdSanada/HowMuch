@@ -11,7 +11,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-class MyReceiptViewController: UIViewController {
+class SalesViewController: SNViewController<SalesStates, SalesViewModel> {
     @IBOutlet weak var tableReceipt: UITableView!
     
     weak var delegate: MyReceiptProtocol?
@@ -19,23 +19,18 @@ class MyReceiptViewController: UIViewController {
     private let searchController = UISearchController()
     private var disposeBag = DisposeBag()
     
-    var array: ReceiptsModel = .mock()
-    var filtered: ReceiptsModel = [] {
+    var filtered: [SaleDTO] = [] {
         didSet {
             tableReceipt.reloadData()
         }
-    }
-    
-    deinit {
-        Sanada.print("Deinitializing \(self)")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
-        configureBindings()
         configureTable()
+        viewModel?.didLoad.onNext(())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,7 +44,6 @@ class MyReceiptViewController: UIViewController {
     }
     
     private func configureTable() {
-        filtered = array
         tableReceipt.register(type: ReceiptTableViewCell.self)
         tableReceipt.delegate = self
         tableReceipt.dataSource = self
@@ -59,21 +53,22 @@ class MyReceiptViewController: UIViewController {
         print("Button tapped")
     }
         
-    private func configureBindings() {
+    override func configureBindings() {
         searchText
             .distinctUntilChanged()
             .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] text in
-                self?.filter(text: text)
+                self?.viewModel?.filteredText.onNext(text)
             })
             .disposed(by: disposeBag)
     }
     
-    private func filter(text: String) {
-        if text.isEmpty {
+    override func render(states: SalesStates) {
+        switch states {
+        case .didLoad(let sales):
+            filtered = sales
+        case .filter(let array):
             filtered = array
-        } else {
-            filtered = array.filter({ $0.title.lowercased().contains(text.lowercased()) })
         }
     }
     
@@ -83,7 +78,7 @@ class MyReceiptViewController: UIViewController {
     }
 }
 
-extension MyReceiptViewController: UITableViewDelegate, UITableViewDataSource {
+extension SalesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.pushSaleDatailed()
     }
@@ -95,15 +90,20 @@ extension MyReceiptViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ReceiptTableViewCell = tableView.dequeueReusableCell(indexPath)
         let item = filtered[indexPath.row]
-        cell.render(image: item.image,
-                    title: item.title,
-                    description: item.description,
-                    value: item.value)
+        
+        cell.render(image: nil,
+                    title: item.name ?? "",
+                    description: item.salesDescription ?? "",
+                    value: Decimal(item.unitPrice ?? 0))
+//        cell.render(image: item.image,
+//                    title: item.title,
+//                    description: item.description,
+//                    value: item.value)
         return cell
     }
 }
 
-extension MyReceiptViewController: UISearchResultsUpdating {
+extension SalesViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
         searchText.onNext(text)

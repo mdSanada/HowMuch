@@ -11,7 +11,7 @@ import RxCocoa
 import RxGesture
 
 protocol QuantityMaterialProtocol: AnyObject {
-    func pushAdded(type: MaterialsType, quantity: Double)
+    func pushAdded(type: MaterialsType, quantity: QuantityModel)
     func popToRoot()
 }
 
@@ -22,11 +22,13 @@ class QuantityMaterialViewController: SNViewController<QuantityMaterialStates, Q
 
     @IBOutlet weak var labelFieldTitle: UILabel!
     @IBOutlet weak var fieldValue: UITextField!
+    @IBOutlet weak var buttonMenu: UIButton!
     
     @IBOutlet weak var buttonSave: UIButton!
     
     weak var delegate: QuantityMaterialProtocol? = nil
     weak var selectDelegate: DidSelectMaterialProtocol? = nil
+    private var didSelectMenu: String = ""
     private var disposeBag = DisposeBag()
     
     var type: MaterialsType? = nil {
@@ -74,6 +76,21 @@ class QuantityMaterialViewController: SNViewController<QuantityMaterialStates, Q
             .disposed(by: disposeBag)
     }
     
+    private func configureMenu(actions: [String: String]) {
+        var children: [UIAction] = []
+        actions.forEach { title in
+            let action = UIAction(title: title.value) { [weak self] (action) in
+                self?.buttonMenu.setTitle(action.title, for: .normal)
+           }
+            children.append(action)
+        }
+
+        let menu = UIMenu(options: .displayInline,
+                          children: children)
+        buttonMenu.menu = menu
+        buttonMenu.showsMenuAsPrimaryAction = true
+    }
+    
     private func configureView(_ type: MaterialsType?) {
         guard let type = type else { return }
         switch type {
@@ -83,6 +100,13 @@ class QuantityMaterialViewController: SNViewController<QuantityMaterialStates, Q
                   let measurement = material?.measurement,
                   let cost = material?.cost else { return }
             
+            let measure = MeasureType.init(rawValue: material?.measurement ?? "")
+            let defaultValue = measure?.defaultValue()
+            didSelectMenu = defaultValue?.key ?? ""
+            buttonMenu.setTitle(measure?.defaultValue().value, for: .normal)
+            let actions = MeasuresHelper.shared.select(from: measure ?? .unit).map { $0.mesure }
+            configureMenu(actions: MeasureType.dict(from: actions))
+            
             configureHeader(title: name,
                             description: "\(quantity) \(measurement)",
                             value: Decimal(cost).asMoney())
@@ -91,7 +115,13 @@ class QuantityMaterialViewController: SNViewController<QuantityMaterialStates, Q
                   let quantity = ingredient?.quantity,
                   let measurement = ingredient?.measurement,
                   let cost = ingredient?.cost else { return }
-            
+            let measure = MeasureType.init(rawValue: ingredient?.measurement ?? "")
+            let defaultValue = measure?.defaultValue()
+            didSelectMenu = defaultValue?.key ?? ""
+            buttonMenu.setTitle(measure?.defaultValue().value, for: .normal)
+            let actions = MeasuresHelper.shared.select(from: measure ?? .unit).map { $0.mesure }
+            configureMenu(actions: MeasureType.dict(from: actions))
+
             configureHeader(title: name,
                             description: "\(quantity) \(measurement)",
                             value: Decimal(cost).asMoney())
@@ -103,6 +133,13 @@ class QuantityMaterialViewController: SNViewController<QuantityMaterialStates, Q
             buttonSave.backgroundColor = UIColor.accent
             fieldValue.isHidden = true
             labelFieldTitle.isHidden = true
+            
+            let measure = MeasureType.init(rawValue: taxes?.measurement ?? "")
+            let defaultValue = measure?.defaultValue()
+            didSelectMenu = defaultValue?.key ?? ""
+            buttonMenu.setTitle(measure?.defaultValue().value, for: .normal)
+            let actions = MeasuresHelper.shared.select(from: measure ?? .unit).map { $0.mesure }
+            configureMenu(actions: MeasureType.dict(from: actions))
 
             configureHeader(title: name,
                             description: description,
@@ -115,6 +152,14 @@ class QuantityMaterialViewController: SNViewController<QuantityMaterialStates, Q
             buttonSave.backgroundColor = UIColor.accent
             fieldValue.isHidden = true
             labelFieldTitle.isHidden = true
+            
+            let measure = MeasureType.init(rawValue: consumption?.measurement ?? "")
+            let defaultValue = measure?.defaultValue()
+            didSelectMenu = defaultValue?.key ?? ""
+            buttonMenu.setTitle(measure?.defaultValue().value, for: .normal)
+            let actions = MeasuresHelper.shared.select(from: measure ?? .unit).map { $0.mesure }
+            configureMenu(actions: MeasureType.dict(from: actions))
+
             configureHeader(title: name,
                             description: _consumption,
                             value: level)
@@ -137,8 +182,9 @@ class QuantityMaterialViewController: SNViewController<QuantityMaterialStates, Q
     
     @IBAction func actionAdd(_ sender: Any) {
         guard let type = type, let value = extractedField else { return }
-        selectDelegate?.didSelect(type: type, quantity: value)
-        delegate?.pushAdded(type: type, quantity: value)
+        let quantity: QuantityModel = ["quantity": value, "type": didSelectMenu]
+        selectDelegate?.didSelect(type: type, quantity: quantity)
+        delegate?.pushAdded(type: type, quantity: quantity)
     }
 }
 

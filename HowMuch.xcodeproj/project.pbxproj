@@ -299,6 +299,7 @@
 		16FBF4A0291C3933001CD231 /* Measures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measures.swift; sourceTree = "<group>"; };
 		16FBF4A2291C3E50001CD231 /* MeasuresHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasuresHelp.swift; sourceTree = "<group>"; };
 		16FBF4A4291C717D001CD231 /* QuantityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityModel.swift; sourceTree = "<group>"; };
+		16FBF4A6291C8F9C001CD231 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		16FE20AF29073657000AC718 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		16FE20B029073657000AC718 /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		16FE20B4290737F9000AC718 /* SalesCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesCreateViewController.swift; sourceTree = "<group>"; };
@@ -511,6 +512,7 @@
 		16AE03FC2900A05C00490465 = {
 			isa = PBXGroup;
 			children = (
+				16FBF4A6291C8F9C001CD231 /* TODO.md */,
 				16D80CD7290335E000A3FC5A /* GoogleService-Info.plist */,
 				16AE04072900A05C00490465 /* HowMuch */,
 				16AE04062900A05C00490465 /* Products */,

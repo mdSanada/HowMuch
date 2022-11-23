@@ -7,8 +7,8 @@
 - [ ] Delete Sale  
 - [ ] Delete Old Storage on Database
 - [ ] Save image on Firebase Cloud
-- [ ] Create Login
-- [ ] Create Sign Up
+- [ ] Create `Login`
+- [ ] Create `Sign Up`
 
 ### In Progress
 

@@ -48,6 +48,7 @@
 		1649F9A52912B20B00144C17 /* SelectMaterialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1649F9A42912B20B00144C17 /* SelectMaterialsViewController.swift */; };
 		1649F9A72912B21500144C17 /* SelectMaterialsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1649F9A62912B21500144C17 /* SelectMaterialsViewModel.swift */; };
 		1650A281291AEC2F002AD2C6 /* SaleDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1650A280291AEC2F002AD2C6 /* SaleDTO.swift */; };
+		167665B8291D2A9F00F2F9C1 /* Calculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167665B7291D2A9F00F2F9C1 /* Calculate.swift */; };
 		1684C0D5290234A100249C7B /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684C0D3290234A100249C7B /* ItemTableViewCell.swift */; };
 		1684C0D6290234A100249C7B /* ItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1684C0D4290234A100249C7B /* ItemTableViewCell.xib */; };
 		1684C0D92902405100249C7B /* ParallaxGroupedSectionHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1684C0D82902405100249C7B /* ParallaxGroupedSectionHeaderTableView.swift */; };
@@ -199,6 +200,7 @@
 		1649F9A42912B20B00144C17 /* SelectMaterialsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMaterialsViewController.swift; sourceTree = "<group>"; };
 		1649F9A62912B21500144C17 /* SelectMaterialsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMaterialsViewModel.swift; sourceTree = "<group>"; };
 		1650A280291AEC2F002AD2C6 /* SaleDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleDTO.swift; sourceTree = "<group>"; };
+		167665B7291D2A9F00F2F9C1 /* Calculate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculate.swift; sourceTree = "<group>"; };
 		1684C0D3290234A100249C7B /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		1684C0D4290234A100249C7B /* ItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemTableViewCell.xib; sourceTree = "<group>"; };
 		1684C0D82902405100249C7B /* ParallaxGroupedSectionHeaderTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxGroupedSectionHeaderTableView.swift; sourceTree = "<group>"; };
@@ -493,6 +495,14 @@
 			path = SelectMaterials;
 			sourceTree = "<group>";
 		};
+		167665B6291D2A8F00F2F9C1 /* Calculate */ = {
+			isa = PBXGroup;
+			children = (
+				167665B7291D2A9F00F2F9C1 /* Calculate.swift */,
+			);
+			path = Calculate;
+			sourceTree = "<group>";
+		};
 		1684C0D12902345E00249C7B /* SalesDetailed */ = {
 			isa = PBXGroup;
 			children = (
@@ -552,6 +562,7 @@
 		16AE041F2900A12600490465 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				167665B6291D2A8F00F2F9C1 /* Calculate */,
 				1622E22D291552B40007AC8F /* CameraHandler */,
 				16407A08290DDB1A00CD1B26 /* Vibration */,
 				16E763FF290D92DA00F32124 /* NotificationCenter.swift */,
@@ -1267,6 +1278,7 @@
 				1622E22F291552BF0007AC8F /* CameraHandler.swift in Sources */,
 				16AE04AC2900A12600490465 /* SNRefreshTokenService.swift in Sources */,
 				16AE049B2900A12600490465 /* Extension + Dictionary.swift in Sources */,
+				167665B8291D2A9F00F2F9C1 /* Calculate.swift in Sources */,
 				16AE04A12900A12600490465 /* Registering.swift in Sources */,
 				164664482908BA2A008892EB /* MeasureMenu.swift in Sources */,
 				16FB425729148DF900CB5AD9 /* SalesCreateViewModel.swift in Sources */,

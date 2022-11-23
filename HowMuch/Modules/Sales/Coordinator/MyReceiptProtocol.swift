@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MyReceiptProtocol: AnyObject {
-    func pushSaleDatailed()
+    func pushSaleDatailed(item: SaleDTO)
     func presentSaleCreate()
     func pushSelectMaterial(type: MaterialsType)
     func dismissFromParent()

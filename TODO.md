@@ -2,12 +2,8 @@
 
 ### Todo
 
-- [ ] Refactor Calculus (Ingredients, Materials, Taxes) # Using new info of quantity and measurement, proportionally to default measurement
-- [ ] Refator Price Presented on Create New Sale
 - [ ] Do Consumption Calculus
 - [ ] Add Edditing Sale  
-- [ ] Displaying Enum Raw value on Measures, change to user friendly text ("GRAMS" to "g")
-- [ ] Refactor Detail Sale
 - [ ] Delete Sale  
 - [ ] Delete Old Storage on Database
 - [ ] Save image on Firebase Cloud
@@ -16,8 +12,12 @@
 
 ### In Progress
 
-- [ ] Save Sale
+- [ ] Refactor Detail Sale
 
 ### Done ✓
 
 - [x] Changed Quantity from simple Double to QuantityModelDTO  
+- [x] Save Sale
+- [x] Refactor Calculus (Ingredients, Materials, Taxes) # Using new info of quantity and measurement, proportionally to default measurement
+- [x] Refator Price Presented on Create New Sale
+- [x] Displaying Enum Raw value on Measures, change to user friendly text ("GRAMS" to "g")

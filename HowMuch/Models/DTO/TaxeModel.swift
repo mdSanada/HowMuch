@@ -51,7 +51,7 @@ extension TaxeModel: Creatable {
     }
     
     func calculate(quantity: QuantityModelDTO) -> Double {
-        return (self.cost ?? 0) * (quantity.quantity ?? 1)
+        return Calculate.price(from: quantity, material: .taxes(self))
     }
 
     func detailed() -> [DetailedDTO] {

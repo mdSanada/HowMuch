@@ -63,8 +63,17 @@ struct MeasuresHelper {
     
     func type(from: MeasureType) -> MeasuresType? {
         return measures.first { measure in
+            if measure.mesure == .unit {
+                return measure.type.rawValue == from.rawValue
+            }
             return measure.mesure.rawValue == from.rawValue
         }.map { $0.type }
+    }
+    
+    func ratio(from: MeasureType) -> Double {
+        return measures.first { measure in
+            return measure.mesure.rawValue == from.rawValue
+        }.map { $0.ratio ?? 1 } ?? 1
     }
     
     func select(from: MeasureType) -> [Measures] {

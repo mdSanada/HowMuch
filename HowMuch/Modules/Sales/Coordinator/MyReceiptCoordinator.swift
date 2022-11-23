@@ -47,8 +47,9 @@ class MyReceiptCoordinator: SNCoordinator {
     }
 }
 extension MyReceiptCoordinator: MyReceiptProtocol {
-    func pushSaleDatailed() {
+    func pushSaleDatailed(item: SaleDTO) {
         guard let controller = saleStoryboard.instantiateViewController(identifier: "SaleDetailed") as? SaleDetailedViewController else { return }
+        controller.item = item
         navigation?.pushViewController(controller, animated: true)
     }
     

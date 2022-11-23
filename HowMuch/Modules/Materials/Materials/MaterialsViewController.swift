@@ -191,8 +191,8 @@ extension MaterialsViewController: UITableViewDataSource, UITableViewDelegate {
         case .ingredient:
             guard let ingredient = filtered[indexPath.row] as? IngredientsModel else { return UITableViewCell() }
             guard let name = ingredient.name,
-                  let quantity = ingredient.quantity,
-                  let measurement = ingredient.measurement,
+                  let quantity = ingredient.quantity?.asString(minimum: 0),
+                  let measurement = MeasureType(rawValue: ingredient.measurement ?? "")?.defaultValue().value,
                   let cost = ingredient.cost else { return fallbackCell }
             
             cell.render(title: name,
@@ -201,8 +201,8 @@ extension MaterialsViewController: UITableViewDataSource, UITableViewDelegate {
         case .material:
             guard let material = filtered[indexPath.row] as? MaterialModel else { return UITableViewCell() }
             guard let name = material.name,
-                  let quantity = material.quantity,
-                  let measurement = material.measurement,
+                  let quantity = material.quantity?.asString(minimum: 0),
+                  let measurement = MeasureType(rawValue: material.measurement ?? "")?.defaultValue().value,
                   let cost = material.cost else { return fallbackCell }
             
             cell.render(title: name,

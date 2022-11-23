@@ -57,8 +57,7 @@ extension ConsumptionModel: Creatable {
     }
     
     func calculate(quantity: QuantityModelDTO) -> Double {
-        // TODO: - This should be changed to some function switched by type (gas, electricity, etc...) forcing 0 value
-        return 0
+        return Calculate.price(from: quantity, material: .consumption(self))
     }
     
     func detailed() -> [DetailedDTO] {

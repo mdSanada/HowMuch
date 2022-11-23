@@ -51,7 +51,7 @@ extension MaterialModel: Creatable {
     }
     
     func calculate(quantity: QuantityModelDTO) -> Double {
-        return (self.cost ?? 0) * (quantity.quantity ?? 1)
+        return Calculate.price(from: quantity, material: .material(self))
     }
 
     func detailed() -> [DetailedDTO] {
@@ -62,8 +62,9 @@ extension MaterialModel: Creatable {
                                   description: self.materialDescription))
         result.append(DetailedDTO(title: "Custo (R$)",
                                   description: self.cost?.asString().currencyInputFormatting()))
+        let measurement = MeasureType(rawValue: self.measurement ?? "")?.defaultValue().value
         result.append(DetailedDTO(title: "Quantidade",
-                                  description: Double(self.quantity ?? 0).asString(digits: 0) + " " + (self.measurement ?? "")))
+                                  description: Double(self.quantity ?? 0).asString(minimum: 0) + " " + (measurement ?? "")))
         return result
     }
     

@@ -49,18 +49,19 @@ extension AddItemViewModelCell: AddItemInputProtocol {
             let quantity = quantityDict.data?.map(to: QuantityModelDTO.self) ?? QuantityModelDTO(quantity: 0, type: "UNIT")
             
             let unitType = MeasureType.init(rawValue: quantity.type ?? "")
-            let value = (quantity.quantity ?? 0)?.asString(digits: 2, minimum: 0) ?? ""
-            let _quantity = value + (unitType?.defaultValue().value ?? "")
+            let stringQuantity = (quantity.quantity ?? 0)?.asString(digits: 2, minimum: 0) ?? ""
+            let _quantity = stringQuantity + " " + (unitType?.defaultValue().value ?? "")
+            
+            let value = Decimal(Calculate.price(from: quantity, material: material))
+            
             switch material {
             case .ingredient(let ingredient):
                 let title = ingredient?.name ?? ""
-                let value = Decimal((ingredient?.cost ?? 0) * (quantity.quantity ?? 1))
                 output?.configure(title: title,
                                   quantity: _quantity,
                                   value: value.asMoney())
             case .material(let _material):
                 let title = _material?.name ?? ""
-                let value = Decimal((_material?.cost ?? 0) * (quantity.quantity ?? 1))
                 
                 output?.configure(title: title,
                                   quantity: _quantity,
@@ -71,7 +72,7 @@ extension AddItemViewModelCell: AddItemInputProtocol {
                 
                 output?.configure(title: title,
                                   quantity: "",
-                                  value: value)
+                                  value: value.percentFormatting())
             case .consumption(let consumption):
                 let title = consumption?.name ?? ""
                 let _consumption = consumption?.consumption ?? ""

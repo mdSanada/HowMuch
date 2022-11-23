@@ -80,7 +80,8 @@ class SalesViewController: SNViewController<SalesStates, SalesViewModel> {
 
 extension SalesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.pushSaleDatailed()
+        let item = filtered[indexPath.row]
+        delegate?.pushSaleDatailed(item: item)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -95,10 +96,6 @@ extension SalesViewController: UITableViewDelegate, UITableViewDataSource {
                     title: item.name ?? "",
                     description: item.salesDescription ?? "",
                     value: Decimal(item.unitPrice ?? 0))
-//        cell.render(image: item.image,
-//                    title: item.title,
-//                    description: item.description,
-//                    value: item.value)
         return cell
     }
 }

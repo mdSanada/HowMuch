@@ -81,6 +81,7 @@ class QuantityMaterialViewController: SNViewController<QuantityMaterialStates, Q
         actions.forEach { title in
             let action = UIAction(title: title.value) { [weak self] (action) in
                 self?.buttonMenu.setTitle(action.title, for: .normal)
+                self?.didSelectMenu = title.key
            }
             children.append(action)
         }

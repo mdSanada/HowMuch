@@ -13,6 +13,7 @@ import RxSwift
 class SaleDetailedViewController: UIViewController {
     @IBOutlet weak var tableDetailed: ParallaxGroupedSectionHeaderTableView!
     var headerView: UIView?
+    var item: SaleDTO?
     let publishSection = PublishSubject<Int>()
     
     override func viewDidLoad() {
